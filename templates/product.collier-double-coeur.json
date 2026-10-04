@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "logo_list_YUNwB8": {
@@ -808,7 +817,7 @@
             "image": "shopify://shop_images/sdv.png",
             "stretch_image": true,
             "link_text": "",
-            "link_url": "shopify://products/collier-ours-personnalise",
+            "link_url": "shopify://products/eternal-bear-personalized-necklace",
             "background": "",
             "text_color": "#ffffff",
             "overlay_color": "#000000",
@@ -821,7 +830,7 @@
             "image": "shopify://shop_images/Zeichenflaeche_1089_1516c1fd-e97e-4693-8b70-418b15da1e80.jpg",
             "stretch_image": true,
             "link_text": "",
-            "link_url": "shopify://products/globe-eternel-collier-personnalisee",
+            "link_url": "shopify://products/eternal-globe-personalized-necklace",
             "background": "",
             "text_color": "#ffffff",
             "overlay_color": "#000000",
@@ -834,7 +843,7 @@
             "image": "shopify://shop_images/Capture_d_ecran_2025-10-24_151021_7b6a90cb-f42c-44fc-94c5-f0a412d71898.png",
             "stretch_image": true,
             "link_text": "",
-            "link_url": "shopify://products/collier-trefle-coeurs",
+            "link_url": "shopify://products/clover-hearts-necklace",
             "background": "",
             "text_color": "#ffffff",
             "overlay_color": "#000000",

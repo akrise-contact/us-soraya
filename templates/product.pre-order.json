@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -92,7 +101,7 @@
             "text": "Add the matching bracelet, engraved just like the necklace.",
             "show_savings": true,
             "savings_text": "You save [montant]",
-            "product_1": "bracelet-personnalise",
+            "product_1": "matching-personalized-bracelet",
             "label_1": "",
             "subtitle_1": "Engraving to match the necklace",
             "price_mode_1": "fixed",
@@ -1019,7 +1028,7 @@
             "image": "shopify://shop_images/Capture_d_ecran_2025-10-24_151021_7b6a90cb-f42c-44fc-94c5-f0a412d71898.png",
             "stretch_image": true,
             "link_text": "",
-            "link_url": "shopify://products/collier-trefle-coeurs",
+            "link_url": "shopify://products/clover-hearts-necklace",
             "background": "",
             "text_color": "#ffffff",
             "overlay_color": "#000000",

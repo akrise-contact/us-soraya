@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Header group",
@@ -85,34 +94,8 @@
         "show_country_name": false,
         "transparent_header_text_color": "#1a1a1a",
         "reduce_padding": false,
-        "force_solid_background": true,
-        "background_color": "#505050",
         "background_opacity": 31,
-        "background_blur_radius": 8,
-        "show_header_border": true,
-        "header_border_color": "#e5e5e5",
-        "show_header_shadow": true,
-        "header_shadow_opacity": 26,
-        "drawer_background_color": "#ffffff",
-        "drawer_text_color": "#1a1a1a",
-        "show_drawer_dividers": true,
-        "drawer_divider_color": "#e5e5e5",
-        "menu_font_size": 15,
-        "menu_font_weight": "500",
-        "menu_text_transform": "none",
-        "override_menu_font": false,
-        "menu_font": "assistant_n4",
-        "logo_subtitle": "Paris",
-        "logo_subtitle_font_source": "custom",
-        "logo_subtitle_font": "poppins_n4",
-        "logo_subtitle_size": 11,
-        "logo_subtitle_size_mobile": 8,
-        "logo_subtitle_letter_spacing": 45,
-        "logo_subtitle_gap": 2,
-        "logo_subtitle_alignment": "center",
-        "logo_subtitle_uppercase": true,
-        "logo_subtitle_color": "",
-        "logo_subtitle_hide_mobile": false
+        "background_blur_radius": 8
       }
     }
   },
