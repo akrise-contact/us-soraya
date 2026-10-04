@@ -119,10 +119,6 @@
             "liquid": "{% assign lang = request.locale.iso_code %}\n\n<!-- Bullet points -->\n<ul style=\"list-style: none; padding: 0; margin: 0;\">\n\n  <!-- Ligne 1 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">✿</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Son initiale, avec vous chaque jour</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Ihre Initiale, jeden Tag bei Ihnen</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">La sua iniziale, con te ogni giorno</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Su inicial, contigo cada día</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">Their initial, with you every day</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">Their initial, with you every day</span>\n    {% endcase %}\n  </li>\n\n  <!-- Ligne 2 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">❀</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Une seule taille qui s'adapte à vous, pas l'inverse</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Eine Größe, die sich an Sie anpasst – nicht umgekehrt</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Una taglia unica che si adatta a te, non il contrario</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Una talla única que se adapta a ti, no al revés</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">One size that adapts to you, not the other way around</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">One size that adapts to you, not the other way around</span>\n    {% endcase %}\n  </li>\n\n  <!-- Ligne 3 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">♡</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Bague garantie à vie • Résistante à l'eau</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Ring mit lebenslanger Garantie • Wasserfest</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Anello garantito a vita • Resistente all'acqua</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Anillo con garantía de por vida • Resistente al agua</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">Lifetime guarantee ring • Water resistant</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">Lifetime guarantee ring • Water resistant</span>\n    {% endcase %}\n  </li>\n\n</ul>"
           }
         },
-        "optis_color_swatch_se_product_variant_RJ3nWY": {
-          "type": "shopify://apps/optis-color-swatch/blocks/se-product-variant/ad128d8f-5ebd-45ad-954a-7dd4c4226109",
-          "settings": {}
-        },
         "variant_picker_CfmmYE": {
           "type": "variant_picker",
           "settings": {
@@ -132,12 +128,6 @@
             "swatch_selector_style": "swatch",
             "variant_image_options": "",
             "size_chart_page": ""
-          }
-        },
-        "globo_product_options_app_block_qbBnMj": {
-          "type": "shopify://apps/globo-product-options/blocks/app-block/fdc9fad5-1a0f-4bd4-9c8a-1af6a6eef6b8",
-          "settings": {
-            "product": ""
           }
         },
         "buy_buttons_LgztLR": {
@@ -169,9 +159,7 @@
         "title_xPdkK6",
         "price_V7WCLh",
         "liquid_9gHiLK",
-        "optis_color_swatch_se_product_variant_RJ3nWY",
         "variant_picker_CfmmYE",
-        "globo_product_options_app_block_qbBnMj",
         "buy_buttons_LgztLR",
         "liquid_iNMmTU",
         "liquid_AFfCbR"
@@ -679,17 +667,6 @@
         "text_color": "#800020"
       }
     },
-    "176097975835e95088": {
-      "type": "apps",
-      "settings": {
-        "full_width": true,
-        "remove_vertical_spacing": false,
-        "remove_horizontal_spacing": false,
-        "background": "",
-        "background_gradient": "",
-        "text_color": ""
-      }
-    },
     "faq_wzmqVL": {
       "type": "faq",
       "blocks": {
@@ -893,7 +870,6 @@
     "rich_text_496Ycb",
     "ss_testimonial_8_A7ndw7",
     "multi_column_WVG9ed",
-    "176097975835e95088",
     "faq_wzmqVL",
     "milona_features_jm3Fr4",
     "image_link_blocks_eKnzqR"

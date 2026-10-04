@@ -130,10 +130,6 @@
             "size_chart_page": ""
           }
         },
-        "optis_color_swatch_se_product_variant_4RL38a": {
-          "type": "shopify://apps/optis-color-swatch/blocks/se-product-variant/ad128d8f-5ebd-45ad-954a-7dd4c4226109",
-          "settings": {}
-        },
         "line_item_property_UJWMEK": {
           "type": "line_item_property",
           "settings": {
@@ -161,7 +157,6 @@
         "price_V7WCLh",
         "liquid_9gHiLK",
         "variant_picker_kzfMJB",
-        "optis_color_swatch_se_product_variant_4RL38a",
         "line_item_property_UJWMEK",
         "buy_buttons_LgztLR"
       ],
@@ -667,17 +662,6 @@
         "text_color": "#800020"
       }
     },
-    "176097975835e95088": {
-      "type": "apps",
-      "settings": {
-        "full_width": true,
-        "remove_vertical_spacing": false,
-        "remove_horizontal_spacing": false,
-        "background": "",
-        "background_gradient": "",
-        "text_color": ""
-      }
-    },
     "faq_wzmqVL": {
       "type": "faq",
       "blocks": {
@@ -881,7 +865,6 @@
     "rich_text_496Ycb",
     "ss_testimonial_8_A7ndw7",
     "multi_column_WVG9ed",
-    "176097975835e95088",
     "faq_wzmqVL",
     "milona_features_jm3Fr4",
     "image_link_blocks_eKnzqR"

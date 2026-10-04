@@ -62,10 +62,6 @@
             "selector_style": "swatch"
           }
         },
-        "optis_color_swatch_se_product_variant_iiPFGH": {
-          "type": "shopify://apps/optis-color-swatch/blocks/se-product-variant/ad128d8f-5ebd-45ad-954a-7dd4c4226109",
-          "settings": {}
-        },
         "variant_picker_Akr4Bc": {
           "type": "variant_picker",
           "settings": {
@@ -75,13 +71,6 @@
             "swatch_selector_style": "swatch",
             "variant_image_options": "",
             "size_chart_page": ""
-          }
-        },
-        "globo_product_options_app_block_GVr3MW": {
-          "type": "shopify://apps/globo-product-options/blocks/app-block/fdc9fad5-1a0f-4bd4-9c8a-1af6a6eef6b8",
-          "disabled": true,
-          "settings": {
-            "product": ""
           }
         },
         "line_item_property_6HiUf8": {
@@ -138,9 +127,7 @@
         "price_3ey3rY",
         "liquid_pKVN8L",
         "product_variations_KF3YrY",
-        "optis_color_swatch_se_product_variant_iiPFGH",
         "variant_picker_Akr4Bc",
-        "globo_product_options_app_block_GVr3MW",
         "line_item_property_6HiUf8",
         "line_item_property_nhfXmr",
         "buy_buttons",
@@ -638,17 +625,6 @@
         "text_color": "#000000"
       }
     },
-    "1761231111ad2a4f2f": {
-      "type": "apps",
-      "settings": {
-        "full_width": true,
-        "remove_vertical_spacing": false,
-        "remove_horizontal_spacing": false,
-        "background": "",
-        "background_gradient": "",
-        "text_color": ""
-      }
-    },
     "faq_7ytpep": {
       "type": "faq",
       "blocks": {
@@ -867,7 +843,6 @@
     "rich_text_xEWBWd",
     "image_link_blocks_qthT6T",
     "rich_text_WzXYat",
-    "1761231111ad2a4f2f",
     "faq_7ytpep",
     "milona_features_TFmT9D",
     "image_link_blocks_wkzTbP"

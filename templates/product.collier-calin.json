@@ -130,12 +130,6 @@
             "size_chart_page": ""
           }
         },
-        "globo_product_options_app_block_qbBnMj": {
-          "type": "shopify://apps/globo-product-options/blocks/app-block/fdc9fad5-1a0f-4bd4-9c8a-1af6a6eef6b8",
-          "settings": {
-            "product": ""
-          }
-        },
         "buy_buttons_LgztLR": {
           "type": "buy_buttons",
           "settings": {
@@ -160,7 +154,6 @@
         "price_V7WCLh",
         "liquid_9gHiLK",
         "variant_picker_88jTWz",
-        "globo_product_options_app_block_qbBnMj",
         "buy_buttons_LgztLR",
         "liquid_hfYq77"
       ],
@@ -666,17 +659,6 @@
         "text_color": "#800020"
       }
     },
-    "176097975835e95088": {
-      "type": "apps",
-      "settings": {
-        "full_width": true,
-        "remove_vertical_spacing": false,
-        "remove_horizontal_spacing": false,
-        "background": "",
-        "background_gradient": "",
-        "text_color": ""
-      }
-    },
     "faq_wzmqVL": {
       "type": "faq",
       "blocks": {
@@ -880,7 +862,6 @@
     "rich_text_496Ycb",
     "ss_testimonial_8_A7ndw7",
     "multi_column_WVG9ed",
-    "176097975835e95088",
     "faq_wzmqVL",
     "milona_features_jm3Fr4",
     "image_link_blocks_eKnzqR"

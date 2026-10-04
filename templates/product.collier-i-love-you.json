@@ -73,12 +73,6 @@
             "size_chart_page": ""
           }
         },
-        "globo_product_options_app_block_GVr3MW": {
-          "type": "shopify://apps/globo-product-options/blocks/app-block/fdc9fad5-1a0f-4bd4-9c8a-1af6a6eef6b8",
-          "settings": {
-            "product": ""
-          }
-        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -99,7 +93,6 @@
         "liquid_pKVN8L",
         "product_variations_KF3YrY",
         "variant_picker_FagzTf",
-        "globo_product_options_app_block_GVr3MW",
         "buy_buttons"
       ],
       "settings": {

@@ -36,24 +36,6 @@
             "selector_style": "swatch"
           }
         },
-        "optis_color_swatch_se_product_variant_iiPFGH": {
-          "type": "shopify://apps/optis-color-swatch/blocks/se-product-variant/ad128d8f-5ebd-45ad-954a-7dd4c4226109",
-          "settings": {}
-        },
-        "kaching_bundles_app_block_AGVndY": {
-          "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
-          "settings": {
-            "product": "{{product}}",
-            "manual_deal_block_id": ""
-          }
-        },
-        "globo_product_options_app_block_GVr3MW": {
-          "type": "shopify://apps/globo-product-options/blocks/app-block/fdc9fad5-1a0f-4bd4-9c8a-1af6a6eef6b8",
-          "disabled": true,
-          "settings": {
-            "product": ""
-          }
-        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -78,9 +60,6 @@
         "title",
         "liquid_pKVN8L",
         "product_variations_KF3YrY",
-        "optis_color_swatch_se_product_variant_iiPFGH",
-        "kaching_bundles_app_block_AGVndY",
-        "globo_product_options_app_block_GVr3MW",
         "buy_buttons",
         "liquid_gBWq97"
       ],
@@ -441,17 +420,6 @@
         "text_color": "#000000"
       }
     },
-    "1761231111ad2a4f2f": {
-      "type": "apps",
-      "settings": {
-        "full_width": true,
-        "remove_vertical_spacing": false,
-        "remove_horizontal_spacing": false,
-        "background": "",
-        "background_gradient": "",
-        "text_color": ""
-      }
-    },
     "faq_7ytpep": {
       "type": "faq",
       "blocks": {
@@ -610,7 +578,6 @@
     "multi_column_rT6yeD",
     "ss_testimonial_8_Cxx4Fe",
     "rich_text_WzXYat",
-    "1761231111ad2a4f2f",
     "faq_7ytpep",
     "image_link_blocks_wkzTbP"
   ]

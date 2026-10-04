@@ -119,12 +119,6 @@
             "liquid": "{% assign lang = request.locale.iso_code %}\n\n<!-- Bullet points -->\n<ul style=\"list-style: none; padding: 0; margin: 0;\">\n\n  <!-- Ligne 1 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">✿</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Un bijou contre son cœur chaque jour</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Ein Schmuckstück nah am Herzen jeden Tag</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Un gioiello vicino al suo cuore ogni giorno</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Una joya cerca de su corazón cada día</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">A jewel close to her heart every day</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">A jewel close to her heart every day</span>\n    {% endcase %}\n  </li>\n\n  <!-- Ligne 2 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">❀</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Une vraie rose qui dure éternellement</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Eine echte Rose, die für immer hält</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Una vera rosa che dura per sempre</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Una rosa real que dura para siempre</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">A real rose that lasts forever</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">A real rose that lasts forever</span>\n    {% endcase %}\n  </li>\n\n  <!-- Ligne 3 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">♡</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Collier garanti à vie • Résistant à l'eau</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Halskette mit lebenslanger Garantie • Wasserfest</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Collana garantita a vita • Resistente all'acqua</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Collar con garantía de por vida • Resistente al agua</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">Lifetime guarantee necklace • Water resistant</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">Lifetime guarantee necklace • Water resistant</span>\n    {% endcase %}\n  </li>\n\n</ul>"
           }
         },
-        "globo_product_options_app_block_qbBnMj": {
-          "type": "shopify://apps/globo-product-options/blocks/app-block/fdc9fad5-1a0f-4bd4-9c8a-1af6a6eef6b8",
-          "settings": {
-            "product": ""
-          }
-        },
         "buy_buttons_LgztLR": {
           "type": "buy_buttons",
           "settings": {
@@ -142,7 +136,6 @@
         "title_xPdkK6",
         "price_V7WCLh",
         "liquid_9gHiLK",
-        "globo_product_options_app_block_qbBnMj",
         "buy_buttons_LgztLR"
       ],
       "settings": {
@@ -647,17 +640,6 @@
         "text_color": "#800020"
       }
     },
-    "176097975835e95088": {
-      "type": "apps",
-      "settings": {
-        "full_width": true,
-        "remove_vertical_spacing": false,
-        "remove_horizontal_spacing": false,
-        "background": "",
-        "background_gradient": "",
-        "text_color": ""
-      }
-    },
     "faq_wzmqVL": {
       "type": "faq",
       "blocks": {
@@ -861,7 +843,6 @@
     "rich_text_496Ycb",
     "ss_testimonial_8_A7ndw7",
     "multi_column_WVG9ed",
-    "176097975835e95088",
     "faq_wzmqVL",
     "milona_features_jm3Fr4",
     "image_link_blocks_eKnzqR"

@@ -15,10 +15,6 @@
             "liquid": "<!-- Prix -->\n<div style=\"margin-bottom: 12px;\">\n  <div class=\"price-container\">\n    {%- assign sp_v = product.selected_or_first_available_variant -%}\n    <span class=\"sale-price\">{{ sp_v.price | money }}</span>\n    {%- if sp_v.compare_at_price > sp_v.price %}\n    <span class=\"compare-price\">{{ sp_v.compare_at_price | money }}</span>\n    {%- endif %}\n  </div>\n</div>\n\n<!-- Bullet points -->\n<ul style=\"list-style: none; padding: 0; margin: 0;\">\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 4px;\">✿</span>\n    <span style=\"color: #000; font-weight: 600;\"> {% if request.locale.iso_code == 'es' %}Una joya cerca de su corazón cada día{% else %}A jewel close to her heart every day{% endif %}</span>\n  </li>\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">❀</span>\n    <span style=\"color: #000; font-weight: 600;\">{% if request.locale.iso_code == 'es' %}Un momento que nunca olvidará{% else %}A moment she'll never forget{% endif %}</span>\n  </li>\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">♡</span>\n    <span style=\"color: #000; font-weight: 600;\">{% if request.locale.iso_code == 'es' %}Sorpresa garantizada, recuerdo imborrable{% else %}Guaranteed surprise, lasting memory{% endif %}</span>\n  </li>\n</ul>\n\n<style>\n  .price-container {\n    display: inline-flex;\n    align-items: center;\n    gap: 10px;\n  }\n\n  .sale-price {\n    font-size: 24px;\n    font-weight: 600;\n    color: #800020;\n  }\n\n  .compare-price {\n    font-size: 18px;\n    color: #000;\n    text-decoration: line-through;\n  }\n</style>"
           }
         },
-        "globo_product_options_app_block_GVr3MW": {
-          "type": "shopify://apps/globo-product-options/blocks/app-block/fdc9fad5-1a0f-4bd4-9c8a-1af6a6eef6b8",
-          "settings": {}
-        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -34,7 +30,6 @@
       "block_order": [
         "title",
         "liquid_pKVN8L",
-        "globo_product_options_app_block_GVr3MW",
         "buy_buttons"
       ],
       "settings": {

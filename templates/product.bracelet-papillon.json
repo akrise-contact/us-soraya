@@ -53,10 +53,6 @@
             "liquid": "{% assign lang = request.locale.iso_code %}\n<!-- Bullet points -->\n<ul style=\"list-style: none; padding: 0; margin: 0;\">\n  <!-- Ligne 1 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">❖</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Un papillon lumineux qui illumine son poignet</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Ein leuchtender Schmetterling, der ihr Handgelenk erhellt</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Una farfalla luminosa che illumina il suo polso</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Una mariposa luminosa que ilumina su muñeca</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">A radiant butterfly that lights up her wrist</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">A radiant butterfly that lights up her wrist</span>\n    {% endcase %}\n  </li>\n  <!-- Ligne 2 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">♡</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Le symbole de la liberté et d'un nouveau départ</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Das Symbol für Freiheit und einen Neuanfang</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Il simbolo della libertà e di una nuova rinascita</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">El símbolo de la libertad y de un nuevo comienzo</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">The symbol of freedom and a new beginning</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">The symbol of freedom and a new beginning</span>\n    {% endcase %}\n  </li>\n  <!-- Ligne 3 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">✧</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Argent 925 • Garantie à vie • Hypoallergénique</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">925er Silber • Lebenslange Garantie • Hypoallergen</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Argento 925 • Garanzia a vita • Ipoallergenico</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Plata 925 • Garantía de por vida • Hipoalergénico</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">925 Sterling Silver • Lifetime warranty • Hypoallergenic</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">925 Sterling Silver • Lifetime warranty • Hypoallergenic</span>\n    {% endcase %}\n  </li>\n</ul>"
           }
         },
-        "optis_color_swatch_se_product_variant_3fmRnf": {
-          "type": "shopify://apps/optis-color-swatch/blocks/se-product-variant/ad128d8f-5ebd-45ad-954a-7dd4c4226109",
-          "settings": {}
-        },
         "variant_picker_GN3xdk": {
           "type": "variant_picker",
           "settings": {
@@ -107,7 +103,6 @@
         "title",
         "price_p7rfKt",
         "liquid_gF6Ygg",
-        "optis_color_swatch_se_product_variant_3fmRnf",
         "variant_picker_GN3xdk",
         "product_variations_KF3YrY",
         "buy_buttons",
@@ -178,18 +173,6 @@
         "full_width": true,
         "content_width": "small",
         "text_position": "center",
-        "background": "",
-        "background_gradient": "",
-        "text_color": ""
-      }
-    },
-    "1761231111ad2a4f2f": {
-      "type": "apps",
-      "disabled": true,
-      "settings": {
-        "full_width": true,
-        "remove_vertical_spacing": false,
-        "remove_horizontal_spacing": false,
         "background": "",
         "background_gradient": "",
         "text_color": ""
@@ -443,7 +426,6 @@
     "main",
     "tabs_exFE47",
     "rich_text_WzXYat",
-    "1761231111ad2a4f2f",
     "multi_column_KWKd6h",
     "multi_column_d3FHmj",
     "faq_we3zNR",

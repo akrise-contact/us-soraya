@@ -82,10 +82,6 @@
             "size_chart_page": ""
           }
         },
-        "optis_color_swatch_se_product_variant_GVxR6N": {
-          "type": "shopify://apps/optis-color-swatch/blocks/se-product-variant/ad128d8f-5ebd-45ad-954a-7dd4c4226109",
-          "settings": {}
-        },
         "line_item_property_6HiUf8": {
           "type": "line_item_property",
           "settings": {
@@ -194,7 +190,6 @@
         "liquid_pKVN8L",
         "product_variations_KF3YrY",
         "variant_picker_E8qtg7",
-        "optis_color_swatch_se_product_variant_GVxR6N",
         "line_item_property_6HiUf8",
         "line_item_property_nhfXmr",
         "product_upsell_eE4mnw",
@@ -391,17 +386,6 @@
         "full_width": true,
         "content_width": "small",
         "text_position": "center",
-        "background": "",
-        "background_gradient": "",
-        "text_color": ""
-      }
-    },
-    "1761231111ad2a4f2f": {
-      "type": "apps",
-      "settings": {
-        "full_width": true,
-        "remove_vertical_spacing": false,
-        "remove_horizontal_spacing": false,
         "background": "",
         "background_gradient": "",
         "text_color": ""
@@ -1023,7 +1007,6 @@
     "multi_column_9XUVDD",
     "video_yhpTk7",
     "rich_text_WzXYat",
-    "1761231111ad2a4f2f",
     "ss_testimonial_8_Cxx4Fe",
     "ss_testimonial_8_FjXY9Y",
     "faq_7ytpep",

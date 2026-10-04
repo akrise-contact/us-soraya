@@ -53,10 +53,6 @@
             "liquid": "{% assign lang = request.locale.iso_code %}\n\n<!-- Bullet points -->\n<ul style=\"list-style: none; padding: 0; margin: 0;\">\n\n  <!-- Ligne 1 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">✿</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Un bijou contre son cœur chaque jour</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Ein Schmuckstück nah am Herzen jeden Tag</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Un gioiello vicino al suo cuore ogni giorno</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Una joya cerca de su corazón cada día</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">A jewel close to her heart every day</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">A jewel close to her heart every day</span>\n    {% endcase %}\n  </li>\n\n  <!-- Ligne 2 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">❀</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Une vraie rose qui dure éternellement</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Eine echte Rose, die für immer hält</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Una vera rosa che dura per sempre</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Una rosa real que dura para siempre</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">A real rose that lasts forever</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">A real rose that lasts forever</span>\n    {% endcase %}\n  </li>\n\n  <!-- Ligne 3 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">♡</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Collier garanti à vie • Résistant à l'eau</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Halskette mit lebenslanger Garantie • Wasserfest</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Collana garantita a vita • Resistente all'acqua</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Collar con garantía de por vida • Resistente al agua</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">Lifetime guarantee necklace • Water resistant</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">Lifetime guarantee necklace • Water resistant</span>\n    {% endcase %}\n  </li>\n\n</ul>"
           }
         },
-        "optis_color_swatch_se_product_variant_hhqqkT": {
-          "type": "shopify://apps/optis-color-swatch/blocks/se-product-variant/ad128d8f-5ebd-45ad-954a-7dd4c4226109",
-          "settings": {}
-        },
         "variant_picker_Akr4Bc": {
           "type": "variant_picker",
           "settings": {
@@ -66,12 +62,6 @@
             "swatch_selector_style": "swatch",
             "variant_image_options": "",
             "size_chart_page": ""
-          }
-        },
-        "globo_product_options_app_block_GVr3MW": {
-          "type": "shopify://apps/globo-product-options/blocks/app-block/fdc9fad5-1a0f-4bd4-9c8a-1af6a6eef6b8",
-          "settings": {
-            "product": ""
           }
         },
         "line_item_property_6HiUf8": {
@@ -195,9 +185,7 @@
         "title",
         "price_3ey3rY",
         "liquid_pKVN8L",
-        "optis_color_swatch_se_product_variant_hhqqkT",
         "variant_picker_Akr4Bc",
-        "globo_product_options_app_block_GVr3MW",
         "line_item_property_6HiUf8",
         "line_item_property_nhfXmr",
         "product_upsell_eE4mnw",
@@ -852,17 +840,6 @@
         "text_color": "#000000"
       }
     },
-    "1761231111ad2a4f2f": {
-      "type": "apps",
-      "settings": {
-        "full_width": true,
-        "remove_vertical_spacing": false,
-        "remove_horizontal_spacing": false,
-        "background": "",
-        "background_gradient": "",
-        "text_color": ""
-      }
-    },
     "faq_7ytpep": {
       "type": "faq",
       "blocks": {
@@ -1082,7 +1059,6 @@
     "rich_text_xEWBWd",
     "image_link_blocks_qthT6T",
     "rich_text_WzXYat",
-    "1761231111ad2a4f2f",
     "faq_7ytpep",
     "milona_features_TFmT9D",
     "image_link_blocks_wkzTbP"
