@@ -62,6 +62,10 @@
             "liquid": "{% assign lang = request.locale.iso_code %}\n\n<!-- Bullet points -->\n<ul style=\"list-style: none; padding: 0; margin: 0;\">\n\n  <!-- Ligne 1 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">✿</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Un bijou contre son cœur chaque jour</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Ein Schmuckstück nah am Herzen jeden Tag</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Un gioiello vicino al suo cuore ogni giorno</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Una joya cerca de su corazón cada día</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">A jewel close to her heart every day</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">A jewel close to her heart every day</span>\n    {% endcase %}\n  </li>\n\n  <!-- Ligne 2 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">❀</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Une vraie rose qui dure éternellement</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Eine echte Rose, die für immer hält</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Una vera rosa che dura per sempre</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Una rosa real que dura para siempre</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">A real rose that lasts forever</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">A real rose that lasts forever</span>\n    {% endcase %}\n  </li>\n\n  <!-- Ligne 3 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">♡</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Collier garanti à vie • Résistant à l'eau</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Halskette mit lebenslanger Garantie • Wasserfest</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Collana garantita a vita • Resistente all'acqua</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Collar con garantía de por vida • Resistente al agua</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">Lifetime guarantee necklace • Water resistant</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">Lifetime guarantee necklace • Water resistant</span>\n    {% endcase %}\n  </li>\n\n</ul>"
           }
         },
+        "optis_color_swatch_se_product_variant_th7Qha": {
+          "type": "shopify://apps/optis-color-swatch/blocks/se-product-variant/ad128d8f-5ebd-45ad-954a-7dd4c4226109",
+          "settings": {}
+        },
         "variant_picker_Akr4Bc": {
           "type": "variant_picker",
           "settings": {
@@ -137,9 +141,9 @@
             "border_width": 1,
             "margin_top": 4,
             "margin_bottom": 8,
-            "background": "#FFFFFF",
-            "border_color": "#FFFFFF",
-            "item_background": "#F0EFEF",
+            "background": "#ffffff",
+            "border_color": "#ffffff",
+            "item_background": "#f0efef",
             "selected_background": "#fbeef0",
             "accent": "#800020",
             "title_color": "#1a1a1a",
@@ -194,6 +198,7 @@
         "title",
         "price_3ey3rY",
         "liquid_pKVN8L",
+        "optis_color_swatch_se_product_variant_th7Qha",
         "variant_picker_Akr4Bc",
         "line_item_property_6HiUf8",
         "line_item_property_nhfXmr",
