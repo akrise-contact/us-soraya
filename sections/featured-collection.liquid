@@ -1,52 +1,199 @@
-{%- render 'section-spacing-collapsing' -%}
+{% comment %}
+  Featured collection — version personnalisable
+  ------------------------------------------------
+  Nouveautés par rapport au fichier d'origine :
+  - Couleur du fond de la "rangée" de produits (indépendante du fond de section)
+  - Bordure / arrondi des cartes produit
+  - Couleurs des flèches du carrousel
+  - Nombre de produits par ligne sur mobile / tablette / desktop
+  - Largeur des cartes sur mobile et tablette (mode carrousel)
+  - Espacements (gap) réglables entre les cartes
+  - Affichage des badges activable/désactivable
+  - AJOUT : taille, espacement des lettres, majuscules, graisse, alignement
+    (gauche / centré / droite), espacement en dessous et fond de couleur
+    (avec opacité + padding) du titre — + couleur, taille et majuscules du
+    sous-titre. Objectif : mêmes réglages que la section "Vitrine collections",
+    pour un rendu identique entre "Nos Collections" et "Nos Best Sellers".
+  - AJOUT : couleur du badge promo (fond + texte).
+  - AJOUT (optionnel, désactivé par défaut) : surcharge de la couleur du prix
+    UNIQUEMENT dans cette section, si vous voulez un prix différent ici sans
+    toucher au reste du site.
 
+  ⚠️ Merci d'avoir partagé snippets/section-header.liquid — ça a permis de corriger
+  le vrai problème : ce snippet gère l'alignement via des classes CSS de grille
+  (start / center / end), pilotées par un paramètre "text_alignment" que le fichier
+  ne lui transmettait jamais. C'est corrigé : l'alignement (gauche/centré/droite)
+  passe maintenant par le mécanisme natif du thème, et le sélecteur du sous-titre
+  a aussi été corrigé (il ciblait le mauvais élément). Taille, espacement des
+  lettres, majuscules, graisse et fond du titre restent appliqués en CSS ciblé,
+  ce qui est confirmé fonctionnel.
+
+  Les badges et le prix restent affichés via des snippets que je n'ai pas
+  (product-card.liquid, price-list.liquid) : ces réglages restent du "meilleur
+  effort" CSS. Si le badge ou le prix ne changent pas visuellement après réglage,
+  envoyez-moi le contenu de ces snippets et j'ajusterai le sélecteur exact.
+
+  Par défaut, la couleur/taille/gras du prix reste celle définie globalement dans
+  Réglages du thème (icône pinceau) → Colors > Product, et Product card > Price
+  display — c'est ce qui garde le prix cohérent sur tout le site. N'activez la
+  surcharge ci-dessous que si vous voulez vraiment un prix différent ici.
+
+  À copier-coller dans votre fichier Shopify existant (sections/featured-collection.liquid),
+  à la place du contenu actuel.
+{% endcomment %}
+ 
+{%- render 'section-spacing-collapsing' -%}
+ 
 <style>
   {%- assign section_background = section.settings.background | default: settings.background -%}
   {%- assign card_background = section.settings.product_card_background | default: settings.product_card_background -%}
   {%- assign card_blends = false -%}
-
+ 
   {%- unless section_background != 'rgba(0,0,0,0)' and card_background != 'rgba(0,0,0,0)' and section_background != card_background -%}
     {%- assign card_blends = true -%}
   {%- endunless -%}
-
+ 
+  /* ---------- Fond de la rangée de produits ---------- */
+  {%- if section.settings.row_background != blank %}
+    #shopify-section-{{ section.id }} .product-row {
+      background: {{ section.settings.row_background }};
+    }
+  {%- endif %}
+ 
+  /* ---------- Bordure / arrondi des cartes produit ---------- */
+  {%- if section.settings.card_border_radius > 0 %}
+    #shopify-section-{{ section.id }} product-card {
+      border-radius: {{ section.settings.card_border_radius }}px;
+      overflow: hidden;
+    }
+  {%- endif %}
+  {%- if section.settings.card_border_width > 0 %}
+    #shopify-section-{{ section.id }} product-card {
+      border: {{ section.settings.card_border_width }}px solid {{ section.settings.card_border_color | default: 'transparent' }};
+    }
+  {%- endif %}
+ 
+  /* ---------- Flèches du carrousel ---------- */
+  {%- if section.settings.button_background != blank or section.settings.button_icon_color != blank %}
+    #shopify-section-{{ section.id }} [is="prev-button"],
+    #shopify-section-{{ section.id }} [is="next-button"] {
+      {% if section.settings.button_background != blank %}background: {{ section.settings.button_background }};{% endif %}
+      {% if section.settings.button_icon_color != blank %}color: {{ section.settings.button_icon_color }};{% endif %}
+    }
+  {%- endif %}
+ 
+  /* ---------- Grille / espacements / tailles ---------- */
   #shopify-section-{{ section.id }} .product-list {
-    --product-list-gap: {% if section.settings.stack_products and section.settings.products_per_row_mobile == '2' %}{% if card_blends %}var(--product-list-row-gap){% endif %} var(--spacing-2){% else %}var(--product-list-row-gap) var(--product-list-column-gap){% endif %};
+    --product-list-gap: {% if section.settings.stack_products and section.settings.products_per_row_mobile == '2' %}{% if card_blends %}{{ section.settings.row_gap }}px {% endif %}8px{% else %}{{ section.settings.row_gap }}px {{ section.settings.column_gap }}px{% endif %};
     --product-list-items-per-row: {{ section.settings.products_per_row_mobile | times: 1 }};
-    --product-list-carousel-item-width: 74vw;
+    --product-list-carousel-item-width: {{ section.settings.mobile_card_width }}vw;
     --product-list-grid: {% if section.settings.stack_products %}auto / repeat(var(--product-list-items-per-row), minmax(0, 1fr)){% else %}auto / auto-flow var(--product-list-carousel-item-width){% endif %};
   }
-
+ 
   @media screen and (min-width: 700px) {
     #shopify-section-{{ section.id }} .product-list {
-      --product-list-gap: var(--product-list-row-gap) var(--product-list-column-gap);
-      --product-list-items-per-row: 2;
-      --product-list-carousel-item-width: 36vw;
+      --product-list-gap: {{ section.settings.row_gap }}px {{ section.settings.column_gap }}px;
+      --product-list-items-per-row: {{ section.settings.products_per_row_tablet | times: 1 }};
+      --product-list-carousel-item-width: {{ section.settings.tablet_card_width }}vw;
     }
   }
-
+ 
   @media screen and (min-width: 1000px) {
     #shopify-section-{{ section.id }} .product-list {
       --product-list-items-per-row: {{ section.settings.products_per_row_desktop }};
-      --product-list-carousel-item-width: calc(var(--container-inner-width) / {{ section.settings.products_per_row_desktop }} - (var(--product-list-column-gap) / {{ section.settings.products_per_row_desktop }} * {{ section.settings.products_per_row_desktop | minus: 1 }}));
+      --product-list-carousel-item-width: calc(var(--container-inner-width) / {{ section.settings.products_per_row_desktop }} - ({{ section.settings.column_gap }}px / {{ section.settings.products_per_row_desktop }} * {{ section.settings.products_per_row_desktop | minus: 1 }}));
     }
   }
+
+  /* ---------- AJOUT : Typographie du titre / sous-titre ---------- */
+  {%- case section.settings.heading_weight -%}
+    {%- when 'normal' -%}{%- assign heading_font_weight = 400 -%}
+    {%- when 'medium' -%}{%- assign heading_font_weight = 500 -%}
+    {%- when 'semibold' -%}{%- assign heading_font_weight = 600 -%}
+    {%- when 'bold' -%}{%- assign heading_font_weight = 700 -%}
+    {%- else -%}{%- assign heading_font_weight = 800 -%}
+  {%- endcase -%}
+
+  #shopify-section-{{ section.id }} .section-header {
+    text-align: {{ section.settings.heading_alignment }};
+  }
+
+  #shopify-section-{{ section.id }} .section-header :is(h1, h2, h3) {
+    font-size: {{ section.settings.heading_size }}px;
+    letter-spacing: {{ section.settings.heading_letter_spacing }}px;
+    text-transform: {% if section.settings.heading_uppercase %}uppercase{% else %}none{% endif %};
+    font-weight: {{ heading_font_weight }};
+    margin-bottom: {{ section.settings.heading_spacing_bottom }}px;
+    {%- if section.settings.show_heading_background and section.settings.heading_background_color != blank -%}
+      {%- assign heading_bg_alpha = section.settings.heading_background_opacity | divided_by: 100.0 -%}
+      {%- assign heading_bg_rgba = section.settings.heading_background_color | color_modify: 'alpha', heading_bg_alpha -%}
+      display: inline-block;
+      background-color: {{ heading_bg_rgba }};
+      padding: {{ section.settings.heading_padding }}px;
+    {%- endif -%}
+  }
+
+  {%- if section.settings.subheading_color != blank -%}
+    #shopify-section-{{ section.id }} .section-header .subheading {
+      color: {{ section.settings.subheading_color }};
+    }
+  {%- endif -%}
+  #shopify-section-{{ section.id }} .section-header .subheading {
+    font-size: {{ section.settings.subheading_size }}px;
+    text-transform: {% if section.settings.subheading_uppercase %}uppercase{% else %}none{% endif %};
+  }
+
+  /* ---------- AJOUT : Badge promo (meilleur effort) ---------- */
+  {%- if section.settings.badge_background_color != blank or section.settings.badge_text_color != blank -%}
+    #shopify-section-{{ section.id }} :is([class*="badge" i]) {
+      {%- if section.settings.badge_background_color != blank %}background-color: {{ section.settings.badge_background_color }} !important;{% endif %}
+      {%- if section.settings.badge_text_color != blank %}color: {{ section.settings.badge_text_color }} !important;{% endif %}
+    }
+  {%- endif -%}
+
+  /* ---------- AJOUT : Surcharge du prix, cette section uniquement (meilleur effort) ---------- */
+  {%- if section.settings.override_price_style -%}
+    {%- if section.settings.price_color != blank -%}
+      #shopify-section-{{ section.id }} :is([class*="price" i]):not(del):not(s) {
+        color: {{ section.settings.price_color }} !important;
+      }
+    {%- endif -%}
+    {%- if section.settings.compare_price_color != blank -%}
+      #shopify-section-{{ section.id }} :is(del, s, [class*="compare" i]) {
+        color: {{ section.settings.compare_price_color }} !important;
+      }
+    {%- endif -%}
+  {%- endif -%}
 </style>
+ 
+  {%- case section.settings.heading_alignment -%}
+    {%- when 'left' -%}{%- assign heading_text_alignment = 'start' -%}
+    {%- when 'right' -%}{%- assign heading_text_alignment = 'end' -%}
+    {%- else -%}{%- assign heading_text_alignment = 'center' -%}
+  {%- endcase -%}
 
 <div {% render 'section-properties' %}>
   <div class="section-stack">
     {%- assign link_url = section.settings.link_url | default: section.settings.collection.url -%}
-    {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, heading_color: section.settings.heading_color, heading_gradient: section.settings.heading_gradient, content: section.settings.content, link_text: section.settings.link_text, link_url: link_url -%}
-
-    <div class="{% if section.settings.show_progress_bar %}scrollable-with-controls{% else %}floating-controls-container{% endif %}">
+    {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, heading_color: section.settings.heading_color, heading_gradient: section.settings.heading_gradient, content: section.settings.content, link_text: section.settings.link_text, link_url: link_url, text_alignment: heading_text_alignment -%}
+ 
+    <div class="product-row {% if section.settings.show_progress_bar %}scrollable-with-controls{% else %}floating-controls-container{% endif %}">
       {%- assign scroll_area_id = 'scroll-area-' | append: section.id -%}
-
+ 
       <scroll-carousel selector="product-card" id="{{ scroll_area_id }}" class="scroll-area bleed {% if section.settings.products_count > section.settings.products_per_row_desktop %}is-scrollable{% endif %}">
         <reveal-items selector=".product-list > *">
           <product-list class="product-list">
             {%- assign products = section.settings.products | default: section.settings.collection.products -%}
-
+ 
             {%- for product in products limit: section.settings.products_count -%}
-              {%- render 'product-card', product: product, stacked: section.settings.stack_products, position: forloop.index, background: section.settings.product_card_background, text_color: section.settings.product_card_text_color, show_badges: true -%}
+              {%- render 'product-card',
+                product: product,
+                stacked: section.settings.stack_products,
+                position: forloop.index,
+                background: section.settings.product_card_background,
+                text_color: section.settings.product_card_text_color,
+                show_badges: section.settings.show_badges
+              -%}
             {%- else -%}
               {%- for i in (1..section.settings.products_count) -%}
                 {%- capture placeholder_image -%}product-{% cycle '1', '2', '3', '4', '5', '6' %}{%- endcapture -%}
@@ -56,7 +203,7 @@
           </product-list>
         </reveal-items>
       </scroll-carousel>
-
+ 
       {%- if section.settings.stack_products == false -%}
         {%- if section.settings.show_progress_bar -%}
           {%- assign default_progress = section.settings.products_per_row_desktop | times: 1.0 | divided_by: section.settings.products_count -%}
@@ -66,7 +213,7 @@
             <span class="sr-only">{{ 'general.accessibility.previous' | t }}</span>
             <span class="animated-arrow animated-arrow--reverse"></span>
           </button>
-
+ 
           <button is="next-button" class="circle-button circle-button--lg circle-button--fill border group" aria-controls="{{ scroll_area_id }}">
             <span class="sr-only">{{ 'general.accessibility.next' | t }}</span>
             <span class="animated-arrow"></span>
@@ -76,7 +223,7 @@
     </div>
   </div>
 </div>
-
+ 
 {% schema %}
 {
   "name": "Featured collection",
@@ -87,140 +234,111 @@
     "groups": ["header", "custom.overlay"]
   },
   "settings": [
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "product_list", "id": "products", "label": "Products", "info": "Replaces collection when selected." },
+    { "type": "checkbox", "id": "full_width", "label": "Full width", "default": true },
+ 
+    { "type": "header", "content": "Products" },
+    { "type": "checkbox", "id": "stack_products", "label": "Stack products (grid instead of swipeable row)", "default": true },
+    { "type": "checkbox", "id": "show_progress_bar", "label": "Show carousel progress bar", "default": false },
+    { "type": "checkbox", "id": "show_badges", "label": "Show sale / promo badges", "default": true },
+    { "type": "color", "id": "badge_background_color", "label": "Badge background color" },
+    { "type": "color", "id": "badge_text_color", "label": "Badge text color" },
+    { "type": "range", "id": "products_count", "min": 2, "max": 50, "label": "Products to show", "default": 6 },
+ 
+    { "type": "header", "content": "Mobile layout" },
+    { "type": "select", "id": "products_per_row_mobile", "label": "Products per row (mobile)", "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" }
+      ], "default": "2" },
+    { "type": "range", "id": "mobile_card_width", "min": 50, "max": 100, "step": 2, "unit": "vw", "label": "Card width on mobile (carousel mode)", "info": "Only used when Stack products is off — controls how much of the screen each card takes in the swipeable row.", "default": 74 },
+ 
+    { "type": "header", "content": "Tablet layout" },
+    { "type": "select", "id": "products_per_row_tablet", "label": "Products per row (tablet)", "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ], "default": "2" },
+    { "type": "range", "id": "tablet_card_width", "min": 25, "max": 60, "step": 1, "unit": "vw", "label": "Card width on tablet (carousel mode)", "default": 36 },
+ 
+    { "type": "header", "content": "Desktop layout" },
+    { "type": "range", "id": "products_per_row_desktop", "min": 2, "max": 6, "label": "Products per row (desktop)", "default": 3 },
+ 
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "row_gap", "min": 0, "max": 64, "step": 2, "unit": "px", "label": "Row gap (vertical spacing)", "default": 16 },
+    { "type": "range", "id": "column_gap", "min": 0, "max": 64, "step": 2, "unit": "px", "label": "Column gap (horizontal spacing)", "default": 16 },
+ 
+    { "type": "header", "content": "Heading typography" },
+    { "type": "text", "id": "subheading", "label": "Subheading" },
+    { "type": "color", "id": "subheading_color", "label": "Subheading color" },
+    { "type": "range", "id": "subheading_size", "min": 10, "max": 24, "step": 1, "unit": "px", "label": "Subheading size", "default": 14 },
+    { "type": "checkbox", "id": "subheading_uppercase", "label": "Subheading uppercase", "default": false },
+
+    { "type": "text", "id": "title", "label": "Heading", "default": "Featured collection" },
+    { "type": "range", "id": "heading_size", "min": 18, "max": 64, "step": 1, "unit": "px", "label": "Heading size", "default": 32 },
+    { "type": "range", "id": "heading_letter_spacing", "min": 0, "max": 6, "step": 0.5, "unit": "px", "label": "Heading letter spacing", "default": 2 },
+    { "type": "checkbox", "id": "heading_uppercase", "label": "Heading uppercase", "default": true },
     {
-      "type": "collection",
-      "id": "collection",
-      "label": "Collection"
-    },
-    {
-      "type": "product_list",
-      "id": "products",
-      "label": "Products",
-      "info": "Replaces collection when selected."
-    },
-    {
-      "type": "checkbox",
-      "id": "full_width",
-      "label": "Full width",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "stack_products",
-      "label": "Stack products",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_progress_bar",
-      "label": "Show carousel progress bar",
-      "default": false
-    },
-    {
-      "type": "range",
-      "id": "products_count",
-      "min": 2,
-      "max": 50,
-      "label": "Products to show",
-      "default": 6
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "semibold", "label": "Semi-bold" },
+        { "value": "bold", "label": "Bold" },
+        { "value": "extrabold", "label": "Extra bold" }
+      ],
+      "default": "semibold"
     },
     {
       "type": "select",
-      "id": "products_per_row_mobile",
-      "label": "Products per row (mobile)",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
       "options": [
-        {
-          "value": "1",
-          "label": "1"
-        },
-        {
-          "value": "2",
-          "label": "2"
-        }
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
       ],
-      "default": "2"
+      "default": "left"
     },
-    {
-      "type": "range",
-      "id": "products_per_row_desktop",
-      "min": 2,
-      "max": 5,
-      "label": "Products per row (desktop)",
-      "default": 3
-    },
-    {
-      "type": "text",
-      "id": "subheading",
-      "label": "Subheading"
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Heading",
-      "default": "Featured collection"
-    },
-    {
-      "type": "richtext",
-      "id": "content",
-      "label": "Content"
-    },
-    {
-      "type": "url",
-      "id": "link_url",
-      "label": "Link URL",
-      "info": "Default to collection URL."
-    },
-    {
-      "type": "text",
-      "id": "link_text",
-      "label": "Link text",
-      "default": "View all"
-    },
-    {
-      "type": "header",
-      "content": "Colors",
-      "info": "Gradient replaces solid colors when set."
-    },
-    {
-      "type": "color",
-      "id": "background",
-      "label": "Background"
-    },
-    {
-      "type": "color_background",
-      "id": "background_gradient",
-      "label": "Background gradient"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading color"
-    },
-    {
-      "type": "color_background",
-      "id": "heading_gradient",
-      "label": "Heading gradient"
-    },
-    {
-      "type": "color",
-      "id": "product_card_background",
-      "label": "Product card background"
-    },
-    {
-      "type": "color",
-      "id": "product_card_text_color",
-      "label": "Product card text"
-    }
+    { "type": "range", "id": "heading_spacing_bottom", "min": 0, "max": 80, "step": 2, "unit": "px", "label": "Space below heading", "default": 24 },
+    { "type": "checkbox", "id": "show_heading_background", "label": "Show background behind heading", "default": false },
+    { "type": "color", "id": "heading_background_color", "label": "Heading background color" },
+    { "type": "range", "id": "heading_background_opacity", "min": 0, "max": 100, "step": 5, "unit": "%", "label": "Heading background opacity", "default": 100 },
+    { "type": "range", "id": "heading_padding", "min": 0, "max": 32, "step": 2, "unit": "px", "label": "Heading background padding", "default": 12 },
+
+    { "type": "richtext", "id": "content", "label": "Content" },
+    { "type": "url", "id": "link_url", "label": "Link URL", "info": "Default to collection URL." },
+    { "type": "text", "id": "link_text", "label": "Link text", "default": "View all" },
+ 
+    { "type": "header", "content": "Colors", "info": "Gradient replaces solid colors when set." },
+    { "type": "color", "id": "background", "label": "Background" },
+    { "type": "color_background", "id": "background_gradient", "label": "Background gradient" },
+    { "type": "color", "id": "text_color", "label": "Text" },
+    { "type": "color", "id": "heading_color", "label": "Heading color" },
+    { "type": "color_background", "id": "heading_gradient", "label": "Heading gradient" },
+    { "type": "color", "id": "row_background", "label": "Product row background", "info": "Background of the band behind the product cards — independent from the section background above." },
+ 
+    { "type": "header", "content": "Product card" },
+    { "type": "color", "id": "product_card_background", "label": "Card background" },
+    { "type": "color", "id": "product_card_text_color", "label": "Card text" },
+    { "type": "color", "id": "card_border_color", "label": "Card border color" },
+    { "type": "range", "id": "card_border_width", "min": 0, "max": 10, "step": 1, "unit": "px", "label": "Card border width", "default": 0 },
+    { "type": "range", "id": "card_border_radius", "min": 0, "max": 40, "step": 2, "unit": "px", "label": "Card corner radius", "default": 0 },
+ 
+    { "type": "header", "content": "Price (this section only)", "info": "By default price follows your global theme settings, which keeps it consistent across the whole store. Only turn this on if you want a different price color specifically here." },
+    { "type": "checkbox", "id": "override_price_style", "label": "Override price color in this section", "default": false },
+    { "type": "color", "id": "price_color", "label": "Price color" },
+    { "type": "color", "id": "compare_price_color", "label": "Compare-at (strikethrough) price color" },
+
+    { "type": "header", "content": "Carousel arrows" },
+    { "type": "color", "id": "button_background", "label": "Arrow button background" },
+    { "type": "color", "id": "button_icon_color", "label": "Arrow icon color" }
   ],
   "presets": [
-    {
-      "name": "Featured collection"
-    }
+    { "name": "Featured collection" }
   ]
 }
 {% endschema %}

@@ -1,1 +1,101 @@
-{"sections":{"banner":{"type":"collection-banner","settings":{}},"main":{"type":"main-collection","settings":{}}},"order":["banner","main"]}
+{
+  "sections": {
+    "banner": {
+      "type": "collection-banner",
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "show_collection_title": false,
+        "show_collection_description": false,
+        "show_collection_image": false,
+        "collection_title_size": "h3",
+        "image_size": "auto",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "featured_product": "",
+        "featured_product_heading": "Featured product",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "products_per_page": 15,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 3,
+        "filter_layout": "drawer",
+        "show_sort_by": false,
+        "show_filters": false,
+        "show_filter_group_name": false,
+        "show_filter_values_count": true,
+        "open_first_filter_group": true
+      }
+    },
+    "milona_features_PcD7gM": {
+      "type": "milona-features",
+      "blocks": {
+        "feature_AeADUm": {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "text": "<p>Free shipping</p>"
+          }
+        },
+        "feature_k7wgeM": {
+          "type": "feature",
+          "settings": {
+            "icon": "box",
+            "text": "<h5>30-day money-back guarantee</h5>"
+          }
+        },
+        "feature_beYMFi": {
+          "type": "feature",
+          "settings": {
+            "icon": "badge",
+            "text": "<p>Lifetime jewelry warranty</p>"
+          }
+        },
+        "feature_8CLTPM": {
+          "type": "feature",
+          "settings": {
+            "icon": "lock",
+            "text": "<h3>Secure payment</h3>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_AeADUm",
+        "feature_k7wgeM",
+        "feature_beYMFi",
+        "feature_8CLTPM"
+      ],
+      "name": "Réassurance",
+      "settings": {
+        "show_heading": true,
+        "heading": "",
+        "heading_size": 32,
+        "heading_color": "#1a1a1a",
+        "columns_desktop": "4",
+        "columns_mobile": "2",
+        "content_alignment": "center",
+        "gap": 24,
+        "max_width": 720,
+        "padding_top": 0,
+        "padding_bottom": 44,
+        "icon_size": 34,
+        "icon_color": "#800020",
+        "text_size": 15,
+        "text_color": "#800020",
+        "background_color": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "main",
+    "milona_features_PcD7gM"
+  ]
+}

@@ -1,18 +1,18 @@
 {%- render 'section-spacing-collapsing' -%}
-
+ 
 <style>
   #shopify-section-{{ section.id }} {
     --product-grid: auto / minmax(0, 1fr);
     --product-gallery-media-list-grid: auto / auto-flow {% if section.settings.mobile_carousel_control == 'free_scroll' %}{% if section.settings.mobile_media_size == 'expanded' %}84vw{% else %}73vw{% endif %}{% else %}100%{% endif %};
     --product-gallery-media-list-gap: {% if section.settings.mobile_media_size == 'expanded' %}var(--spacing-0-5){% else %}var(--grid-gutter){% endif %};
   }
-
+ 
   @media screen and (max-width: 999px) {
     #shopify-section-{{ section.id }} {
       --section-spacing-block-start: {% if section.settings.mobile_media_size == 'expanded' %}0px{% else %}var(--container-gutter){% endif %};
     }
   }
-
+ 
   @media screen and (min-width: 1000px) {
     #shopify-section-{{ section.id }} {
       {%- assign media_ratio = section.settings.desktop_media_width | divided_by: 50.0 -%}
@@ -20,34 +20,34 @@
       --product-gallery-media-list-grid: {% if section.settings.desktop_media_layout contains 'grid' %}auto-flow dense / repeat({% if section.settings.desktop_media_layout == 'grid_one' %}1{% else %}2{% endif %}, minmax(0, 1fr)){% else %}auto / auto-flow 100%{% endif %};
       --product-gallery-media-list-gap: calc(var(--grid-gutter) / 2);
     }
-
+ 
     {%- if section.settings.desktop_media_layout == 'grid_highlight' -%}
       #shopify-section-{{ section.id }} .product-gallery__media-list > :not([hidden]) {
         grid-column: span 2;
       }
-
+ 
       #shopify-section-{{ section.id }} .product-gallery__media-list > :not([hidden]) ~ *:not(.product-gallery__media--expand) {
         grid-column: span 1;
       }
     {%- endif -%}
   }
-
+ 
   @media screen and (min-width: 1400px) {
     #shopify-section-{{ section.id }} {
       --product-gallery-media-list-gap: var(--grid-gutter);
     }
   }
 </style>
-
+ 
 {%- capture product_form_id -%}product-form-{{ product.id }}-{{ section.id }}{%- endcapture -%}
-
+ 
 <div {% render 'section-properties', tight: true %}>
   <product-rerender id="product-info-{{ product.id }}-{{ section.id }}" observe-form="{{ product_form_id }}" allow-partial-rerender>
     <div class="product">
       {%- if product.media.size > 0 -%}
         {%- render 'product-gallery', product: product, product_form_id: product_form_id -%}
       {%- endif -%}
-
+ 
       {%- render 'product-info', 
         product: product, 
         update_url: true,
@@ -57,39 +57,39 @@
     </div>
   </product-rerender>
 </div>
-
+ 
 {%- assign buy_buttons_block = section.blocks | where: 'type', 'buy_buttons' | first -%}
-
+ 
 {%- if section.settings.show_fixed_add_to_cart and product.available and buy_buttons_block != blank -%}
   <product-rerender id="{{ product_form_id }}-sticky-bar" observe-form="{{ product_form_id }}">
     {%- if product.selected_or_first_available_variant.available -%}
       <product-quick-add form="{{ product_form_id }}" class="product-quick-add">
         {%- assign button_label = 'product.general.add_to_cart_button' | t -%}
-
+ 
         <buy-buttons template="{{ product.template_suffix }}" form="{{ product_form_id }}" class="sm:hidden">
           {%- render 'button', type: 'submit', content: button_label, form: product_form_id, background: buy_buttons_block.settings.atc_button_background, text_color: buy_buttons_block.settings.atc_button_text_color, secondary: true, stretch: true, size: 'lg' -%}
         </buy-buttons>
-
+ 
         {%- assign image = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
-
+ 
         <div class="product-quick-add__variant {% if image == blank %}no-image{% endif %} hidden sm:grid">
           {%- if image != blank -%}
             <variant-media widths="80,160" form="{{ product_form_id }}">
               {{- image | image_url: width: image.width | image_tag: loading: 'lazy', sizes: '80px', widths: '80,160', class: 'rounded-xs' -}}
             </variant-media>
           {%- endif -%}
-
+ 
           <div class="v-stack gap-0.5">
             {%- assign vendor_block = section.blocks | where: 'type', 'vendor' -%}
-
+ 
             {%- if vendor_block != blank -%}
               {%- render 'vendor' with product.vendor, class: 'text-xs' -%}
             {%- endif -%}
-
+ 
             <a href="{{ product.url }}" class="bold truncate-text">{{ product.title }}</a>
             {%- render 'price-list', product: product, variant: product.selected_or_first_available_variant, form_id: product_form_id -%}
           </div>
-
+ 
           <buy-buttons template="{{ product.template_suffix }}" form="{{ product_form_id }}" force-secondary-button>
             {%- render 'button', type: 'submit', content: button_label, form: product_form_id, background: buy_buttons_block.settings.atc_button_background, text_color: buy_buttons_block.settings.atc_button_text_color, secondary: true -%}
           </buy-buttons>
@@ -98,1732 +98,258 @@
     {%- endif -%}
   </product-rerender>
 {%- endif -%}
-
+ 
 {%- comment -%}
 IMPLEMENTATION NOTE: Shopify does not currently allows to render a given section within the context of a given product. However,
 when rendering the quick buy popovers, we want to be able to re-use the merchant's choices (such as the selector type). This
 is however only possible by rendering the whole product page, and extracting the relevant part. Here, we therefore render the
 quick buy information in a template, that will be extracted in JS, but ensure it is not visible in the main product page
 {%- endcomment -%}
-
+ 
 {%- render 'product-quick-buy', product: product -%}
-
+ 
 {% schema %}
 {
-  "name": "Product page",
-  "class": "shopify-section--main-product",
-  "tag": "section",
-  "blocks": [
-    {
-      "type": "@app"
-    },
-    {
-      "type": "vendor",
-      "name": "Vendor",
-      "limit": 1
-    },
-    {
-      "type": "title",
-      "name": "Title",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "select",
-          "id": "heading_tag",
-          "label": "Style",
-          "options": [
-            {
-              "value": "h1",
-              "label": "X-Large"
-            },
-            {
-              "value": "h2",
-              "label": "Large"
-            },
-            {
-              "value": "h3",
-              "label": "Medium"
-            },
-            {
-              "value": "h4",
-              "label": "Small"
-            },
-            {
-              "value": "h5",
-              "label": "X-Small"
-            },
-            {
-              "value": "h6",
-              "label": "XX-Small"
-            }
-          ],
-          "default": "h2"
-        }
-      ]
-    },
-    {
-      "type": "sku",
-      "name": "SKU",
-      "limit": 1
-    },
-    {
-      "type": "badges",
-      "name": "Badges",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "Use metafields to add custom badges. [Learn more](https://support.maestrooo.com/article/75-collection-displaying-custom-label)"
-        }
-      ]
-    },
-    {
-      "type": "price",
-      "name": "Price",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "checkbox",
-          "id": "show_taxes_notice",
-          "label": "Show taxes notice",
-          "default": false
-        }
-      ]
-    },
-    {
-      "type": "payment_terms",
-      "name": "Payment installments",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "To display payment installments, your store needs to support Shop Pay Installments. [Learn more](https://help.shopify.com/en/manual/payments/shop-pay-installments)"
-        }
-      ]
-    },
-    {
-      "type": "rating",
-      "name": "Rating",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "To display a rating, add a product rating app. [Learn more](https://apps.shopify.com/categories/store-design-social-proof-product-reviews)"
-        },
-        {
-          "type": "checkbox",
-          "id": "show_empty",
-          "label": "Show if no reviews",
-          "default": false
-        }
-      ]
-    },
-    {
-      "type": "separator",
-      "name": "Separator"
-    },
-    {
-      "type": "description",
-      "name": "Description",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "select",
-          "id": "icon",
-          "label": "Icon",
-          "options": [
-            {
-              "value": "none",
-              "label": "None"
-            },
-            {
-              "value": "picto-coupon",
-              "label": "Coupon",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-percent",
-              "label": "Percent",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-gift",
-              "label": "Gift",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-star",
-              "label": "Star",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-like",
-              "label": "Like",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-building",
-              "label": "Building",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-love",
-              "label": "Love",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-award-gift",
-              "label": "Award gift",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-happy",
-              "label": "Happy",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-box",
-              "label": "Box",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-pin",
-              "label": "Pin",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-timer",
-              "label": "Timer",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-validation",
-              "label": "Validation",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-truck",
-              "label": "Truck",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-return",
-              "label": "Return",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-earth",
-              "label": "Earth",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-plane",
-              "label": "Plane",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-credit-card",
-              "label": "Credit card",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-lock",
-              "label": "Lock",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-shield",
-              "label": "Shield",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-secure-profile",
-              "label": "Secure profile",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-money",
-              "label": "Money",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-recycle",
-              "label": "Recycle",
-              "group": "Ecology"
-            },
-            {
-              "value": "picto-leaf",
-              "label": "Leaf",
-              "group": "Ecology"
-            },
-            {
-              "value": "picto-tree",
-              "label": "Tree",
-              "group": "Ecology"
-            },
-            {
-              "value": "picto-mobile-phone",
-              "label": "Mobile phone",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-phone",
-              "label": "Phone",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-chat",
-              "label": "Chat",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-customer-support",
-              "label": "Customer support",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-operator",
-              "label": "Operator",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-mailbox",
-              "label": "Mailbox",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-envelope",
-              "label": "Envelope",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-comment",
-              "label": "Comment",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-question",
-              "label": "Question",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-send",
-              "label": "Send",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-at-sign",
-              "label": "At sign",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-camera",
-              "label": "Camera",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-wifi",
-              "label": "WiFi",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-bluetooth",
-              "label": "Bluetooth",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-printer",
-              "label": "Printer",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-smart-watch",
-              "label": "Smart watch",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-coffee",
-              "label": "Coffee",
-              "group": "Food & Drink"
-            },
-            {
-              "value": "picto-burger",
-              "label": "Burger",
-              "group": "Food & Drink"
-            },
-            {
-              "value": "picto-beer",
-              "label": "Beer",
-              "group": "Food & Drink"
-            },
-            {
-              "value": "picto-target",
-              "label": "Target",
-              "group": "Other"
-            },
-            {
-              "value": "picto-document",
-              "label": "Document",
-              "group": "Other"
-            },
-            {
-              "value": "picto-jewelry",
-              "label": "Jewelry",
-              "group": "Other"
-            },
-            {
-              "value": "picto-music",
-              "label": "Music",
-              "group": "Other"
-            },
-            {
-              "value": "picto-file",
-              "label": "File",
-              "group": "Other"
-            },
-            {
-              "value": "picto-mask",
-              "label": "Mask",
-              "group": "Other"
-            },
-            {
-              "value": "picto-stop",
-              "label": "Stop",
-              "group": "Other"
-            }
-          ],
-          "default": "none"
-        },
-        {
-          "type": "image_picker",
-          "id": "custom_icon",
-          "label": "Custom icon",
-          "info": "96 x 96px .png or .svg recommended. Only used when content is collapsed."
-        },
-        {
-          "type": "range",
-          "id": "icon_width",
-          "min": 16,
-          "max": 48,
-          "step": 2,
-          "unit": "px",
-          "label": "Icon width",
-          "default": 20
-        },
-        {
-          "type": "checkbox",
-          "id": "collapse_content",
-          "label": "Collapse content",
-          "default": false
-        }
-      ]
-    },
-    {
-      "type": "variant_picker",
-      "name": "Variant picker",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "checkbox",
-          "id": "hide_sold_out_variants",
-          "label": "Hide sold out variants",
-          "default": false
-        },
-        {
-          "type": "checkbox",
-          "id": "stack_blocks",
-          "label": "Stack options on mobile",
-          "default": true
-        },
-        {
-          "type": "select",
-          "id": "selector_style",
-          "label": "Selector style",
-          "options": [
-            {
-              "value": "block",
-              "label": "Block"
-            },
-            {
-              "value": "dropdown",
-              "label": "Dropdown"
-            }
-          ],
-          "default": "block"
-        },
-        {
-          "type": "select",
-          "id": "swatch_selector_style",
-          "label": "Swatch selector style",
-          "info": "Enable [swatches](https://help.shopify.com/en/manual/online-store/themes/theme-structure/theme-settings#options-with-swatches) on product options.",
-          "options": [
-            {
-              "value": "swatch",
-              "label": "Swatch"
-            },
-            {
-              "value": "block_swatch",
-              "label": "Block with swatch"
-            },
-            {
-              "value": "none",
-              "label": "None"
-            }
-          ],
-          "default": "swatch"
-        },
-        {
-          "type": "text",
-          "id": "variant_image_options",
-          "label": "Show variant image for options",
-          "info": "List of comma separated option names where option values show the attached variant image. [Learn more](https://impact-theme.helpscoutdocs.com/article/555-variant-images-for-color-option)"
-        },
-        {
-          "type": "page",
-          "id": "size_chart_page",
-          "label": "Size chart page",
-          "info": "Feature a page for size option"
-        }
-      ]
-    },
-    {
-      "type": "product_variations",
-      "name": "Product variations",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "Link products of different colors using swatches. [Learn more](https://support.maestrooo.com/article/307-product-creating-product-variations-that-link-to-different-pages)"
-        },
-        {
-          "type": "text",
-          "id": "option_name",
-          "label": "Option name",
-          "info": "Example: Color, Style..."
-        },
-        {
-          "type": "text",
-          "id": "option_value_metafield",
-          "label": "Option value metafield",
-          "info": "Enter namespace and key of the metafield holding the value. Eg.: custom.color"
-        },
-        {
-          "type": "product_list",
-          "id": "products",
-          "label": "Products",
-          "info": "Select all the variations (including the product itself)."
-        },
-        {
-          "type": "select",
-          "id": "selector_style",
-          "label": "Selector style",
-          "info": "Product image mode requires that all variant have an associated image. [Learn more](https://help.shopify.com/en/manual/products/product-media/add-images-variants#add-images-to-existing-variants)",
-          "options": [
-            {
-              "value": "block",
-              "label": "Block"
-            },
-            {
-              "value": "block_swatch",
-              "label": "Block with swatch"
-            },
-            {
-              "value": "swatch",
-              "label": "Swatch"
-            },
-            {
-              "value": "variant_image",
-              "label": "Variant image"
-            }
-          ],
-          "default": "swatch"
-        }
-      ]
-    },
-    {
-      "type": "line_item_property",
-      "name": "Line item property",
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "Line item properties are used to collect customization information for an item added to the cart."
-        },
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Label",
-          "default": "Your label"
-        },
-        {
-          "type": "select",
-          "id": "type",
-          "label": "Type",
-          "options": [
-            {
-              "value": "text",
-              "label": "Text"
-            },
-            {
-              "value": "checkbox",
-              "label": "Checkbox"
-            }
-          ],
-          "default": "text"
-        },
-        {
-          "type": "checkbox",
-          "id": "required",
-          "label": "Required",
-          "info": "For text property, the customer must write a text ; for checkbox, the customer must check it to add to cart.",
-          "default": false
-        },
-        {
-          "type": "header",
-          "content": "Text",
-          "info": "Only applicable for line item property of type Text."
-        },
-        {
-          "type": "checkbox",
-          "id": "allow_long_text",
-          "label": "Allow long text",
-          "default": false
-        },
-        {
-          "type": "number",
-          "id": "max_length",
-          "label": "Maximum number of characters"
-        }
-      ]
-    },
-    {
-      "type": "quantity_selector",
-      "name": "Quantity selector",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "The selector is automatically hidden if all variants are sold out. When at least one variant is available, the selector is always visible to prevent the page from moving when switching variants. To show a volume pricing table, add the dedicatd Volume pricing block."
-        }
-      ]
-    },
-    {
-      "type": "volume_pricing",
-      "name": "Volume pricing table",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "Volume pricing is only available to Shopify Plus merchants. [Learn more](https://help.shopify.com/en/manual/b2b/catalogs/quantity-pricing#volume-pricing)"
-        }
-      ]
-    },
-    {
-      "type": "inventory",
-      "name": "Inventory",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "range",
-          "id": "low_inventory_threshold",
-          "label": "Low inventory threshold",
-          "info": "Use low stock color when quantity is below the threshold. Choose 0 to always show in stock.",
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "default": 0
-        }
-      ]
-    },
-    {
-      "type": "buy_buttons",
-      "name": "Buy buttons",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "checkbox",
-          "id": "show_payment_button",
-          "label": "Show dynamic checkout button",
-          "info": "Each customer will see their preferred payment method from those available on your store, such as PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
-          "default": true
-        },
-        {
-          "type": "checkbox",
-          "id": "show_gift_card_recipient",
-          "label": "Show recipient information form for gift cards",
-          "info": "Allow buyers to send gift cards along with a personal message. [Learn more](https://help.shopify.com/manual/online-store/themes/customizing-themes/add-gift-card-recipient-fields)",
-          "default": true
-        },
-        {
-          "type": "color",
-          "id": "atc_button_background",
-          "label": "Add to cart background"
-        },
-        {
-          "type": "color",
-          "id": "atc_button_text_color",
-          "label": "Add to cart color"
-        },
-        {
-          "type": "color",
-          "id": "payment_button_background",
-          "label": "Buy now button background"
-        },
-        {
-          "type": "color",
-          "id": "payment_button_text_color",
-          "label": "Buy now button color"
-        }
-      ]
-    },
-    {
-      "type": "pickup_availability",
-      "name": "Pickup availability",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "Allow your customers to see availability in retail stores by [setting up local pickup](https://help.shopify.com/en/manual/sell-in-person/shopify-pos/order-management/local-pickup-for-online-orders)."
-        }
-      ]
-    },
-    {
-      "type": "text",
-      "name": "Text",
-      "settings": [
-        {
-          "type": "richtext",
-          "id": "text",
-          "label": "Text",
-          "default": "<p>Share some content to your customers about your products.</p>"
-        }
-      ]
-    },
-    {
-      "type": "collapsible_text",
-      "name": "Collapsible text",
-      "settings": [
-        {
-          "type": "select",
-          "id": "icon",
-          "label": "Icon",
-          "options": [
-            {
-              "value": "none",
-              "label": "None"
-            },
-            {
-              "value": "picto-coupon",
-              "label": "Coupon",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-percent",
-              "label": "Percent",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-gift",
-              "label": "Gift",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-star",
-              "label": "Star",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-like",
-              "label": "Like",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-building",
-              "label": "Building",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-love",
-              "label": "Love",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-award-gift",
-              "label": "Award gift",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-happy",
-              "label": "Happy",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-box",
-              "label": "Box",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-pin",
-              "label": "Pin",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-timer",
-              "label": "Timer",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-validation",
-              "label": "Validation",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-truck",
-              "label": "Truck",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-return",
-              "label": "Return",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-earth",
-              "label": "Earth",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-plane",
-              "label": "Plane",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-credit-card",
-              "label": "Credit card",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-lock",
-              "label": "Lock",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-shield",
-              "label": "Shield",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-secure-profile",
-              "label": "Secure profile",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-money",
-              "label": "Money",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-recycle",
-              "label": "Recycle",
-              "group": "Ecology"
-            },
-            {
-              "value": "picto-leaf",
-              "label": "Leaf",
-              "group": "Ecology"
-            },
-            {
-              "value": "picto-tree",
-              "label": "Tree",
-              "group": "Ecology"
-            },
-            {
-              "value": "picto-mobile-phone",
-              "label": "Mobile phone",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-phone",
-              "label": "Phone",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-chat",
-              "label": "Chat",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-customer-support",
-              "label": "Customer support",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-operator",
-              "label": "Operator",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-mailbox",
-              "label": "Mailbox",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-envelope",
-              "label": "Envelope",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-comment",
-              "label": "Comment",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-question",
-              "label": "Question",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-send",
-              "label": "Send",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-at-sign",
-              "label": "At sign",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-camera",
-              "label": "Camera",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-wifi",
-              "label": "WiFi",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-bluetooth",
-              "label": "Bluetooth",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-printer",
-              "label": "Printer",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-smart-watch",
-              "label": "Smart watch",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-coffee",
-              "label": "Coffee",
-              "group": "Food & Drink"
-            },
-            {
-              "value": "picto-burger",
-              "label": "Burger",
-              "group": "Food & Drink"
-            },
-            {
-              "value": "picto-beer",
-              "label": "Beer",
-              "group": "Food & Drink"
-            },
-            {
-              "value": "picto-target",
-              "label": "Target",
-              "group": "Other"
-            },
-            {
-              "value": "picto-document",
-              "label": "Document",
-              "group": "Other"
-            },
-            {
-              "value": "picto-jewelry",
-              "label": "Jewelry",
-              "group": "Other"
-            },
-            {
-              "value": "picto-music",
-              "label": "Music",
-              "group": "Other"
-            },
-            {
-              "value": "picto-file",
-              "label": "File",
-              "group": "Other"
-            },
-            {
-              "value": "picto-mask",
-              "label": "Mask",
-              "group": "Other"
-            },
-            {
-              "value": "picto-stop",
-              "label": "Stop",
-              "group": "Other"
-            }
-          ],
-          "default": "none"
-        },
-        {
-          "type": "image_picker",
-          "id": "custom_icon",
-          "label": "Custom icon",
-          "info": "96 x 96px .png or .svg recommended"
-        },
-        {
-          "type": "range",
-          "id": "icon_width",
-          "min": 16,
-          "max": 48,
-          "step": 2,
-          "unit": "px",
-          "label": "Icon width",
-          "default": 20
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Title"
-        },
-        {
-          "type": "richtext",
-          "id": "content",
-          "label": "Content",
-          "default": "<p>Share some content to your customers about your products.</p>"
-        },
-        {
-          "type": "page",
-          "id": "page",
-          "label": "Page",
-          "info": "Replaces inline content if specified."
-        }
-      ]
-    },
-    {
-      "type": "image",
-      "name": "Image",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "select",
-          "id": "alignment",
-          "label": "Alignment",
-          "options": [
-            {
-              "value": "start",
-              "label": "Left"
-            },
-            {
-              "value": "center",
-              "label": "Center"
-            },
-            {
-              "value": "end",
-              "label": "Right"
-            }
-          ],
-          "default": "start"
-        },
-        {
-          "type": "range",
-          "id": "max_width",
-          "min": 50,
-          "max": 500,
-          "step": 10,
-          "unit": "px",
-          "label": "Width",
-          "default": 150
-        }
-      ]
-    },
-    {
-      "type": "button",
-      "name": "Button",
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "Create link to your contact page, external marketplace..."
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Link"
-        },
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Text",
-          "default": "Button"
-        },
-        {
-          "type": "select",
-          "id": "size",
-          "label": "Size",
-          "options": [
-            {
-              "value": "sm",
-              "label": "Small"
-            },
-            {
-              "value": "base",
-              "label": "Medium"
-            },
-            {
-              "value": "lg",
-              "label": "Large"
-            },
-            {
-              "value": "xl",
-              "label": "X-Large"
-            }
-          ],
-          "default": "xl"
-        },
-        {
-          "type": "select",
-          "id": "style",
-          "label": "Style",
-          "options": [
-            {
-              "value": "outline",
-              "label": "Outline"
-            },
-            {
-              "value": "fill",
-              "label": "Fill"
-            }
-          ],
-          "default": "fill"
-        },
-        {
-          "type": "checkbox",
-          "id": "stretch",
-          "label": "Stretch",
-          "default": true
-        },
-        {
-          "type": "color",
-          "id": "background",
-          "label": "Background"
-        },
-        {
-          "type": "color",
-          "id": "text_color",
-          "label": "Text"
-        }
-      ]
-    },
-    {
-      "type": "liquid",
-      "name": "Custom Liquid",
-      "settings": [
-        {
-          "type": "liquid",
-          "id": "liquid",
-          "label": "Liquid",
-          "info": "Add app snippets or other Liquid code to create advanced customizations."
-        }
-      ]
-    },
-    {
-      "type": "associated_products",
-      "name": "Complementary products",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "To select complementary products, use the Search & Discovery app. [Learn more](https://help.shopify.com/en/manual/online-store/search-and-discovery/product-recommendations#complementary-products)"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Heading",
-          "default": "Buy it with"
-        },
-        {
-          "type": "checkbox",
-          "id": "stack_products",
-          "label": "Stack products",
-          "default": true
-        },
-        {
-          "type": "range",
-          "id": "products_count",
-          "min": 1,
-          "max": 10,
-          "label": "Products to show",
-          "default": 5
-        },
-        {
-          "type": "header",
-          "content": "Colors",
-          "info": "Cards are bordered when background matches section background."
-        },
-        {
-          "type": "color",
-          "id": "background",
-          "label": "Background"
-        },
-        {
-          "type": "color",
-          "id": "text_color",
-          "label": "Text"
-        }
-      ]
-    },
-    {
-      "type": "offer",
-      "name": "Offer",
-      "settings": [
-        {
-          "type": "select",
-          "id": "text_alignment",
-          "label": "Text alignment",
-          "options": [
-            {
-              "value": "start",
-              "label": "Left"
-            },
-            {
-              "value": "center",
-              "label": "Center"
-            }
-          ],
-          "default": "start"
-        },
-        {
-          "type": "select",
-          "id": "icon_position",
-          "label": "Icon position",
-          "options": [
-            {
-              "value": "aligned",
-              "label": "Aligned horizontally"
-            },
-            {
-              "value": "stacked",
-              "label": "Stacked"
-            }
-          ],
-          "default": "aligned"
-        },
-        {
-          "type": "select",
-          "id": "icon",
-          "label": "Icon",
-          "options": [
-            {
-              "value": "none",
-              "label": "None"
-            },
-            {
-              "value": "picto-coupon",
-              "label": "Coupon",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-percent",
-              "label": "Percent",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-gift",
-              "label": "Gift",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-star",
-              "label": "Star",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-like",
-              "label": "Like",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-building",
-              "label": "Building",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-love",
-              "label": "Love",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-award-gift",
-              "label": "Award gift",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-happy",
-              "label": "Happy",
-              "group": "Shop"
-            },
-            {
-              "value": "picto-box",
-              "label": "Box",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-pin",
-              "label": "Pin",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-timer",
-              "label": "Timer",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-validation",
-              "label": "Validation",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-truck",
-              "label": "Truck",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-return",
-              "label": "Return",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-earth",
-              "label": "Earth",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-plane",
-              "label": "Plane",
-              "group": "Shipping"
-            },
-            {
-              "value": "picto-credit-card",
-              "label": "Credit card",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-lock",
-              "label": "Lock",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-shield",
-              "label": "Shield",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-secure-profile",
-              "label": "Secure profile",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-money",
-              "label": "Money",
-              "group": "Payment & Security"
-            },
-            {
-              "value": "picto-recycle",
-              "label": "Recycle",
-              "group": "Ecology"
-            },
-            {
-              "value": "picto-leaf",
-              "label": "Leaf",
-              "group": "Ecology"
-            },
-            {
-              "value": "picto-tree",
-              "label": "Tree",
-              "group": "Ecology"
-            },
-            {
-              "value": "picto-mobile-phone",
-              "label": "Mobile phone",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-phone",
-              "label": "Phone",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-chat",
-              "label": "Chat",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-customer-support",
-              "label": "Customer support",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-operator",
-              "label": "Operator",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-mailbox",
-              "label": "Mailbox",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-envelope",
-              "label": "Envelope",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-comment",
-              "label": "Comment",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-question",
-              "label": "Question",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-send",
-              "label": "Send",
-              "group": "Communication"
-            },
-            {
-              "value": "picto-at-sign",
-              "label": "At sign",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-camera",
-              "label": "Camera",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-wifi",
-              "label": "WiFi",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-bluetooth",
-              "label": "Bluetooth",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-printer",
-              "label": "Printer",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-smart-watch",
-              "label": "Smart watch",
-              "group": "Tech"
-            },
-            {
-              "value": "picto-coffee",
-              "label": "Coffee",
-              "group": "Food & Drink"
-            },
-            {
-              "value": "picto-burger",
-              "label": "Burger",
-              "group": "Food & Drink"
-            },
-            {
-              "value": "picto-beer",
-              "label": "Beer",
-              "group": "Food & Drink"
-            },
-            {
-              "value": "picto-target",
-              "label": "Target",
-              "group": "Other"
-            },
-            {
-              "value": "picto-document",
-              "label": "Document",
-              "group": "Other"
-            },
-            {
-              "value": "picto-jewelry",
-              "label": "Jewelry",
-              "group": "Other"
-            },
-            {
-              "value": "picto-music",
-              "label": "Music",
-              "group": "Other"
-            },
-            {
-              "value": "picto-file",
-              "label": "File",
-              "group": "Other"
-            },
-            {
-              "value": "picto-mask",
-              "label": "Mask",
-              "group": "Other"
-            },
-            {
-              "value": "picto-stop",
-              "label": "Stop",
-              "group": "Other"
-            }
-          ],
-          "default": "picto-coupon"
-        },
-        {
-          "type": "image_picker",
-          "id": "custom_icon",
-          "label": "Custom icon",
-          "info": "240 x 240px .png recommended"
-        },
-        {
-          "type": "range",
-          "id": "icon_width",
-          "min": 20,
-          "max": 100,
-          "step": 4,
-          "unit": "px",
-          "label": "Icon width",
-          "default": 20
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Heading",
-          "default": "Shipping"
-        },
-        {
-          "type": "richtext",
-          "id": "content",
-          "label": "Content",
-          "default": "<p>Short content about your shipping rates or discounts.</p>"
-        },
-        {
-          "type": "color",
-          "id": "background",
-          "label": "Background",
-          "default": "#eaf2ed"
-        },
-        {
-          "type": "color",
-          "id": "text_color",
-          "label": "Text",
-          "default": "#00a341"
-        }
-      ]
-    },
-    {
-      "type": "share_buttons",
-      "name": "Share buttons",
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "To improve user experience and performance, native share buttons are used when supported."
-        },
-        {
-          "type": "select",
-          "id": "alignment",
-          "label": "Alignment",
-          "options": [
-            {
-              "value": "start",
-              "label": "Left"
-            },
-            {
-              "value": "center",
-              "label": "Center"
-            },
-            {
-              "value": "end",
-              "label": "Right"
-            }
-          ],
-          "default": "start"
-        }
-      ]
-    }
-  ],
-  "settings": [
-    {
-      "type": "checkbox",
-      "id": "full_width",
-      "label": "Full width",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_fixed_add_to_cart",
-      "label": "Show add to cart on scroll",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Media"
-    },
-    {
-      "type": "paragraph",
-      "content": "Learn more about [media types](https://help.shopify.com/en/manual/products/product-media)"
-    },
-    {
-      "type": "range",
-      "id": "desktop_media_width",
-      "label": "Desktop media size",
-      "min": 35,
-      "max": 65,
-      "step": 5,
-      "unit": "%",
-      "default": 55
-    },
-    {
-      "type": "select",
-      "id": "desktop_media_layout",
-      "label": "Desktop media layout",
-      "options": [
-        {
-          "value": "grid_one",
-          "label": "Grid (1x1)"
-        },
-        {
-          "value": "grid",
-          "label": "Grid (2x2)"
-        },
-        {
-          "value": "grid_highlight",
-          "label": "Grid (2x2) with highlighted media"
-        },
-        {
-          "value": "carousel_thumbnails_left",
-          "label": "Thumbnails left (carousel)"
-        },
-        {
-          "value": "carousel_thumbnails_bottom",
-          "label": "Thumbnails bottom (carousel)"
-        }
-      ],
-      "default": "carousel_thumbnails_left"
-    },
-    {
-      "type":"select",
-      "id": "mobile_media_size",
-      "label": "Mobile media size",
-      "options": [
-        {
-          "value": "expanded",
-          "label": "Expanded"
-        },
-        {
-          "value": "contained",
-          "label": "Contained"
-        }
-      ],
-      "default": "expanded"
-    },
-    {
-      "type": "select",
-      "id": "mobile_carousel_control",
-      "label": "Mobile carousel control",
-      "options": [
-        {
-          "value": "dots",
-          "label": "Dots"
-        },
-        {
-          "value": "floating_dots",
-          "label": "Floating dots"
-        },
-        {
-          "value": "thumbnails",
-          "label": "Thumbnails"
-        },
-        {
-          "value": "free_scroll",
-          "label": "Free scroll"
-        }
-      ],
-      "default": "floating_dots"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_video_autoplay",
-      "label": "Enable video autoplay",
-      "info": "Video are muted automatically to allow autoplay. Grid mode on desktop turn off autoplay.",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_video_looping",
-      "label": "Enable video looping",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Image zoom"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_image_zoom",
-      "label": "Enable",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "max_image_zoom_level",
-      "min": 1,
-      "max": 4,
-      "step": 0.5,
-      "label": "Max zoom level",
-      "default": 3
-    },
-    {
-      "type": "header",
-      "content": "Colors",
-      "info": "Gradient replaces solid colors when set."
-    },
-    {
-      "type": "color",
-      "id": "background",
-      "label": "Background"
-    },
-    {
-      "type": "color_background",
-      "id": "background_gradient",
-      "label": "Background gradient"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text"
-    },
-    {
-      "type": "header",
-      "content": "Input colors",
-      "info": "Applies to elements like quantity selector and variant selectors."
-    },
-    {
-      "type": "color",
-      "id": "input_background",
-      "label": "Background",
-      "default": "rgba(0,0,0,0)"
-    },
-    {
-      "type": "color",
-      "id": "input_text_color",
-      "label": "Text"
-    }
-  ]
+"name": "Product page",
+"class": "shopify-section--main-product",
+"tag": "section",
+"blocks": [
+{"type":"@app"},
+{"type":"vendor","name":"Vendor","limit":1},
+{"type":"title","name":"Title","limit":1,"settings":[{"type":"select","id":"heading_tag","label":"Style","options":[{"value":"h1","label":"X-Large"},{"value":"h2","label":"Large"},{"value":"h3","label":"Medium"},{"value":"h4","label":"Small"},{"value":"h5","label":"X-Small"},{"value":"h6","label":"XX-Small"}],"default":"h2"}]},
+{"type":"sku","name":"SKU","limit":1},
+{"type":"badges","name":"Badges","limit":1,"settings":[{"type":"paragraph","content":"Use metafields to add custom badges. [Learn more](https://support.maestrooo.com/article/75-collection-displaying-custom-label)"}]},
+{"type":"price","name":"Price","limit":1,"settings":[
+{"type":"checkbox","id":"show_taxes_notice","label":"Show taxes notice","default":false},
+{"type":"header","content":"Price style","info":"Overrides Theme settings > Product card > Price display and Colors > Product, just for this page. Leave on 'Theme default' to inherit those."},
+{"type":"color","id":"price_color","label":"Price color","info":"Leave blank to use the theme's 'On sale accent' color."},
+{"type":"color","id":"price_compare_color","label":"Compare-at price color","info":"Leave blank to use the theme default."},
+{"type":"select","id":"price_weight","label":"Price weight","options":[{"value":"","label":"Theme default"},{"value":"300","label":"Light (300)"},{"value":"400","label":"Normal (400)"},{"value":"500","label":"Medium (500)"},{"value":"600","label":"Semibold (600)"},{"value":"700","label":"Bold (700)"},{"value":"800","label":"Extrabold (800)"}],"default":""},
+{"type":"select","id":"price_strikethrough","label":"Compare-at price strikethrough","options":[{"value":"","label":"Theme default"},{"value":"show","label":"Show"},{"value":"hide","label":"Hide"}],"default":""},
+{"type":"select","id":"price_size","label":"Price size","options":[{"value":"","label":"Theme default"},{"value":"18","label":"18px"},{"value":"22","label":"22px"},{"value":"26","label":"26px"},{"value":"30","label":"30px"},{"value":"36","label":"36px"},{"value":"42","label":"42px"}],"default":""},
+{"type":"select","id":"price_compare_size","label":"Compare-at price size","info":"Set this smaller than 'Price size' above to shrink just the crossed-out price.","options":[{"value":"","label":"Same as price"},{"value":"12","label":"12px"},{"value":"14","label":"14px"},{"value":"16","label":"16px"},{"value":"18","label":"18px"},{"value":"22","label":"22px"},{"value":"26","label":"26px"}],"default":""},
+{"type":"select","id":"price_order","label":"Price order","options":[{"value":"","label":"Theme default"},{"value":"sale_first","label":"Current price, then compare-at price"},{"value":"compare_first","label":"Compare-at price, then current price"}],"default":""},
+{"type":"select","id":"price_font","label":"Price font","options":[{"value":"","label":"Theme default"},{"value":"body","label":"Body font"},{"value":"heading","label":"Heading font"},{"value":"sans-serif","label":"Generic sans-serif"},{"value":"serif","label":"Generic serif"},{"value":"monospace","label":"Generic monospace"}],"default":""},
+{"type":"header","content":"Promotional badge"},
+{"type":"checkbox","id":"show_promo_badge","label":"Show badge","default":false},
+{"type":"text","id":"promo_badge_text","label":"Badge text","default":"-50% SALE"},
+{"type":"color","id":"promo_badge_background","label":"Badge background","default":"#6d1f2e"},
+{"type":"color","id":"promo_badge_text_color","label":"Badge text color","default":"#ffffff"},
+{"type":"select","id":"promo_badge_shape","label":"Badge shape","options":[{"value":"pill","label":"Pill (fully rounded)"},{"value":"rounded","label":"Rounded corners"},{"value":"square","label":"Square corners"}],"default":"pill"},
+{"type":"color","id":"promo_badge_border_color","label":"Badge border color","info":"Leave blank for no border."},
+{"type":"range","id":"promo_badge_border_width","min":0,"max":4,"step":1,"unit":"px","label":"Badge border width","default":0},
+{"type":"range","id":"promo_badge_font_size","min":8,"max":24,"step":1,"unit":"px","label":"Badge text size","default":12},
+{"type":"range","id":"promo_badge_padding_v","min":0,"max":16,"step":1,"unit":"px","label":"Badge vertical padding","default":4},
+{"type":"range","id":"promo_badge_padding_h","min":0,"max":32,"step":1,"unit":"px","label":"Badge horizontal padding","default":12},
+{"type":"header","content":"Additional text"},
+{"type":"text","id":"extra_text","label":"Text below price","info":"e.g. 'Livraison offerte', 'Paiement en 3x sans frais'."},
+{"type":"color","id":"extra_text_color","label":"Text color"}
+]},
+{"type":"payment_terms","name":"Payment installments","limit":1,"settings":[{"type":"paragraph","content":"To display payment installments, your store needs to support Shop Pay Installments. [Learn more](https://help.shopify.com/en/manual/payments/shop-pay-installments)"}]},
+{"type":"rating","name":"Rating","limit":1,"settings":[{"type":"paragraph","content":"To display a rating, add a product rating app. [Learn more](https://apps.shopify.com/categories/store-design-social-proof-product-reviews)"},{"type":"checkbox","id":"show_empty","label":"Show if no reviews","default":false}]},
+{"type":"separator","name":"Separator"},
+{"type":"description","name":"Description","limit":1,"settings":[
+{"type":"select","id":"icon","label":"Icon","options":[{"value":"none","label":"None"},{"value":"picto-coupon","label":"Coupon","group":"Shop"},{"value":"picto-percent","label":"Percent","group":"Shop"},{"value":"picto-gift","label":"Gift","group":"Shop"},{"value":"picto-star","label":"Star","group":"Shop"},{"value":"picto-like","label":"Like","group":"Shop"},{"value":"picto-building","label":"Building","group":"Shop"},{"value":"picto-love","label":"Love","group":"Shop"},{"value":"picto-award-gift","label":"Award gift","group":"Shop"},{"value":"picto-happy","label":"Happy","group":"Shop"},{"value":"picto-box","label":"Box","group":"Shipping"},{"value":"picto-pin","label":"Pin","group":"Shipping"},{"value":"picto-timer","label":"Timer","group":"Shipping"},{"value":"picto-validation","label":"Validation","group":"Shipping"},{"value":"picto-truck","label":"Truck","group":"Shipping"},{"value":"picto-return","label":"Return","group":"Shipping"},{"value":"picto-earth","label":"Earth","group":"Shipping"},{"value":"picto-plane","label":"Plane","group":"Shipping"},{"value":"picto-credit-card","label":"Credit card","group":"Payment & Security"},{"value":"picto-lock","label":"Lock","group":"Payment & Security"},{"value":"picto-shield","label":"Shield","group":"Payment & Security"},{"value":"picto-secure-profile","label":"Secure profile","group":"Payment & Security"},{"value":"picto-money","label":"Money","group":"Payment & Security"},{"value":"picto-recycle","label":"Recycle","group":"Ecology"},{"value":"picto-leaf","label":"Leaf","group":"Ecology"},{"value":"picto-tree","label":"Tree","group":"Ecology"},{"value":"picto-mobile-phone","label":"Mobile phone","group":"Communication"},{"value":"picto-phone","label":"Phone","group":"Communication"},{"value":"picto-chat","label":"Chat","group":"Communication"},{"value":"picto-customer-support","label":"Customer support","group":"Communication"},{"value":"picto-operator","label":"Operator","group":"Communication"},{"value":"picto-mailbox","label":"Mailbox","group":"Communication"},{"value":"picto-envelope","label":"Envelope","group":"Communication"},{"value":"picto-comment","label":"Comment","group":"Communication"},{"value":"picto-question","label":"Question","group":"Communication"},{"value":"picto-send","label":"Send","group":"Communication"},{"value":"picto-at-sign","label":"At sign","group":"Tech"},{"value":"picto-camera","label":"Camera","group":"Tech"},{"value":"picto-wifi","label":"WiFi","group":"Tech"},{"value":"picto-bluetooth","label":"Bluetooth","group":"Tech"},{"value":"picto-printer","label":"Printer","group":"Tech"},{"value":"picto-smart-watch","label":"Smart watch","group":"Tech"},{"value":"picto-coffee","label":"Coffee","group":"Food & Drink"},{"value":"picto-burger","label":"Burger","group":"Food & Drink"},{"value":"picto-beer","label":"Beer","group":"Food & Drink"},{"value":"picto-target","label":"Target","group":"Other"},{"value":"picto-document","label":"Document","group":"Other"},{"value":"picto-jewelry","label":"Jewelry","group":"Other"},{"value":"picto-music","label":"Music","group":"Other"},{"value":"picto-file","label":"File","group":"Other"},{"value":"picto-mask","label":"Mask","group":"Other"},{"value":"picto-stop","label":"Stop","group":"Other"}],"default":"none"},
+{"type":"image_picker","id":"custom_icon","label":"Custom icon","info":"96 x 96px .png or .svg recommended. Only used when content is collapsed."},
+{"type":"range","id":"icon_width","min":16,"max":48,"step":2,"unit":"px","label":"Icon width","default":20},
+{"type":"checkbox","id":"collapse_content","label":"Collapse content","default":false}
+]},
+{"type":"variant_picker","name":"Variant picker","limit":1,"settings":[
+{"type":"checkbox","id":"hide_sold_out_variants","label":"Hide sold out variants","default":false},
+{"type":"checkbox","id":"stack_blocks","label":"Stack options on mobile","default":true},
+{"type":"select","id":"selector_style","label":"Selector style","options":[{"value":"block","label":"Block"},{"value":"dropdown","label":"Dropdown"}],"default":"block"},
+{"type":"select","id":"swatch_selector_style","label":"Swatch selector style","info":"Enable [swatches](https://help.shopify.com/en/manual/online-store/themes/theme-structure/theme-settings#options-with-swatches) on product options.","options":[{"value":"swatch","label":"Swatch"},{"value":"block_swatch","label":"Block with swatch"},{"value":"none","label":"None"}],"default":"swatch"},
+{"type":"text","id":"variant_image_options","label":"Show variant image for options","info":"List of comma separated option names where option values show the attached variant image. [Learn more](https://impact-theme.helpscoutdocs.com/article/555-variant-images-for-color-option)"},
+{"type":"page","id":"size_chart_page","label":"Size chart page","info":"Feature a page for size option"}
+]},
+{"type":"product_variations","name":"Product variations","limit":1,"settings":[
+{"type":"paragraph","content":"Link products of different colors using swatches. [Learn more](https://support.maestrooo.com/article/307-product-creating-product-variations-that-link-to-different-pages)"},
+{"type":"text","id":"option_name","label":"Option name","info":"Example: Color, Style..."},
+{"type":"text","id":"option_value_metafield","label":"Option value metafield","info":"Enter namespace and key of the metafield holding the value. Eg.: custom.color"},
+{"type":"product_list","id":"products","label":"Products","info":"Select all the variations (including the product itself)."},
+{"type":"select","id":"selector_style","label":"Selector style","info":"Product image mode requires that all variant have an associated image. [Learn more](https://help.shopify.com/en/manual/products/product-media/add-images-variants#add-images-to-existing-variants)","options":[{"value":"block","label":"Block"},{"value":"block_swatch","label":"Block with swatch"},{"value":"swatch","label":"Swatch"},{"value":"variant_image","label":"Variant image"}],"default":"swatch"}
+]},
+{"type":"line_item_property","name":"Line item property","settings":[
+{"type":"paragraph","content":"Line item properties are used to collect customization information for an item added to the cart."},
+{"type":"text","id":"label","label":"Label","default":"Your label"},
+{"type":"select","id":"type","label":"Type","options":[{"value":"text","label":"Text"},{"value":"checkbox","label":"Checkbox"}],"default":"text"},
+{"type":"checkbox","id":"required","label":"Required","info":"For text property, the customer must write a text ; for checkbox, the customer must check it to add to cart.","default":false},
+{"type":"header","content":"Text","info":"Only applicable for line item property of type Text."},
+{"type":"checkbox","id":"allow_long_text","label":"Allow long text","default":false},
+{"type":"number","id":"max_length","label":"Maximum number of characters"}
+]},
+{"type":"quantity_selector","name":"Quantity selector","limit":1,"settings":[{"type":"paragraph","content":"The selector is automatically hidden if all variants are sold out. When at least one variant is available, the selector is always visible to prevent the page from moving when switching variants. To show a volume pricing table, add the dedicatd Volume pricing block."}]},
+{"type":"volume_pricing","name":"Volume pricing table","limit":1,"settings":[{"type":"paragraph","content":"Volume pricing is only available to Shopify Plus merchants. [Learn more](https://help.shopify.com/en/manual/b2b/catalogs/quantity-pricing#volume-pricing)"}]},
+{"type":"inventory","name":"Inventory","limit":1,"settings":[{"type":"range","id":"low_inventory_threshold","label":"Low inventory threshold","info":"Use low stock color when quantity is below the threshold. Choose 0 to always show in stock.","min":0,"max":100,"step":1,"default":0}]},
+{"type":"upsell_header","name":"Ancien upsell (titre)","limit":1,"settings":[
+{"type":"paragraph","content":"Ancien système, ne plus utiliser : il est remplacé par le bloc Upsell (offre produit)."},
+{"type":"text","id":"title","label":"Titre","default":"AUJOURD'HUI SEULEMENT :"},
+{"type":"richtext","id":"subtitle","label":"Sous-titre / accroche","default":"<p>→ Your personalized bracelet at 50% off<br>→ Free earrings</p>"}
+]},
+{"type":"upsell_item","name":"Ancien upsell (produit)","settings":[
+{"type":"product","id":"product","label":"Produit additionnel"},
+{"type":"text","id":"label","label":"Titre affiché","info":"Laisser vide pour utiliser le titre du produit."},
+{"type":"text","id":"description","label":"Sous-titre","info":"Ex: Gravures assorties avec le collier"},
+{"type":"checkbox","id":"free","label":"Offert (affiche 0,00 €)","default":false},
+{"type":"checkbox","id":"default_on","label":"Activé par défaut","default":true},
+{"type":"header","content":"Gravure"},
+{"type":"checkbox","id":"sync_engraving","label":"Copier la gravure du produit principal","default":false},
+{"type":"text","id":"engraving_property_name","label":"Nom exact de la propriété de gravure","info":"Doit correspondre au Label du bloc Line item property de gravure sur CE produit (ex: Gravure).","default":"Gravure"}
+]},
+{"type":"product_upsell","name":"Upsell (offre produit)","settings":[
+{"type":"paragraph","content":"Bloc d’offre à placer où vous voulez, idéalement juste au-dessus de Buy buttons. Le prix affiché doit correspondre à une réduction automatique active (Shopify > Réductions), sinon le prix normal est facturé."},
+{"type":"header","content":"Textes"},
+{"type":"text","id":"badge","label":"Badge","default":"Gift set offer","info":"Laisser vide pour masquer."},
+{"type":"text","id":"title","label":"Titre","default":"Complete your gift"},
+{"type":"inline_richtext","id":"text","label":"Texte d’accroche","default":"Add the matching bracelet, engraved just like the necklace."},
+{"type":"checkbox","id":"show_savings","label":"Afficher l’économie réalisée","default":true},
+{"type":"text","id":"savings_text","label":"Texte de l’économie","default":"You save [montant]","info":"[montant] est remplacé automatiquement par la somme économisée."},
+{"type":"paragraph","content":"Les textes par défaut sont traduits automatiquement (EN, DE, ES, IT). Si vous les modifiez, traduisez-les dans l’app Translate & Adapt."},
+{"type":"header","content":"Produit 1"},
+{"type":"product","id":"product_1","label":"Produit"},
+{"type":"text","id":"label_1","label":"Titre affiché","info":"Vide = titre du produit."},
+{"type":"text","id":"subtitle_1","label":"Sous-titre","default":"Engraving to match the necklace"},
+{"type":"select","id":"price_mode_1","label":"Type d’offre","options":[{"value":"fixed","label":"Prix fixe"},{"value":"percent","label":"Réduction en %"},{"value":"amount","label":"Réduction en €"},{"value":"free","label":"Offert"},{"value":"none","label":"Prix normal"}],"default":"fixed"},
+{"type":"text","id":"price_value_1","label":"Valeur de l’offre","default":"14,90","info":"Prix fixe : 14,90 / Réduction en % : 50 / Réduction en € : 15"},
+{"type":"checkbox","id":"compare_1","label":"Afficher le prix normal barré","default":true},
+{"type":"checkbox","id":"default_on_1","label":"Activé par défaut","default":true},
+{"type":"checkbox","id":"copy_props_1","label":"Copier la gravure du produit principal","default":true},
+{"type":"checkbox","id":"match_variant_1","label":"Présélectionner la même couleur","info":"Ex : collier Or = bracelet Or.","default":true},
+{"type":"header","content":"Produit 2 (optionnel)"},
+{"type":"product","id":"product_2","label":"Produit"},
+{"type":"text","id":"label_2","label":"Titre affiché","info":"Vide = titre du produit."},
+{"type":"text","id":"subtitle_2","label":"Sous-titre"},
+{"type":"select","id":"price_mode_2","label":"Type d’offre","options":[{"value":"fixed","label":"Prix fixe"},{"value":"percent","label":"Réduction en %"},{"value":"amount","label":"Réduction en €"},{"value":"free","label":"Offert"},{"value":"none","label":"Prix normal"}],"default":"percent"},
+{"type":"text","id":"price_value_2","label":"Valeur de l’offre","info":"Prix fixe : 14,90 / Réduction en % : 50 / Réduction en € : 15"},
+{"type":"checkbox","id":"compare_2","label":"Afficher le prix normal barré","default":true},
+{"type":"checkbox","id":"default_on_2","label":"Activé par défaut","default":true},
+{"type":"checkbox","id":"copy_props_2","label":"Copier la gravure du produit principal","default":false},
+{"type":"checkbox","id":"match_variant_2","label":"Présélectionner la même couleur","default":true},
+{"type":"header","content":"Produit 3 (optionnel)"},
+{"type":"product","id":"product_3","label":"Produit"},
+{"type":"text","id":"label_3","label":"Titre affiché","info":"Vide = titre du produit."},
+{"type":"text","id":"subtitle_3","label":"Sous-titre"},
+{"type":"select","id":"price_mode_3","label":"Type d’offre","options":[{"value":"fixed","label":"Prix fixe"},{"value":"percent","label":"Réduction en %"},{"value":"amount","label":"Réduction en €"},{"value":"free","label":"Offert"},{"value":"none","label":"Prix normal"}],"default":"percent"},
+{"type":"text","id":"price_value_3","label":"Valeur de l’offre","info":"Prix fixe : 14,90 / Réduction en % : 50 / Réduction en € : 15"},
+{"type":"checkbox","id":"compare_3","label":"Afficher le prix normal barré","default":true},
+{"type":"checkbox","id":"default_on_3","label":"Activé par défaut","default":true},
+{"type":"checkbox","id":"copy_props_3","label":"Copier la gravure du produit principal","default":false},
+{"type":"checkbox","id":"match_variant_3","label":"Présélectionner la même couleur","default":true},
+{"type":"header","content":"Affichage"},
+{"type":"select","id":"control_style","label":"Sélection du produit","options":[{"value":"check","label":"Case ronde"},{"value":"toggle","label":"Interrupteur"}],"default":"check"},
+{"type":"select","id":"variant_style","label":"Choix de la variante","options":[{"value":"pills","label":"Pastilles"},{"value":"dropdown","label":"Liste déroulante"},{"value":"hidden","label":"Masqué"}],"default":"pills"},
+{"type":"range","id":"image_size","label":"Taille de l’image","min":40,"max":140,"step":4,"unit":"px","default":72},
+{"type":"range","id":"image_radius","label":"Arrondi de l’image","min":0,"max":40,"step":2,"unit":"px","default":10},
+{"type":"range","id":"padding","label":"Marge intérieure","min":8,"max":40,"step":2,"unit":"px","default":16},
+{"type":"range","id":"radius","label":"Arrondi du bloc","min":0,"max":30,"step":2,"unit":"px","default":14},
+{"type":"range","id":"border_width","label":"Épaisseur de la bordure","min":0,"max":4,"step":1,"unit":"px","default":1},
+{"type":"range","id":"margin_top","label":"Espace au-dessus","min":0,"max":40,"step":2,"unit":"px","default":4},
+{"type":"range","id":"margin_bottom","label":"Espace en dessous","min":0,"max":40,"step":2,"unit":"px","default":8},
+{"type":"header","content":"Couleurs"},
+{"type":"color","id":"background","label":"Fond du bloc","default":"#fdf7f5"},
+{"type":"color","id":"border_color","label":"Bordures","default":"#ead7d2"},
+{"type":"color","id":"item_background","label":"Fond des produits","default":"#ffffff"},
+{"type":"color","id":"selected_background","label":"Fond du produit sélectionné","default":"#fbeef0"},
+{"type":"color","id":"accent","label":"Couleur principale","info":"Case cochée, interrupteur, contour du produit sélectionné, économie.","default":"#800020"},
+{"type":"color","id":"title_color","label":"Titres","default":"#1a1a1a"},
+{"type":"color","id":"text_color","label":"Textes","default":"#555555"},
+{"type":"color","id":"price_color","label":"Prix de l’offre","default":"#800020"},
+{"type":"color","id":"compare_color","label":"Prix barré","default":"#8a8a8a"},
+{"type":"color","id":"badge_background","label":"Fond du badge","default":"#800020"},
+{"type":"color","id":"badge_text_color","label":"Texte du badge","default":"#ffffff"},
+{"type":"header","content":"Typographie"},
+{"type":"select","id":"title_font_source","label":"Police des titres","options":[{"value":"heading","label":"Police des titres du thème"},{"value":"body","label":"Police du texte du thème"},{"value":"custom","label":"Police personnalisée"}],"default":"heading"},
+{"type":"font_picker","id":"title_font","label":"Police personnalisée des titres","default":"josefin_sans_n4"},
+{"type":"select","id":"text_font_source","label":"Police des textes","options":[{"value":"body","label":"Police du texte du thème"},{"value":"heading","label":"Police des titres du thème"},{"value":"custom","label":"Police personnalisée"}],"default":"body"},
+{"type":"font_picker","id":"text_font","label":"Police personnalisée des textes","default":"josefin_sans_n4"},
+{"type":"range","id":"title_size","label":"Taille du titre","min":12,"max":30,"step":1,"unit":"px","default":17},
+{"type":"select","id":"title_weight","label":"Graisse du titre","options":[{"value":"400","label":"Normal"},{"value":"500","label":"Medium"},{"value":"600","label":"Semi-gras"},{"value":"700","label":"Gras"}],"default":"700"},
+{"type":"checkbox","id":"title_uppercase","label":"Titre en majuscules","default":false},
+{"type":"range","id":"text_size","label":"Taille des textes","min":11,"max":20,"step":1,"unit":"px","default":14},
+{"type":"range","id":"name_size","label":"Taille du nom du produit","min":12,"max":24,"step":1,"unit":"px","default":15},
+{"type":"range","id":"price_size","label":"Taille du prix","min":12,"max":26,"step":1,"unit":"px","default":16},
+{"type":"range","id":"badge_size","label":"Taille du badge","min":9,"max":16,"step":1,"unit":"px","default":11}
+]},
+{"type":"buy_buttons","name":"Buy buttons","limit":1,"settings":[
+{"type":"checkbox","id":"show_payment_button","label":"Show dynamic checkout button","info":"Each customer will see their preferred payment method from those available on your store, such as PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)","default":true},
+{"type":"checkbox","id":"show_gift_card_recipient","label":"Show recipient information form for gift cards","info":"Allow buyers to send gift cards along with a personal message. [Learn more](https://help.shopify.com/manual/online-store/themes/customizing-themes/add-gift-card-recipient-fields)","default":true},
+{"type":"color","id":"atc_button_background","label":"Add to cart background"},
+{"type":"color","id":"atc_button_text_color","label":"Add to cart color"},
+{"type":"color","id":"payment_button_background","label":"Buy now button background"},
+{"type":"color","id":"payment_button_text_color","label":"Buy now button color"}
+]},
+{"type":"pickup_availability","name":"Pickup availability","limit":1,"settings":[{"type":"paragraph","content":"Allow your customers to see availability in retail stores by [setting up local pickup](https://help.shopify.com/en/manual/sell-in-person/shopify-pos/order-management/local-pickup-for-online-orders)."}]},
+{"type":"text","name":"Text","settings":[{"type":"richtext","id":"text","label":"Text","default":"<p>Share some content to your customers about your products.</p>"}]},
+{"type":"collapsible_text","name":"Collapsible text","settings":[
+{"type":"select","id":"icon","label":"Icon","options":[{"value":"none","label":"None"},{"value":"picto-coupon","label":"Coupon","group":"Shop"},{"value":"picto-percent","label":"Percent","group":"Shop"},{"value":"picto-gift","label":"Gift","group":"Shop"},{"value":"picto-star","label":"Star","group":"Shop"},{"value":"picto-like","label":"Like","group":"Shop"},{"value":"picto-building","label":"Building","group":"Shop"},{"value":"picto-love","label":"Love","group":"Shop"},{"value":"picto-award-gift","label":"Award gift","group":"Shop"},{"value":"picto-happy","label":"Happy","group":"Shop"},{"value":"picto-box","label":"Box","group":"Shipping"},{"value":"picto-pin","label":"Pin","group":"Shipping"},{"value":"picto-timer","label":"Timer","group":"Shipping"},{"value":"picto-validation","label":"Validation","group":"Shipping"},{"value":"picto-truck","label":"Truck","group":"Shipping"},{"value":"picto-return","label":"Return","group":"Shipping"},{"value":"picto-earth","label":"Earth","group":"Shipping"},{"value":"picto-plane","label":"Plane","group":"Shipping"},{"value":"picto-credit-card","label":"Credit card","group":"Payment & Security"},{"value":"picto-lock","label":"Lock","group":"Payment & Security"},{"value":"picto-shield","label":"Shield","group":"Payment & Security"},{"value":"picto-secure-profile","label":"Secure profile","group":"Payment & Security"},{"value":"picto-money","label":"Money","group":"Payment & Security"},{"value":"picto-recycle","label":"Recycle","group":"Ecology"},{"value":"picto-leaf","label":"Leaf","group":"Ecology"},{"value":"picto-tree","label":"Tree","group":"Ecology"},{"value":"picto-mobile-phone","label":"Mobile phone","group":"Communication"},{"value":"picto-phone","label":"Phone","group":"Communication"},{"value":"picto-chat","label":"Chat","group":"Communication"},{"value":"picto-customer-support","label":"Customer support","group":"Communication"},{"value":"picto-operator","label":"Operator","group":"Communication"},{"value":"picto-mailbox","label":"Mailbox","group":"Communication"},{"value":"picto-envelope","label":"Envelope","group":"Communication"},{"value":"picto-comment","label":"Comment","group":"Communication"},{"value":"picto-question","label":"Question","group":"Communication"},{"value":"picto-send","label":"Send","group":"Communication"},{"value":"picto-at-sign","label":"At sign","group":"Tech"},{"value":"picto-camera","label":"Camera","group":"Tech"},{"value":"picto-wifi","label":"WiFi","group":"Tech"},{"value":"picto-bluetooth","label":"Bluetooth","group":"Tech"},{"value":"picto-printer","label":"Printer","group":"Tech"},{"value":"picto-smart-watch","label":"Smart watch","group":"Tech"},{"value":"picto-coffee","label":"Coffee","group":"Food & Drink"},{"value":"picto-burger","label":"Burger","group":"Food & Drink"},{"value":"picto-beer","label":"Beer","group":"Food & Drink"},{"value":"picto-target","label":"Target","group":"Other"},{"value":"picto-document","label":"Document","group":"Other"},{"value":"picto-jewelry","label":"Jewelry","group":"Other"},{"value":"picto-music","label":"Music","group":"Other"},{"value":"picto-file","label":"File","group":"Other"},{"value":"picto-mask","label":"Mask","group":"Other"},{"value":"picto-stop","label":"Stop","group":"Other"}],"default":"none"},
+{"type":"image_picker","id":"custom_icon","label":"Custom icon","info":"96 x 96px .png or .svg recommended"},
+{"type":"range","id":"icon_width","min":16,"max":48,"step":2,"unit":"px","label":"Icon width","default":20},
+{"type":"text","id":"title","label":"Title","default":"Title"},
+{"type":"richtext","id":"content","label":"Content","default":"<p>Share some content to your customers about your products.</p>"},
+{"type":"page","id":"page","label":"Page","info":"Replaces inline content if specified."}
+]},
+{"type":"image","name":"Image","settings":[
+{"type":"image_picker","id":"image","label":"Image"},
+{"type":"select","id":"alignment","label":"Alignment","options":[{"value":"start","label":"Left"},{"value":"center","label":"Center"},{"value":"end","label":"Right"}],"default":"start"},
+{"type":"range","id":"max_width","min":50,"max":500,"step":10,"unit":"px","label":"Width","default":150}
+]},
+{"type":"button","name":"Button","settings":[
+{"type":"paragraph","content":"Create link to your contact page, external marketplace..."},
+{"type":"url","id":"link","label":"Link"},
+{"type":"text","id":"text","label":"Text","default":"Button"},
+{"type":"select","id":"size","label":"Size","options":[{"value":"sm","label":"Small"},{"value":"base","label":"Medium"},{"value":"lg","label":"Large"},{"value":"xl","label":"X-Large"}],"default":"xl"},
+{"type":"select","id":"style","label":"Style","options":[{"value":"outline","label":"Outline"},{"value":"fill","label":"Fill"}],"default":"fill"},
+{"type":"checkbox","id":"stretch","label":"Stretch","default":true},
+{"type":"color","id":"background","label":"Background"},
+{"type":"color","id":"text_color","label":"Text"}
+]},
+{"type":"liquid","name":"Custom Liquid","settings":[{"type":"liquid","id":"liquid","label":"Liquid","info":"Add app snippets or other Liquid code to create advanced customizations."}]},
+{"type":"associated_products","name":"Complementary products","limit":1,"settings":[
+{"type":"paragraph","content":"To select complementary products, use the Search & Discovery app. [Learn more](https://help.shopify.com/en/manual/online-store/search-and-discovery/product-recommendations#complementary-products)"},
+{"type":"text","id":"title","label":"Heading","default":"Buy it with"},
+{"type":"checkbox","id":"stack_products","label":"Stack products","default":true},
+{"type":"range","id":"products_count","min":1,"max":10,"label":"Products to show","default":5},
+{"type":"header","content":"Colors","info":"Cards are bordered when background matches section background."},
+{"type":"color","id":"background","label":"Background"},
+{"type":"color","id":"text_color","label":"Text"}
+]},
+{"type":"offer","name":"Offer","settings":[
+{"type":"select","id":"text_alignment","label":"Text alignment","options":[{"value":"start","label":"Left"},{"value":"center","label":"Center"}],"default":"start"},
+{"type":"select","id":"icon_position","label":"Icon position","options":[{"value":"aligned","label":"Aligned horizontally"},{"value":"stacked","label":"Stacked"}],"default":"aligned"},
+{"type":"select","id":"icon","label":"Icon","options":[{"value":"none","label":"None"},{"value":"picto-coupon","label":"Coupon","group":"Shop"},{"value":"picto-percent","label":"Percent","group":"Shop"},{"value":"picto-gift","label":"Gift","group":"Shop"},{"value":"picto-star","label":"Star","group":"Shop"},{"value":"picto-like","label":"Like","group":"Shop"},{"value":"picto-building","label":"Building","group":"Shop"},{"value":"picto-love","label":"Love","group":"Shop"},{"value":"picto-award-gift","label":"Award gift","group":"Shop"},{"value":"picto-happy","label":"Happy","group":"Shop"},{"value":"picto-box","label":"Box","group":"Shipping"},{"value":"picto-pin","label":"Pin","group":"Shipping"},{"value":"picto-timer","label":"Timer","group":"Shipping"},{"value":"picto-validation","label":"Validation","group":"Shipping"},{"value":"picto-truck","label":"Truck","group":"Shipping"},{"value":"picto-return","label":"Return","group":"Shipping"},{"value":"picto-earth","label":"Earth","group":"Shipping"},{"value":"picto-plane","label":"Plane","group":"Shipping"},{"value":"picto-credit-card","label":"Credit card","group":"Payment & Security"},{"value":"picto-lock","label":"Lock","group":"Payment & Security"},{"value":"picto-shield","label":"Shield","group":"Payment & Security"},{"value":"picto-secure-profile","label":"Secure profile","group":"Payment & Security"},{"value":"picto-money","label":"Money","group":"Payment & Security"},{"value":"picto-recycle","label":"Recycle","group":"Ecology"},{"value":"picto-leaf","label":"Leaf","group":"Ecology"},{"value":"picto-tree","label":"Tree","group":"Ecology"},{"value":"picto-mobile-phone","label":"Mobile phone","group":"Communication"},{"value":"picto-phone","label":"Phone","group":"Communication"},{"value":"picto-chat","label":"Chat","group":"Communication"},{"value":"picto-customer-support","label":"Customer support","group":"Communication"},{"value":"picto-operator","label":"Operator","group":"Communication"},{"value":"picto-mailbox","label":"Mailbox","group":"Communication"},{"value":"picto-envelope","label":"Envelope","group":"Communication"},{"value":"picto-comment","label":"Comment","group":"Communication"},{"value":"picto-question","label":"Question","group":"Communication"},{"value":"picto-send","label":"Send","group":"Communication"},{"value":"picto-at-sign","label":"At sign","group":"Tech"},{"value":"picto-camera","label":"Camera","group":"Tech"},{"value":"picto-wifi","label":"WiFi","group":"Tech"},{"value":"picto-bluetooth","label":"Bluetooth","group":"Tech"},{"value":"picto-printer","label":"Printer","group":"Tech"},{"value":"picto-smart-watch","label":"Smart watch","group":"Tech"},{"value":"picto-coffee","label":"Coffee","group":"Food & Drink"},{"value":"picto-burger","label":"Burger","group":"Food & Drink"},{"value":"picto-beer","label":"Beer","group":"Food & Drink"},{"value":"picto-target","label":"Target","group":"Other"},{"value":"picto-document","label":"Document","group":"Other"},{"value":"picto-jewelry","label":"Jewelry","group":"Other"},{"value":"picto-music","label":"Music","group":"Other"},{"value":"picto-file","label":"File","group":"Other"},{"value":"picto-mask","label":"Mask","group":"Other"},{"value":"picto-stop","label":"Stop","group":"Other"}],"default":"picto-coupon"},
+{"type":"image_picker","id":"custom_icon","label":"Custom icon","info":"240 x 240px .png recommended"},
+{"type":"range","id":"icon_width","min":20,"max":100,"step":4,"unit":"px","label":"Icon width","default":20},
+{"type":"text","id":"title","label":"Heading","default":"Shipping"},
+{"type":"richtext","id":"content","label":"Content","default":"<p>Short content about your shipping rates or discounts.</p>"},
+{"type":"color","id":"background","label":"Background","default":"#eaf2ed"},
+{"type":"color","id":"text_color","label":"Text","default":"#00a341"}
+]},
+{"type":"share_buttons","name":"Share buttons","settings":[
+{"type":"paragraph","content":"To improve user experience and performance, native share buttons are used when supported."},
+{"type":"select","id":"alignment","label":"Alignment","options":[{"value":"start","label":"Left"},{"value":"center","label":"Center"},{"value":"end","label":"Right"}],"default":"start"}
+]}
+],
+"settings": [
+{"type":"checkbox","id":"full_width","label":"Full width","default":true},
+{"type":"checkbox","id":"show_fixed_add_to_cart","label":"Show add to cart on scroll","default":true},
+{"type":"header","content":"Media"},
+{"type":"paragraph","content":"Learn more about [media types](https://help.shopify.com/en/manual/products/product-media)"},
+{"type":"range","id":"desktop_media_width","label":"Desktop media size","min":35,"max":65,"step":5,"unit":"%","default":55},
+{"type":"select","id":"desktop_media_layout","label":"Desktop media layout","options":[{"value":"grid_one","label":"Grid (1x1)"},{"value":"grid","label":"Grid (2x2)"},{"value":"grid_highlight","label":"Grid (2x2) with highlighted media"},{"value":"carousel_thumbnails_left","label":"Thumbnails left (carousel)"},{"value":"carousel_thumbnails_bottom","label":"Thumbnails bottom (carousel)"}],"default":"carousel_thumbnails_left"},
+{"type":"select","id":"mobile_media_size","label":"Mobile media size","options":[{"value":"expanded","label":"Expanded"},{"value":"contained","label":"Contained"}],"default":"expanded"},
+{"type":"select","id":"mobile_carousel_control","label":"Mobile carousel control","options":[{"value":"dots","label":"Dots"},{"value":"floating_dots","label":"Floating dots"},{"value":"thumbnails","label":"Thumbnails"},{"value":"free_scroll","label":"Free scroll"}],"default":"floating_dots"},
+{"type":"checkbox","id":"enable_video_autoplay","label":"Enable video autoplay","info":"Video are muted automatically to allow autoplay. Grid mode on desktop turn off autoplay.","default":false},
+{"type":"checkbox","id":"enable_video_looping","label":"Enable video looping","default":true},
+{"type":"header","content":"Image zoom"},
+{"type":"checkbox","id":"enable_image_zoom","label":"Enable","default":true},
+{"type":"range","id":"max_image_zoom_level","min":1,"max":4,"step":0.5,"label":"Max zoom level","default":3},
+{"type":"header","content":"Colors","info":"Gradient replaces solid colors when set."},
+{"type":"color","id":"background","label":"Background"},
+{"type":"color_background","id":"background_gradient","label":"Background gradient"},
+{"type":"color","id":"text_color","label":"Text"},
+{"type":"header","content":"Input colors","info":"Applies to elements like quantity selector and variant selectors."},
+{"type":"color","id":"input_background","label":"Background","default":"rgba(0,0,0,0)"},
+{"type":"color","id":"input_text_color","label":"Text"}
+]
 }
 {% endschema %}

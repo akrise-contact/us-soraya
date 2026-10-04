@@ -1,1 +1,254 @@
-{"sections":{"main":{"type":"main-page","disabled":true,"settings":{}},"contact":{"type":"contact","settings":{}}},"order":["main","contact"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "content_width": "80ch"
+      }
+    },
+    "faq_accordeon_QbzFGf": {
+      "type": "faq-accordeon",
+      "blocks": {
+        "category_K8BBxd": {
+          "type": "category",
+          "settings": {
+            "title": "Orders"
+          }
+        },
+        "question_kpEigN": {
+          "type": "question",
+          "settings": {
+            "question": "I didn't receive an order confirmation",
+            "answer": "<p>A confirmation email is sent automatically after your payment. If you don't see it, check your spam folder and search for \"Soraya Paris\" in your inbox.</p><p>Still nothing after 10 minutes? Contact our customer service through the contact form (below) or by email at contact@sorayaparis.com. If you don't hear back from us within 24 hours, check your spam folder again.</p>"
+          }
+        },
+        "question_6MYxKQ": {
+          "type": "question",
+          "settings": {
+            "question": "I used the wrong email address",
+            "answer": "<p>No problem, we can correct the email address linked to your order and resend the confirmation and shipping emails. Contact us through the form or at contact@sorayaparis.com.</p><p>If your package has already shipped, the carrier won't be notified of the change and won't send you tracking updates — but you can still track it on our website.</p>"
+          }
+        },
+        "question_TGhjjc": {
+          "type": "question",
+          "settings": {
+            "question": "Can I change my shipping address?",
+            "answer": "<p>Yes, within 48 hours of placing your order. After that, the order goes into production and the details can no longer be changed.</p><p>Contact us quickly (with your new address 😉) through the form or at contact@sorayaparis.com.</p>"
+          }
+        },
+        "question_mYFHzw": {
+          "type": "question",
+          "settings": {
+            "question": "I made a mistake in my engraving",
+            "answer": "<p>Changes can be made on the same day the order was placed, before 11 PM CET (5 PM ET). After that, the order goes into production and can no longer be changed.</p><p>Contact us quickly through the form or at contact@sorayaparis.com.</p>"
+          }
+        },
+        "question_3TPRgt": {
+          "type": "question",
+          "settings": {
+            "question": "Can I cancel my order?",
+            "answer": "<p>Yes, if the order was placed the same day before 11 PM CET (5 PM ET). After that, it goes into production and can no longer be canceled.</p><p>Contact us right away through the form or at contact@sorayaparis.com.</p>"
+          }
+        },
+        "category_QRWebP": {
+          "type": "category",
+          "settings": {
+            "title": "Shipping"
+          }
+        },
+        "question_J67Czq": {
+          "type": "question",
+          "settings": {
+            "question": "How can I track my order?",
+            "answer": "<p>Go to the \"Track your order\" section at the bottom of our website.</p>"
+          }
+        },
+        "question_7LfDiC": {
+          "type": "question",
+          "settings": {
+            "question": "What information do I need to track my order?",
+            "answer": "<p>You'll need:</p><p>— The email used for the order<br>— The order number (starts with #, e.g. #65842 — not to be confused with the tracking number; it works with or without the #)</p>"
+          }
+        },
+        "question_teUiET": {
+          "type": "question",
+          "settings": {
+            "question": "Do you ship to my country?",
+            "answer": "<p>We ship almost everywhere, except: French overseas territories, Argentina, Ukraine, Cuba, Iran, Libya, Sudan, Syria and Turkmenistan.</p><p>Other areas may occasionally be excluded as well. If so, the order can't be completed at checkout.</p>"
+          }
+        },
+        "question_bF9EaN": {
+          "type": "question",
+          "settings": {
+            "question": "When will I receive my order?",
+            "answer": "<p>Processing and shipping: 1 to 3 business days. Delivery: 6 to 12 days on average, depending on your country.</p><p>Every order comes with a tracking number.</p>"
+          }
+        },
+        "question_VFFxCh": {
+          "type": "question",
+          "settings": {
+            "question": "I didn't receive my tracking email. What should I do?",
+            "answer": "<p>It arrives within 1 to 3 business days. Nothing after that? Check your spam folder or search for \"Soraya Paris\" in your inbox.</p><p>Otherwise, contact us through the form or at contact@sorayaparis.com.</p>"
+          }
+        },
+        "question_QPPRmn": {
+          "type": "question",
+          "settings": {
+            "question": "When will my order ship?",
+            "answer": "<p>Usually within 1 to 3 business days (unless stated otherwise on the product page). This may take slightly longer during peak periods (Valentine's Day, Mother's Day, Christmas).</p>"
+          }
+        },
+        "question_VtEFrY": {
+          "type": "question",
+          "settings": {
+            "question": "My tracking number isn't working. What should I do?",
+            "answer": "<p>Tracking info only appears 3 to 6 business days after the shipping confirmation email, while the carrier updates its system. Hang tight, everything should show up soon.</p>"
+          }
+        },
+        "question_qNVAcL": {
+          "type": "question",
+          "settings": {
+            "question": "My order says \"delivered\" but I haven't received it",
+            "answer": "<p>Sometimes the package was handed to a receptionist or concierge, or left with a neighbor by mistake. A quick look around often does the trick.</p><p>Still can't find it? File a claim with the carrier — our customer service team will ask for a copy to arrange a reshipment.</p>"
+          }
+        },
+        "category_ykEBTn": {
+          "type": "category",
+          "settings": {
+            "title": "Our eternal roses"
+          }
+        },
+        "question_LEMWMq": {
+          "type": "question",
+          "settings": {
+            "question": "What is an eternal rose?",
+            "answer": "<p>A real rose, preserved through a special process that keeps its color and softness for years, with no water or sunlight needed. A lasting symbol of love, perfect as a gift or as decor.</p>"
+          }
+        },
+        "question_kprmG8": {
+          "type": "question",
+          "settings": {
+            "question": "How long does the eternal rose last?",
+            "answer": "<p>Several years, while keeping all its beauty. Each rose is also delicately scented for an even more sensory experience.</p><p>A few tips to preserve it:<br>— Avoid direct sunlight; choose a cool, shaded spot<br>— Avoid humidity, and never water it<br>— Handle it gently<br>— Keep it in its display case (with the lid on) to protect it from dust</p>"
+          }
+        },
+        "question_tyGTyC": {
+          "type": "question",
+          "settings": {
+            "question": "How do I care for my eternal rose?",
+            "answer": "<p>No maintenance needed: just keep it in its case, away from sunlight, heat and humidity. It will stay as beautiful as on day one, for a long time.</p>"
+          }
+        },
+        "question_GfKQiM": {
+          "type": "question",
+          "settings": {
+            "question": "Are the eternal rose colors natural?",
+            "answer": "<p>Some shades are natural, others are enhanced during preservation to expand our color palette — each one as beautiful as the next.</p>"
+          }
+        },
+        "question_nwpTjb": {
+          "type": "question",
+          "settings": {
+            "question": "Are eternal roses eco-friendly?",
+            "answer": "<p>Yes: our preservation process is eco-friendly, and its longevity reduces waste compared to a fresh-cut rose.</p>"
+          }
+        },
+        "category_KQfw7a": {
+          "type": "category",
+          "settings": {
+            "title": "Returns & refunds"
+          }
+        },
+        "question_igaPCH": {
+          "type": "question",
+          "settings": {
+            "question": "How do I return a product?",
+            "answer": "<p><strong>Personalized products:</strong> no returns or refunds, as each piece is made to order.</p><p><strong>Non-personalized products:</strong> returns accepted within 30 days of delivery for a full refund. Return shipping costs are your responsibility, and the item must be returned in the condition you received it (unused, unaltered, undamaged).</p><p>To start a return, contact us through the form or at contact@sorayaparis.com.</p>"
+          }
+        },
+        "question_bVTdA6": {
+          "type": "question",
+          "settings": {
+            "question": "I received a defective product",
+            "answer": "<p>We replace any product that is defective or damaged in transit. Take a photo and email us within 3 days of delivery at contact@sorayaparis.com.</p>"
+          }
+        },
+        "question_DCa8gH": {
+          "type": "question",
+          "settings": {
+            "question": "I received the wrong engraving",
+            "answer": "<p>We're so sorry — this rarely happens, but we're only human! We'll replace the jewelry for free after reconfirming the engraving with you.</p><p>Send us a photo within 3 days of delivery at contact@sorayaparis.com.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "category_K8BBxd",
+        "question_kpEigN",
+        "question_6MYxKQ",
+        "question_TGhjjc",
+        "question_mYFHzw",
+        "question_3TPRgt",
+        "category_QRWebP",
+        "question_J67Czq",
+        "question_7LfDiC",
+        "question_teUiET",
+        "question_bF9EaN",
+        "question_VFFxCh",
+        "question_QPPRmn",
+        "question_VtEFrY",
+        "question_qNVAcL",
+        "category_ykEBTn",
+        "question_LEMWMq",
+        "question_kprmG8",
+        "question_tyGTyC",
+        "question_GfKQiM",
+        "question_nwpTjb",
+        "category_KQfw7a",
+        "question_igaPCH",
+        "question_bVTdA6",
+        "question_DCa8gH"
+      ],
+      "name": "FAQ Accordéon",
+      "settings": {
+        "heading": "FAQ & Contact",
+        "subheading": "<p>The answer to your question is probably in the FAQ below:</p>",
+        "text_color": "#1a1a1a",
+        "muted_text_color": "#444444",
+        "accent_color": "#800020",
+        "border_color": "#e5e5e5",
+        "background_color": "#ffffff",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "override_fonts": false,
+        "heading_font": "poppins_n5",
+        "body_font": "poppins_n5"
+      }
+    },
+    "contact": {
+      "type": "contact",
+      "settings": {
+        "full_width": true,
+        "subheading": "Can't find your answer?",
+        "title": "Our team is here for you",
+        "content": "<p>No reply within 48 hours? Check your spam folder — our emails sometimes end up there.</p><p>Still nothing? Write to us directly from your email at <a href=\"mailto:contact@sorayaparis.com\">contact@sorayaparis.com</a></p><p>Double-check the spelling of your email address before sending.</p>",
+        "text_position": "center",
+        "contact_form_size": "large",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "contact_background": "",
+        "contact_text_color": "",
+        "button_background": "",
+        "button_text_color": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faq_accordeon_QbzFGf",
+    "contact"
+  ]
+}

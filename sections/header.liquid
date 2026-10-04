@@ -21,8 +21,9 @@ the underlying logic of the menu.
   #shopify-section-{{ section.id }} {
     --header-grid-template: "main-nav logo secondary-nav" / minmax(0, 1fr) auto minmax(0, 1fr);
     --header-padding-block: {% if section.settings.reduce_padding %}var(--spacing-3){% else %}var(--spacing-4-5){% endif %};
-    --header-background-opacity: {{ section.settings.background_opacity | divided_by: 100.0 }};
-    --header-background-blur-radius: {{ section.settings.background_blur_radius }}px;
+    --header-background-opacity: {% if section.settings.force_solid_background %}1{% else %}{{ section.settings.background_opacity | divided_by: 100.0 }}{% endif %};
+    --header-background-blur-radius: {% if section.settings.force_solid_background %}0px{% else %}{{ section.settings.background_blur_radius }}px{% endif %};
+    --header-background-color: {{ section.settings.background_color.rgb }};
     --header-transparent-text-color: {{ section.settings.transparent_header_text_color.rgb }};
 
     {%- if section.settings.logo != blank -%}
@@ -73,7 +74,123 @@ the underlying logic of the menu.
       }
     }
   {%- endif -%}
+
+  /* Fond du header (solide, avec bordure/ombre optionnelles) */
+  #shopify-section-{{ section.id }} .header {
+    background-color: rgba(var(--header-background-color), var(--header-background-opacity));
+    {%- if section.settings.show_header_border %}
+      border-bottom: 1px solid {{ section.settings.header_border_color }};
+    {%- endif %}
+    {%- if section.settings.show_header_shadow %}
+      box-shadow: 0 1px 8px rgba(0, 0, 0, {{ section.settings.header_shadow_opacity | divided_by: 100.0 }});
+    {%- endif %}
+  }
+
+  /* Fond et texte du menu tiroir (drawer) mobile */
+  #shopify-section-{{ section.id }} .navigation-drawer {
+    background-color: {{ section.settings.drawer_background_color }};
+    color: {{ section.settings.drawer_text_color }};
+  }
+
+  #shopify-section-{{ section.id }} .navigation-drawer a,
+  #shopify-section-{{ section.id }} .navigation-drawer button {
+    color: {{ section.settings.drawer_text_color }};
+  }
+
+  /* Petites lignes de séparation entre les catégories du drawer */
+  {%- if section.settings.show_drawer_dividers %}
+    #shopify-section-{{ section.id }} .navigation-drawer li {
+      border-top: 1px solid {{ section.settings.drawer_divider_color }};
+    }
+
+    #shopify-section-{{ section.id }} .navigation-drawer li:last-child {
+      border-bottom: 1px solid {{ section.settings.drawer_divider_color }};
+    }
+  {%- endif %}
+
+  /* Typographie des liens du menu (barre du haut + drawer) */
+  #shopify-section-{{ section.id }} .header__link-list a,
+  #shopify-section-{{ section.id }} .header__link-list summary,
+  #shopify-section-{{ section.id }} .header__link-list button,
+  #shopify-section-{{ section.id }} .navigation-drawer a,
+  #shopify-section-{{ section.id }} .navigation-drawer button {
+    font-size: {{ section.settings.menu_font_size }}px !important;
+    font-weight: {{ section.settings.menu_font_weight }} !important;
+    text-transform: {{ section.settings.menu_text_transform }} !important;
+    {%- if section.settings.override_menu_font %}
+      font-family: {{ section.settings.menu_font.family }}, {{ section.settings.menu_font.fallback_families }} !important;
+    {%- endif %}
+  }
+
+  {%- comment -%} Texte sous le logo (ex : PARIS) – entièrement réglable dans l'éditeur {%- endcomment -%}
+  {%- if section.settings.logo_subtitle != blank -%}
+    {%- liquid
+      case section.settings.logo_subtitle_font_source
+        when 'heading'
+          assign sub_family = 'var(--heading-font-family)'
+          assign sub_weight = 'var(--heading-font-weight)'
+          assign sub_style = 'var(--heading-font-style)'
+        when 'body'
+          assign sub_family = 'var(--text-font-family)'
+          assign sub_weight = 'var(--text-font-weight)'
+          assign sub_style = 'var(--text-font-style)'
+        else
+          assign sub_font = section.settings.logo_subtitle_font
+          assign sub_family = sub_font.family | append: ', ' | append: sub_font.fallback_families
+          assign sub_weight = sub_font.weight
+          assign sub_style = sub_font.style
+      endcase
+      assign sub_ls = section.settings.logo_subtitle_letter_spacing | divided_by: 100.0
+    -%}
+    {%- if section.settings.logo_subtitle_font_source == 'custom' -%}
+      {{ section.settings.logo_subtitle_font | font_face: font_display: 'swap' }}
+    {%- endif -%}
+
+    #shopify-section-{{ section.id }} .header__logo-stack {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: {% case section.settings.logo_subtitle_alignment %}{% when 'left' %}flex-start{% when 'right' %}flex-end{% else %}center{% endcase %};
+      gap: {{ section.settings.logo_subtitle_gap }}px;
+    }
+
+    #shopify-section-{{ section.id }} .header__logo-media {
+      position: relative;
+      display: block;
+    }
+
+    #shopify-section-{{ section.id }} .header__logo-subtitle {
+      display: block;
+      font-family: {{ sub_family }};
+      font-weight: {{ sub_weight }};
+      font-style: {{ sub_style }};
+      font-size: {{ section.settings.logo_subtitle_size_mobile }}px;
+      letter-spacing: {{ sub_ls }}em;
+      margin-inline-end: -{{ sub_ls }}em;
+      line-height: 1;
+      white-space: nowrap;
+      {%- if section.settings.logo_subtitle_uppercase %}text-transform: uppercase;{% endif %}
+      {%- if section.settings.logo_subtitle_color != blank and section.settings.logo_subtitle_color.alpha != 0.0 %}
+      color: {{ section.settings.logo_subtitle_color }};
+      {%- endif %}
+    }
+
+    {%- if section.settings.logo_subtitle_hide_mobile -%}
+      @media screen and (max-width: 699px) {
+        #shopify-section-{{ section.id }} .header__logo-subtitle { display: none; }
+      }
+    {%- endif -%}
+
+    @media screen and (min-width: 700px) {
+      #shopify-section-{{ section.id }} .header__logo-subtitle {
+        font-size: {{ section.settings.logo_subtitle_size }}px;
+      }
+    }
+  {%- endif -%}
 </style>
+
+{%- if section.settings.override_menu_font -%}
+  {{ section.settings.menu_font | font_face: font_display: 'swap' }}
+{%- endif -%}
 
 <height-observer variable="header">
   <store-header class="header" {% if section.settings.hide_on_scroll %}hide-on-scroll="100"{% endif %} {% if section.settings.enable_sticky %}sticky{% endif %}>
@@ -203,13 +320,19 @@ the underlying logic of the menu.
           {%- capture sizes -%}{{ section.settings.logo_max_width }}px{%- endcapture -%}
           {%- capture widths -%}{{ section.settings.logo_max_width | times: 2 | at_most: section.settings.logo.width }}, {{ section.settings.logo_max_width | times: 3 | at_most: section.settings.logo.width }}{%- endcapture -%}
           <span class="sr-only">{{ shop.name }}</span>
+          {%- if section.settings.logo_subtitle != blank -%}<span class="header__logo-stack"><span class="header__logo-media">{%- endif -%}
           {{- section.settings.logo | image_url: width: section.settings.logo.width | image_tag: sizes: sizes, widths: widths, class: 'header__logo-image' -}}
 
           {%- if section.settings.transparent_logo -%}
             {{- section.settings.transparent_logo | image_url: width: section.settings.transparent_logo.width | image_tag: sizes: sizes, widths: widths, class: 'header__logo-image header__logo-image--transparent' -}}
           {%- endif -%}
+          {%- if section.settings.logo_subtitle != blank -%}</span><span class="header__logo-subtitle" aria-hidden="true">{{ section.settings.logo_subtitle | escape }}</span></span>{%- endif -%}
         {%- else -%}
-          <span class="header__logo-text h4">{{ shop.name }}</span>
+          {%- if section.settings.logo_subtitle != blank -%}
+            <span class="header__logo-stack"><span class="header__logo-text h4">{{ shop.name }}</span><span class="header__logo-subtitle" aria-hidden="true">{{ section.settings.logo_subtitle | escape }}</span></span>
+          {%- else -%}
+            <span class="header__logo-text h4">{{ shop.name }}</span>
+          {%- endif -%}
         {%- endif -%}
       {%- endcapture -%}
 
@@ -371,6 +494,102 @@ the underlying logic of the menu.
     },
     {
       "type": "header",
+      "content": "Texte sous le logo"
+    },
+    {
+      "type": "text",
+      "id": "logo_subtitle",
+      "label": "Texte",
+      "info": "Ex : PARIS. Laisser vide pour masquer."
+    },
+    {
+      "type": "select",
+      "id": "logo_subtitle_font_source",
+      "label": "Police",
+      "options": [
+        { "value": "heading", "label": "Police des titres du thème" },
+        { "value": "body", "label": "Police du texte du thème" },
+        { "value": "custom", "label": "Police personnalisée (ci-dessous)" }
+      ],
+      "default": "custom"
+    },
+    {
+      "type": "font_picker",
+      "id": "logo_subtitle_font",
+      "label": "Police personnalisée",
+      "default": "poppins_n4"
+    },
+    {
+      "type": "range",
+      "id": "logo_subtitle_size",
+      "min": 6,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Taille (ordinateur)",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "logo_subtitle_size_mobile",
+      "min": 6,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Taille (mobile)",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "logo_subtitle_letter_spacing",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Espacement des lettres",
+      "default": 45
+    },
+    {
+      "type": "range",
+      "id": "logo_subtitle_gap",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Espace entre le logo et le texte",
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "logo_subtitle_alignment",
+      "label": "Alignement",
+      "options": [
+        { "value": "left", "label": "Gauche" },
+        { "value": "center", "label": "Centré" },
+        { "value": "right", "label": "Droite" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "logo_subtitle_uppercase",
+      "label": "Majuscules",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "logo_subtitle_color",
+      "label": "Couleur",
+      "info": "Laisser vide pour reprendre la couleur du texte de l'en-tête."
+    },
+    {
+      "type": "checkbox",
+      "id": "logo_subtitle_hide_mobile",
+      "label": "Masquer sur mobile",
+      "default": false
+    },
+    {
+      "type": "header",
       "content": "Navigation"
     },
     {
@@ -529,6 +748,19 @@ the underlying logic of the menu.
       "default": false
     },
     {
+      "type": "checkbox",
+      "id": "force_solid_background",
+      "label": "Fond opaque (désactive la transparence)",
+      "info": "Décoche cette case uniquement si tu veux que le header soit transparent en superposition sur un slideshow ou une image (utile avec les réglages d'opacité/flou ci-dessous).",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Couleur de fond du header",
+      "default": "#ffffff"
+    },
+    {
       "type": "range",
       "id": "background_opacity",
       "min": 0,
@@ -536,7 +768,8 @@ the underlying logic of the menu.
       "step": 1,
       "unit": "%",
       "label": "Background opacity",
-      "default": 1
+      "info": "Utilisé uniquement si \"Fond opaque\" est décoché.",
+      "default": 100
     },
     {
       "type": "range",
@@ -546,7 +779,119 @@ the underlying logic of the menu.
       "step": 2,
       "unit": "px",
       "label": "Background blur radius",
+      "info": "Utilisé uniquement si \"Fond opaque\" est décoché.",
       "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_header_border",
+      "label": "Afficher une bordure sous le header",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "header_border_color",
+      "label": "Couleur de la bordure",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_header_shadow",
+      "label": "Afficher une ombre sous le header",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "header_shadow_opacity",
+      "label": "Intensité de l'ombre",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Menu tiroir (drawer) mobile"
+    },
+    {
+      "type": "color",
+      "id": "drawer_background_color",
+      "label": "Couleur de fond",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "drawer_text_color",
+      "label": "Couleur du texte",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_drawer_dividers",
+      "label": "Afficher une ligne entre chaque catégorie",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "drawer_divider_color",
+      "label": "Couleur des lignes",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "header",
+      "content": "Typographie du menu"
+    },
+    {
+      "type": "paragraph",
+      "content": "S'applique aux liens du menu, que ce soit dans la barre du haut ou dans le drawer."
+    },
+    {
+      "type": "range",
+      "id": "menu_font_size",
+      "label": "Taille du texte",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "menu_font_weight",
+      "label": "Graisse",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-gras" },
+        { "value": "700", "label": "Gras" }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "select",
+      "id": "menu_text_transform",
+      "label": "Casse du texte",
+      "options": [
+        { "value": "none", "label": "Normal" },
+        { "value": "uppercase", "label": "MAJUSCULES" },
+        { "value": "lowercase", "label": "minuscules" },
+        { "value": "capitalize", "label": "Première Lettre" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "checkbox",
+      "id": "override_menu_font",
+      "label": "Utiliser une police différente pour le menu",
+      "info": "Décoché, le menu utilise déjà la police de ton thème.",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "menu_font",
+      "label": "Police du menu",
+      "default": "assistant_n4"
     }
   ],
   "blocks": [

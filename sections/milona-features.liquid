@@ -1,0 +1,273 @@
+{%- comment -%}
+  SECTION : Expérience / Avantages (icônes + texte)
+  --------------------------------------------------
+  - 2 colonnes sur mobile, 4 (ou plus) colonnes sur ordinateur, automatiquement
+  - 100% personnalisable depuis l'éditeur de thème : titre, couleurs, tailles,
+    espacements, et pour chaque bloc : icône (bibliothèque intégrée OU votre
+    propre image), texte, nombre de blocs (ajoutez/supprimez librement)
+
+  INSTALLATION :
+  1) Enregistrez ce fichier sous : sections/milona-features.liquid
+  2) Dans l'éditeur de thème (Personnaliser) :
+     - Section classique : allez sur la page voulue > "Ajouter une section" > "Expérience (icônes + texte)"
+     - Au-dessus/en dessous du footer (thèmes 2.0) : en bas de l'éditeur, ouvrez le
+       sélecteur qui affiche "Footer" > "Ajouter une section" > "Expérience (icônes + texte)"
+{%- endcomment -%}
+
+{%- assign s = section.settings -%}
+
+<div class="milona-features milona-features-{{ section.id }}">
+  {%- if s.show_heading and s.heading != blank -%}
+    <h2 class="milona-features__heading">{{ s.heading | escape }}</h2>
+  {%- endif -%}
+
+  <div class="milona-features__grid">
+    {%- for block in section.blocks -%}
+      <div class="milona-features__item" {{ block.shopify_attributes }}>
+
+        {%- if block.settings.custom_icon or block.settings.icon != 'none' -%}
+          <div class="milona-features__icon">
+            {%- if block.settings.custom_icon -%}
+              <img
+                src="{{ block.settings.custom_icon | image_url: width: 200 }}"
+                alt=""
+                width="{{ s.icon_size }}"
+                height="{{ s.icon_size }}"
+                loading="lazy"
+              >
+            {%- else -%}
+              {%- case block.settings.icon -%}
+                {%- when 'truck' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="1" y="6" width="13" height="10" rx="1"></rect>
+                    <path d="M14 9h4l4 4v3a1 1 0 0 1-1 1h-3"></path>
+                    <circle cx="6" cy="18" r="2"></circle>
+                    <circle cx="17" cy="18" r="2"></circle>
+                    <path d="M9 18h6"></path>
+                  </svg>
+                {%- when 'box' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3 3 7.5 12 12l9-4.5L12 3z"></path>
+                    <path d="M3 7.5V17l9 4.5"></path>
+                    <path d="M21 7.5V17l-9 4.5"></path>
+                    <path d="M12 12v9.5"></path>
+                  </svg>
+                {%- when 'badge' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="9" r="6"></circle>
+                    <path d="m8.5 9 2 2 4-4"></path>
+                    <path d="M9 14.5 7.5 21l4.5-2.5 4.5 2.5-1.5-6.5"></path>
+                  </svg>
+                {%- when 'heart' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 20.5s-7.5-4.7-9.8-9.4C.7 7.8 2.4 4.5 5.6 4c2-.3 3.7.6 4.9 2.2.2.3.4.5.5.8.1-.3.3-.5.5-.8C12.7 4.6 14.4 3.7 16.4 4c3.2.5 4.9 3.8 3.4 7.1-2.3 4.7-9.8 9.4-9.8 9.4z"></path>
+                  </svg>
+                {%- when 'shield' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3z"></path>
+                    <path d="m9 12 2 2 4-4"></path>
+                  </svg>
+                {%- when 'gift' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="8" width="18" height="4"></rect>
+                    <rect x="4" y="12" width="16" height="9"></rect>
+                    <path d="M12 8v13"></path>
+                    <path d="M12 8c-1.5-3.5-6-4-6-1 0 1.7 2 1 6 1z"></path>
+                    <path d="M12 8c1.5-3.5 6-4 6-1 0 1.7-2 1-6 1z"></path>
+                  </svg>
+                {%- when 'leaf' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 20c8 0 16-6 16-16-10 0-16 6-16 16z"></path>
+                    <path d="M4 20c3-4 6-8 12-13"></path>
+                  </svg>
+                {%- when 'clock' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="M12 7v5l3.5 2"></path>
+                  </svg>
+                {%- when 'star' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m12 2.5 2.9 6 6.6.6-5 4.4 1.5 6.5L12 16.8l-5.9 3.2 1.5-6.5-5-4.4 6.6-.6L12 2.5z"></path>
+                  </svg>
+                {%- when 'lock' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="5" y="11" width="14" height="9" rx="1.5"></rect>
+                    <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+                  </svg>
+              {%- endcase -%}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if block.settings.text != blank -%}
+          <div class="milona-features__text">{{ block.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{%- style -%}
+  .milona-features-{{ section.id }} {
+    background-color: {{ s.background_color }};
+    padding-top: {{ s.padding_top }}px;
+    padding-bottom: {{ s.padding_bottom }}px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .milona-features-{{ section.id }} .milona-features__heading {
+    text-align: center;
+    color: {{ s.heading_color }};
+    font-size: {{ s.heading_size }}px;
+    margin: 0 0 {{ s.gap }}px 0;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .milona-features-{{ section.id }} .milona-features__grid {
+    display: grid;
+    grid-template-columns: repeat({{ s.columns_mobile }}, 1fr);
+    gap: {{ s.gap }}px {{ s.gap }}px;
+    max-width: {{ s.max_width }}px;
+    margin: 0 auto;
+  }
+
+  .milona-features-{{ section.id }} .milona-features__item {
+    display: flex;
+    flex-direction: column;
+    align-items: {{ s.content_alignment }};
+    text-align: {% if s.content_alignment == 'center' %}center{% else %}left{% endif %};
+    gap: 14px;
+  }
+
+  .milona-features-{{ section.id }} .milona-features__icon {
+    width: {{ s.icon_size }}px;
+    height: {{ s.icon_size }}px;
+    color: {{ s.icon_color }};
+    flex-shrink: 0;
+  }
+  .milona-features-{{ section.id }} .milona-features__icon svg,
+  .milona-features-{{ section.id }} .milona-features__icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .milona-features-{{ section.id }} .milona-features__text {
+    color: {{ s.text_color }};
+    font-size: {{ s.text_size }}px;
+    line-height: 1.4;
+  }
+  .milona-features-{{ section.id }} .milona-features__text p {
+    margin: 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    .milona-features-{{ section.id }} .milona-features__grid {
+      grid-template-columns: repeat({{ s.columns_desktop }}, 1fr);
+    }
+  }
+{%- endstyle -%}
+
+{% schema %}
+{
+  "name": "Réassurance",
+  "tag": "section",
+  "class": "section-milona-features-wrapper",
+  "settings": [
+    { "type": "header", "content": "Titre" },
+    { "type": "checkbox", "id": "show_heading", "label": "Afficher le titre", "default": true },
+    { "type": "text", "id": "heading", "label": "Texte du titre", "default": "L'Expérience Milona" },
+    { "type": "range", "id": "heading_size", "label": "Taille du titre", "min": 18, "max": 56, "step": 1, "unit": "px", "default": 32 },
+    { "type": "color", "id": "heading_color", "label": "Couleur du titre", "default": "#1a1a1a" },
+
+    { "type": "header", "content": "Mise en page" },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Colonnes (ordinateur)",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" },
+        { "value": "5", "label": "5" },
+        { "value": "6", "label": "6" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Colonnes (mobile)",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Alignement du contenu",
+      "options": [
+        { "value": "center", "label": "Centré" },
+        { "value": "flex-start", "label": "Gauche" }
+      ],
+      "default": "center"
+    },
+    { "type": "range", "id": "gap", "label": "Espacement entre les blocs", "min": 8, "max": 64, "step": 2, "unit": "px", "default": 32 },
+    { "type": "range", "id": "max_width", "label": "Largeur maximale du contenu", "min": 600, "max": 1600, "step": 20, "unit": "px", "default": 1200 },
+    { "type": "range", "id": "padding_top", "label": "Marge intérieure haute", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "label": "Marge intérieure basse", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 60 },
+
+    { "type": "header", "content": "Icônes & texte" },
+    { "type": "range", "id": "icon_size", "label": "Taille des icônes", "min": 24, "max": 96, "step": 2, "unit": "px", "default": 48 },
+    { "type": "color", "id": "icon_color", "label": "Couleur des icônes", "default": "#1a1a1a" },
+    { "type": "range", "id": "text_size", "label": "Taille du texte", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "color", "id": "text_color", "label": "Couleur du texte", "default": "#1a1a1a" },
+    { "type": "color", "id": "background_color", "label": "Couleur de fond de la section", "default": "#f7f7f5" }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Avantage",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icône (bibliothèque intégrée)",
+          "options": [
+            { "value": "truck", "label": "Camion / Livraison" },
+            { "value": "box", "label": "Boîte / Colis" },
+            { "value": "badge", "label": "Badge / Garantie" },
+            { "value": "heart", "label": "Cœur / Durable" },
+            { "value": "shield", "label": "Bouclier / Sécurité" },
+            { "value": "gift", "label": "Cadeau" },
+            { "value": "leaf", "label": "Feuille / Éco-responsable" },
+            { "value": "clock", "label": "Horloge" },
+            { "value": "star", "label": "Étoile" },
+            { "value": "lock", "label": "Cadenas" },
+            { "value": "none", "label": "Aucune (utiliser une image ci-dessous)" }
+          ],
+          "default": "truck"
+        },
+        { "type": "image_picker", "id": "custom_icon", "label": "Ou : votre propre icône/image (prioritaire sur l'icône ci-dessus)" },
+        { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Livraison offerte dès 50 €</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Réassurance",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "truck", "text": "<p>Livraison offerte dès 50 €</p>" } },
+        { "type": "feature", "settings": { "icon": "box", "text": "<p>Retours sous 30 jours</p>" } },
+        { "type": "feature", "settings": { "icon": "badge", "text": "<p>Garantie 2 ans</p>" } },
+        { "type": "feature", "settings": { "icon": "heart", "text": "<p>Fabriqué de manière durable</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

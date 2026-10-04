@@ -1,0 +1,197 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h3"
+          }
+        },
+        "liquid_pKVN8L": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<!-- Prix -->\n<div style=\"margin-bottom: 12px;\">\n  <div class=\"price-container\">\n    {%- assign sp_v = product.selected_or_first_available_variant -%}\n    <span class=\"sale-price\">{{ sp_v.price | money }}</span>\n    {%- if sp_v.compare_at_price > sp_v.price %}\n    <span class=\"compare-price\">{{ sp_v.compare_at_price | money }}</span>\n    {%- endif %}\n  </div>\n</div>\n\n<!-- Bullet points -->\n<ul style=\"list-style: none; padding: 0; margin: 0;\">\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 4px;\">✿</span>\n    <span style=\"color: #000; font-weight: 600;\"> {% if request.locale.iso_code == 'es' %}Una joya cerca de su corazón cada día{% else %}A jewel close to her heart every day{% endif %}</span>\n  </li>\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">❀</span>\n    <span style=\"color: #000; font-weight: 600;\">{% if request.locale.iso_code == 'es' %}Un momento que nunca olvidará{% else %}A moment she'll never forget{% endif %}</span>\n  </li>\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">♡</span>\n    <span style=\"color: #000; font-weight: 600;\">{% if request.locale.iso_code == 'es' %}Sorpresa garantizada, recuerdo imborrable{% else %}Guaranteed surprise, lasting memory{% endif %}</span>\n  </li>\n</ul>\n\n<style>\n  .price-container {\n    display: inline-flex;\n    align-items: center;\n    gap: 10px;\n  }\n\n  .sale-price {\n    font-size: 24px;\n    font-weight: 600;\n    color: #800020;\n  }\n\n  .compare-price {\n    font-size: 18px;\n    color: #000;\n    text-decoration: line-through;\n  }\n</style>"
+          }
+        },
+        "globo_product_options_app_block_GVr3MW": {
+          "type": "shopify://apps/globo-product-options/blocks/app-block/fdc9fad5-1a0f-4bd4-9c8a-1af6a6eef6b8",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": false,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "#d7b15a",
+            "atc_button_text_color": "#ffffff",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "liquid_pKVN8L",
+        "globo_product_options_app_block_GVr3MW",
+        "buy_buttons"
+      ],
+      "settings": {
+        "full_width": true,
+        "show_fixed_add_to_cart": true,
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_bottom",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "free_scroll",
+        "enable_video_autoplay": false,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "faq_7ytpep": {
+      "type": "faq",
+      "blocks": {
+        "item_ngf99X": {
+          "type": "item",
+          "settings": {
+            "title": "What's included in my order?",
+            "content": "<ul><li>An eternal rose bear</li><li>Your personalized necklace</li><li>A gift bag</li><li>A protective shipping box</li></ul><p><br/>Everything's included, nothing to add. It's ready to give. ✨</p>"
+          }
+        },
+        "item_pVWjbG": {
+          "type": "item",
+          "settings": {
+            "title": "Is the necklace water-resistant?",
+            "content": "<p>Yes, 316L stainless steel plated with 18K gold. Resistant to water and sweat, and hypoallergenic.</p><p>She can wear it every day, even in the shower (although we recommend taking it off to extend the life of the gold plating).</p>"
+          }
+        },
+        "item_eicLT8": {
+          "type": "item",
+          "settings": {
+            "title": "What occasions is it perfect for?",
+            "content": "<p>Any occasion. Birthdays, anniversaries, Valentine's Day, Christmas, engagements, \"just because I love you\"...</p><p>The best gifts don't need an excuse. They come when you think of her. ❤️</p>"
+          }
+        },
+        "item_CTEYdm": {
+          "type": "item",
+          "settings": {
+            "title": "What if my jewelry arrives damaged?",
+            "content": "<p>If your jewelry was damaged during shipping, we'll send you a new one at our expense!</p>"
+          }
+        },
+        "item_ranF8z": {
+          "type": "item",
+          "settings": {
+            "title": "What if I don't like it?",
+            "content": "<p>Don't love it? Send us a message and we'll refund you, no questions asked!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_ngf99X",
+        "item_pVWjbG",
+        "item_eicLT8",
+        "item_CTEYdm",
+        "item_ranF8z"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "full_width": true,
+        "subheading": "",
+        "title": "Your questions",
+        "content": "",
+        "team_avatar_width": 160,
+        "support_hours": "",
+        "answer_time": "",
+        "button_text": "",
+        "button_url": "",
+        "text_position": "center",
+        "background": "#ffffff",
+        "background_gradient": "",
+        "text_color": "#000000",
+        "heading_color": "",
+        "heading_gradient": "",
+        "button_background": "",
+        "button_text_color": "#1a1a1a",
+        "accordion_background": "#dfdbdc",
+        "accordion_text_color": ""
+      }
+    },
+    "image_link_blocks_wkzTbP": {
+      "type": "image-link-blocks",
+      "blocks": {
+        "item_xhaDA6": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/love_box_shooting_-_red_-_lucas_-_jewel_3ffd7585-caab-4373-8883-e9ad1a8d0b8c.jpg",
+            "stretch_image": true,
+            "link_text": "",
+            "link_url": "shopify://products/coeur-eternel",
+            "background": "",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "item_cMQiqD": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Zeichenflaeche_1089_1516c1fd-e97e-4693-8b70-418b15da1e80.jpg",
+            "stretch_image": true,
+            "link_text": "",
+            "link_url": "shopify://products/globe-eternel-collier-personnalisee",
+            "background": "",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "item_7pNbLm": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Capture_d_ecran_2025-10-24_151021_7b6a90cb-f42c-44fc-94c5-f0a412d71898.png",
+            "stretch_image": true,
+            "link_text": "",
+            "link_url": "shopify://products/collier-trefle-coeurs",
+            "background": "",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "item_xhaDA6",
+        "item_cMQiqD",
+        "item_7pNbLm"
+      ],
+      "name": "Image link blocks",
+      "settings": {
+        "full_width": false,
+        "block_size": "large",
+        "subheading": "",
+        "title": "Discover our other creations",
+        "content": "",
+        "link_url": "",
+        "link_text": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faq_7ytpep",
+    "image_link_blocks_wkzTbP"
+  ]
+}

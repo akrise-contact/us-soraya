@@ -1,1 +1,131 @@
-{"type":"footer","name":"Footer group","sections":{"text-with-icons":{"type":"text-with-icons","blocks":{"free-shipping":{"type":"item","settings":{"icon":"picto-box","mobile_icon_width":24,"icon_width":24,"icon_background_type":"none","title":"Free shipping","content":"<p>Tell your customers about your shipping offer.<\/p>"}},"customer-support":{"type":"item","settings":{"icon":"picto-customer-support","mobile_icon_width":24,"icon_width":24,"icon_background_type":"none","title":"Customer service","content":"<p>Tell your customers how they can reach you.<\/p>"}},"discount":{"type":"item","settings":{"icon":"picto-coupon","mobile_icon_width":24,"icon_width":24,"icon_background_type":"none","title":"Refer a friend","content":"<p>Tell your customers about your promotional offers.<\/p>"}},"payment":{"type":"item","settings":{"icon":"picto-lock","mobile_icon_width":24,"icon_width":24,"icon_background_type":"none","title":"Secure payment","content":"<p>Tel your customers about your payment methods.<\/p>"}}},"block_order":["free-shipping","customer-support","discount","payment"],"settings":{"full_width":true,"heading_tag":"h6","text_alignment":"center","icon_spacing":"small"}},"footer":{"type":"footer","blocks":{"newsletter":{"type":"newsletter","settings":{"image_width":150,"heading_size":"h3","title":"Sign up for new stories and personal offers"}},"links":{"type":"links","settings":{"menu":"footer","show_menu_title":true}},"text":{"type":"text","settings":{"title":"About","content":"<p>Use this text area to tell your customers about your brand and vision. You can change it in the theme editor.<\/p>"}}},"block_order":["newsletter","links","text"],"settings":{"show_social_media":true,"show_payment_icons":true,"show_country_selector":true,"show_country_flag":true,"show_country_name":true,"show_locale_selector":true}}},"order":["text-with-icons","footer"]}
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "milona_features_VMBkXw": {
+      "type": "milona-features",
+      "blocks": {
+        "feature_FH4mkx": {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "text": "<p>Free shipping</p>"
+          }
+        },
+        "feature_47ayC6": {
+          "type": "feature",
+          "settings": {
+            "icon": "box",
+            "text": "<h5>30-day money-back guarantee</h5>"
+          }
+        },
+        "feature_brfB4W": {
+          "type": "feature",
+          "settings": {
+            "icon": "badge",
+            "text": "<p>Lifetime jewelry warranty</p>"
+          }
+        },
+        "feature_nLE9ki": {
+          "type": "feature",
+          "settings": {
+            "icon": "lock",
+            "text": "<h3>Secure payment</h3>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_FH4mkx",
+        "feature_47ayC6",
+        "feature_brfB4W",
+        "feature_nLE9ki"
+      ],
+      "disabled": true,
+      "name": "Réassurance",
+      "settings": {
+        "show_heading": true,
+        "heading": "Why choose Soraya Paris",
+        "heading_size": 32,
+        "heading_color": "#1a1a1a",
+        "columns_desktop": "4",
+        "columns_mobile": "2",
+        "content_alignment": "center",
+        "gap": 32,
+        "max_width": 920,
+        "padding_top": 24,
+        "padding_bottom": 64,
+        "icon_size": 40,
+        "icon_color": "#800020",
+        "text_size": 16,
+        "text_color": "#800020",
+        "background_color": "#ffffff"
+      }
+    },
+    "image_with_text_overlay_QfPwnJ": {
+      "type": "image-with-text-overlay",
+      "disabled": true,
+      "name": "Image with text overlay",
+      "settings": {
+        "full_width": true,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/bshgsdfg.png",
+        "mobile_image": "shopify://shop_images/bshgsdfg.png",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "text_wntTLn": {
+          "type": "text",
+          "settings": {
+            "title": "Customer Service",
+            "content": "<p>By email: contact@sorayaparis.com</p><p>We reply within 48 hours, Monday to Friday.</p>",
+            "enable_follow_on_shop": false
+          }
+        },
+        "links": {
+          "type": "links",
+          "settings": {
+            "menu": "footer",
+            "show_menu_title": true,
+            "menu_title": ""
+          }
+        },
+        "links_R8VnFB": {
+          "type": "links",
+          "settings": {
+            "menu": "informations",
+            "show_menu_title": true,
+            "menu_title": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_wntTLn",
+        "links",
+        "links_R8VnFB"
+      ],
+      "settings": {
+        "show_social_media": true,
+        "show_payment_icons": true,
+        "show_policy_links": false,
+        "show_country_selector": true,
+        "show_country_flag": true,
+        "show_country_name": true,
+        "show_locale_selector": true
+      }
+    }
+  },
+  "order": [
+    "milona_features_VMBkXw",
+    "image_with_text_overlay_QfPwnJ",
+    "footer"
+  ]
+}

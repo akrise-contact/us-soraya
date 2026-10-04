@@ -1,0 +1,213 @@
+{% comment %}
+  Section: Compte à rebours Black Friday
+  Utilisation: Ajoutez cette section à votre thème Shopify
+{% endcomment %}
+
+<style>
+  .countdown-banner {
+    background: linear-gradient(135deg, #C41E3A 0%, #8B0000 100%);
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .countdown-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .countdown-text h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .countdown-text p {
+    font-size: 14px;
+    margin: 0;
+    opacity: 0.95;
+  }
+
+  .countdown-timer {
+    display: flex;
+    gap: 15px;
+  }
+
+  .countdown-item {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 15px 20px;
+    min-width: 80px;
+  }
+
+  .countdown-number {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .countdown-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 768px) {
+    .countdown-content {
+      gap: 20px;
+    }
+
+    .countdown-text h2 {
+      font-size: 20px;
+    }
+
+    .countdown-text p {
+      font-size: 12px;
+    }
+
+    .countdown-timer {
+      gap: 8px;
+    }
+
+    .countdown-item {
+      padding: 10px 12px;
+      min-width: 60px;
+    }
+
+    .countdown-number {
+      font-size: 24px;
+    }
+
+    .countdown-label {
+      font-size: 9px;
+    }
+  }
+</style>
+
+<div class="countdown-banner">
+  <div class="countdown-content">
+    <div class="countdown-text">
+      <h2>{{ section.settings.title }}</h2>
+      <p>{{ section.settings.subtitle }}</p>
+    </div>
+    
+    <div class="countdown-timer" id="countdown-{{ section.id }}">
+      <div class="countdown-item">
+        <span class="countdown-number" data-days>00</span>
+        <span class="countdown-label">{{ section.settings.label_days }}</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" data-hours>00</span>
+        <span class="countdown-label">{{ section.settings.label_hours }}</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" data-minutes>00</span>
+        <span class="countdown-label">{{ section.settings.label_minutes }}</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" data-seconds>00</span>
+        <span class="countdown-label">{{ section.settings.label_seconds }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const countdownEl = document.getElementById('countdown-{{ section.id }}');
+    const targetDate = new Date('{{ section.settings.end_date }}').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        countdownEl.querySelector('[data-days]').textContent = '00';
+        countdownEl.querySelector('[data-hours]').textContent = '00';
+        countdownEl.querySelector('[data-minutes]').textContent = '00';
+        countdownEl.querySelector('[data-seconds]').textContent = '00';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownEl.querySelector('[data-days]').textContent = String(days).padStart(2, '0');
+      countdownEl.querySelector('[data-hours]').textContent = String(hours).padStart(2, '0');
+      countdownEl.querySelector('[data-minutes]').textContent = String(minutes).padStart(2, '0');
+      countdownEl.querySelector('[data-seconds]').textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Compte à rebours",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titre",
+      "default": "BLACK FRIDAY"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Sous-titre",
+      "default": "-15% SUPPLÉMENTAIRE AVEC LE CODE LOVE15"
+    },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "Date de fin (YYYY-MM-DD HH:MM:SS)",
+      "default": "2024-11-30 23:59:59",
+      "info": "Format: 2024-11-30 23:59:59"
+    },
+    {
+      "type": "text",
+      "id": "label_days",
+      "label": "Label Jours",
+      "default": "Jours"
+    },
+    {
+      "type": "text",
+      "id": "label_hours",
+      "label": "Label Heures",
+      "default": "Hrs"
+    },
+    {
+      "type": "text",
+      "id": "label_minutes",
+      "label": "Label Minutes",
+      "default": "Mins"
+    },
+    {
+      "type": "text",
+      "id": "label_seconds",
+      "label": "Label Secondes",
+      "default": "Secs"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Compte à rebours Black Friday"
+    }
+  ]
+}
+{% endschema %}

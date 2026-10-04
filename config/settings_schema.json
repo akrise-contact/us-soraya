@@ -1,3 +1,4 @@
+
 [
   {
     "name": "theme_info",
@@ -379,6 +380,12 @@
         "id": "product_primary_badge_background",
         "label": "Custom badge",
         "default": "#1e316a"
+      },
+      {
+        "type": "color",
+        "id": "price_compare_color",
+        "label": "Compare-at (struck-through) price",
+        "info": "Leave blank to keep the theme's default muted color."
       }
     ]
   },
@@ -672,6 +679,267 @@
           }
         ],
         "default": "saving"
+      },
+      {
+        "type": "header",
+        "content": "Price display",
+        "info": "Applies wherever prices are shown: product cards, product page, and cart."
+      },
+      {
+        "type": "select",
+        "id": "price_sale_weight",
+        "label": "Price weight",
+        "options": [
+          {
+            "value": "300",
+            "label": "Light (300)"
+          },
+          {
+            "value": "400",
+            "label": "Normal (400)"
+          },
+          {
+            "value": "500",
+            "label": "Medium (500)"
+          },
+          {
+            "value": "600",
+            "label": "Semibold (600)"
+          },
+          {
+            "value": "700",
+            "label": "Bold (700)"
+          },
+          {
+            "value": "800",
+            "label": "Extrabold (800)"
+          }
+        ],
+        "default": "400"
+      },
+      {
+        "type": "checkbox",
+        "id": "price_compare_strikethrough",
+        "label": "Show a line through the compare-at price",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "price_order",
+        "label": "Price order",
+        "options": [
+          {
+            "value": "sale_first",
+            "label": "Current price, then compare-at price"
+          },
+          {
+            "value": "compare_first",
+            "label": "Compare-at price, then current price"
+          }
+        ],
+        "default": "sale_first"
+      },
+      {
+        "type": "select",
+        "id": "price_font",
+        "label": "Price font",
+        "info": "Body and Heading reuse the fonts already loaded by your theme (Typography section), so they always work. A fully custom font just for prices is possible too, but needs the font loaded in theme.liquid — ask if you want that.",
+        "options": [
+          {
+            "value": "body",
+            "label": "Body font (Typography > Body text)"
+          },
+          {
+            "value": "heading",
+            "label": "Heading font (Typography > Headings)"
+          },
+          {
+            "value": "sans-serif",
+            "label": "Generic sans-serif"
+          },
+          {
+            "value": "serif",
+            "label": "Generic serif"
+          },
+          {
+            "value": "monospace",
+            "label": "Generic monospace"
+          }
+        ],
+        "default": "body"
+      },
+      {
+        "type": "select",
+        "id": "price_size_sm",
+        "label": "Price size — small (compact cards, mini-cart)",
+        "options": [
+          {
+            "value": "",
+            "label": "Theme default"
+          },
+          {
+            "value": "11",
+            "label": "Extra small (11px)"
+          },
+          {
+            "value": "12",
+            "label": "Small (12px)"
+          },
+          {
+            "value": "14",
+            "label": "Medium (14px)"
+          },
+          {
+            "value": "16",
+            "label": "Large (16px)"
+          }
+        ],
+        "default": ""
+      },
+      {
+        "type": "select",
+        "id": "price_size_default",
+        "label": "Price size — default (standard product cards)",
+        "options": [
+          {
+            "value": "",
+            "label": "Theme default"
+          },
+          {
+            "value": "13",
+            "label": "Extra small (13px)"
+          },
+          {
+            "value": "15",
+            "label": "Small (15px)"
+          },
+          {
+            "value": "17",
+            "label": "Medium (17px)"
+          },
+          {
+            "value": "19",
+            "label": "Large (19px)"
+          }
+        ],
+        "default": ""
+      },
+      {
+        "type": "select",
+        "id": "price_size_lg",
+        "label": "Price size — large (product page)",
+        "options": [
+          {
+            "value": "",
+            "label": "Theme default"
+          },
+          {
+            "value": "18",
+            "label": "Small (18px)"
+          },
+          {
+            "value": "22",
+            "label": "Medium (22px)"
+          },
+          {
+            "value": "26",
+            "label": "Large (26px)"
+          },
+          {
+            "value": "30",
+            "label": "Extra large (30px)"
+          }
+        ],
+        "default": ""
+      },
+      {
+        "type": "header",
+        "content": "Compare-at price size",
+        "info": "Independent from the price sizes above — lets the crossed-out price be smaller (or larger) than the current price."
+      },
+      {
+        "type": "select",
+        "id": "price_compare_size_sm",
+        "label": "Compare-at size — small (compact cards, mini-cart)",
+        "options": [
+          {
+            "value": "",
+            "label": "Same as price"
+          },
+          {
+            "value": "10",
+            "label": "10px"
+          },
+          {
+            "value": "11",
+            "label": "11px"
+          },
+          {
+            "value": "12",
+            "label": "12px"
+          },
+          {
+            "value": "14",
+            "label": "14px"
+          }
+        ],
+        "default": ""
+      },
+      {
+        "type": "select",
+        "id": "price_compare_size_default",
+        "label": "Compare-at size — default",
+        "options": [
+          {
+            "value": "",
+            "label": "Same as price"
+          },
+          {
+            "value": "12",
+            "label": "12px"
+          },
+          {
+            "value": "13",
+            "label": "13px"
+          },
+          {
+            "value": "15",
+            "label": "15px"
+          },
+          {
+            "value": "17",
+            "label": "17px"
+          }
+        ],
+        "default": ""
+      },
+      {
+        "type": "select",
+        "id": "price_compare_size_lg",
+        "label": "Compare-at size — large (product page)",
+        "options": [
+          {
+            "value": "",
+            "label": "Same as price"
+          },
+          {
+            "value": "14",
+            "label": "14px"
+          },
+          {
+            "value": "18",
+            "label": "18px"
+          },
+          {
+            "value": "22",
+            "label": "22px"
+          },
+          {
+            "value": "26",
+            "label": "26px"
+          }
+        ],
+        "default": ""
       },
       {
         "type": "select",

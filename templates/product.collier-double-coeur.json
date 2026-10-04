@@ -1,0 +1,901 @@
+{
+  "sections": {
+    "logo_list_YUNwB8": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_aznVc6": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/logo-ELLE-500x281.png",
+            "logo_width": 120,
+            "link": ""
+          }
+        },
+        "logo_VHWBgM": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/Marie-Claire-Logo-500x281.png",
+            "logo_width": 120,
+            "link": ""
+          }
+        },
+        "logo_9KQaHF": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/Vogue-Logo-PNG.png",
+            "logo_width": 120,
+            "link": ""
+          }
+        },
+        "logo_UBkayV": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/madspy-image-1756979453599.png",
+            "logo_width": 120,
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_aznVc6",
+        "logo_VHWBgM",
+        "logo_9KQaHF",
+        "logo_UBkayV"
+      ],
+      "disabled": true,
+      "name": "Logo list",
+      "settings": {
+        "full_width": true,
+        "stack_mobile": false,
+        "title": "As seen on",
+        "content": "",
+        "text_alignment": "center",
+        "items_per_row": 5,
+        "background": "#ffffff",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "logo_item_background": "#f9f6f6",
+        "logo_item_border": ""
+      }
+    },
+    "rich_text_wrkQAe": {
+      "type": "rich-text",
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "#800020"
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "liquid_4BFPwV": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<style>\n  .avika-offer {\n    max-width: 560px;\n    background: #f2f2f2;\n    border-radius: 14px;\n    padding: 8px 16px;\n    font-family: Inter, Arial, sans-serif;\n    color: #111;\n    margin-top: 10px;\n  }\n  .avika-offer__row {\n    display: flex;\n    align-items: center;\n    gap: 14px;\n  }\n  .avika-offer__icon {\n    width: clamp(44px, 7vw, 60px);\n    height: clamp(44px, 7vw, 60px);\n    flex-shrink: 0;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  }\n  .avika-offer__icon img {\n    width: 100%;\n    height: 100%;\n    object-fit: contain;\n    display: block;\n  }\n  .avika-offer__text {\n    font-size: clamp(13px, 1.6vw, 15px);\n    line-height: 1.35;\n    color: #111;\n    max-width: 420px;\n  }\n  .avika-offer__text strong {\n    font-weight: 700;\n  }\n  @media (max-width: 480px) {\n    .avika-offer {\n      padding: 6px 14px;\n      border-radius: 12px;\n    }\n    .avika-offer__text {\n      max-width: 100%;\n    }\n  }\n</style>\n{%- liquid\n  assign locale = request.locale.iso_code | downcase\n  assign country = localization.country.iso_code | upcase\n\n  case country\n    when 'CH'\n      assign t_amount = \"40CHF\"\n    when 'CA'\n      assign t_amount = \"60$CAD\"\n    when 'GB'\n      assign t_amount = \"35£\"\n    when 'US'\n      assign t_amount = \"$45\"\n    else\n      assign t_amount = \"40€\"\n  endcase\n\n  assign t_today = \"Today only\"\n  assign t_free  = \"FREE earrings\"\n  assign t_end   = \"with a purchase of \" | append: t_amount\n  assign t_emoji = \" 🎁\"\n\n  if locale contains 'it'\n    assign t_today = \"Solo per oggi\"\n    assign t_free  = \"orecchini in OMAGGIO\"\n    assign t_end   = \"a partire da \" | append: t_amount | append: \" di acquisto\"\n  elsif locale contains 'es'\n    assign t_today = \"Solo por hoy\"\n    assign t_free  = \"pendientes GRATIS\"\n    assign t_end   = \"a partir de \" | append: t_amount | append: \" de compra\"\n  elsif locale contains 'de'\n    assign t_today = \"Nur heute\"\n    assign t_free  = \"Ohrringe GRATIS\"\n    assign t_end   = \"ab \" | append: t_amount | append: \" Einkaufswert\"\n  elsif locale contains 'en'\n    assign t_today = \"Today only\"\n    assign t_free  = \"FREE earrings\"\n    assign t_end   = \"with a purchase of \" | append: t_amount\n  endif\n-%}\n<div class=\"avika-offer\" role=\"note\" aria-label=\"Today's offer\">\n  <div class=\"avika-offer__row\">\n    <div class=\"avika-offer__icon\">\n      <img\n        src=\"https://cdn.shopify.com/s/files/1/0969/9147/8097/files/Design_sans_titre_11.png?v=1768171085\"\n        alt=\"Free earrings\"\n        loading=\"lazy\"\n      >\n    </div>\n    <div class=\"avika-offer__text\">\n      <strong>{{ t_today }}</strong> – {{ t_free }} {{ t_end }}{{ t_emoji }}\n    </div>\n  </div>\n</div>"
+          }
+        },
+        "title_xPdkK6": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h2"
+          }
+        },
+        "price_V7WCLh": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false,
+            "price_color": "#800020",
+            "price_compare_color": "#505050",
+            "price_weight": "700",
+            "price_strikethrough": "",
+            "price_size": "22",
+            "price_compare_size": "16",
+            "price_order": "",
+            "price_font": "heading",
+            "show_promo_badge": true,
+            "promo_badge_text": "-50% FALL SALE",
+            "promo_badge_background": "#800020",
+            "promo_badge_text_color": "#ffffff",
+            "promo_badge_shape": "rounded",
+            "promo_badge_border_color": "",
+            "promo_badge_border_width": 2,
+            "promo_badge_font_size": 12,
+            "promo_badge_padding_v": 2,
+            "promo_badge_padding_h": 8,
+            "extra_text": "",
+            "extra_text_color": ""
+          }
+        },
+        "liquid_9gHiLK": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "{% assign lang = request.locale.iso_code %}\n\n<!-- Bullet points -->\n<ul style=\"list-style: none; padding: 0; margin: 0;\">\n\n  <!-- Ligne 1 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">✿</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Un bijou contre son cœur chaque jour</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Ein Schmuckstück nah am Herzen jeden Tag</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Un gioiello vicino al suo cuore ogni giorno</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Una joya cerca de su corazón cada día</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">A jewel close to her heart every day</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">A jewel close to her heart every day</span>\n    {% endcase %}\n  </li>\n\n  <!-- Ligne 2 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">❀</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Une vraie rose qui dure éternellement</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Eine echte Rose, die für immer hält</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Una vera rosa che dura per sempre</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Una rosa real que dura para siempre</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">A real rose that lasts forever</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">A real rose that lasts forever</span>\n    {% endcase %}\n  </li>\n\n  <!-- Ligne 3 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">♡</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Collier garanti à vie • Résistant à l'eau</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Halskette mit lebenslanger Garantie • Wasserfest</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Collana garantita a vita • Resistente all'acqua</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Collar con garantía de por vida • Resistente al agua</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">Lifetime guarantee necklace • Water resistant</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">Lifetime guarantee necklace • Water resistant</span>\n    {% endcase %}\n  </li>\n\n</ul>"
+          }
+        },
+        "variant_picker_jEYLnB": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "stack_blocks": true,
+            "selector_style": "block",
+            "swatch_selector_style": "swatch",
+            "variant_image_options": "",
+            "size_chart_page": ""
+          }
+        },
+        "line_item_property_yn8XMg": {
+          "type": "line_item_property",
+          "settings": {
+            "label": "Right heart name",
+            "type": "text",
+            "required": false,
+            "allow_long_text": false
+          }
+        },
+        "line_item_property_6VixNA": {
+          "type": "line_item_property",
+          "settings": {
+            "label": "Left heart name",
+            "type": "text",
+            "required": false,
+            "allow_long_text": false
+          }
+        },
+        "globo_product_options_app_block_qbBnMj": {
+          "type": "shopify://apps/globo-product-options/blocks/app-block/fdc9fad5-1a0f-4bd4-9c8a-1af6a6eef6b8",
+          "settings": {
+            "product": ""
+          }
+        },
+        "buy_buttons_LgztLR": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": false,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "#960025",
+            "atc_button_text_color": "#ffffff",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "liquid_4BFPwV",
+        "title_xPdkK6",
+        "price_V7WCLh",
+        "liquid_9gHiLK",
+        "variant_picker_jEYLnB",
+        "line_item_property_yn8XMg",
+        "line_item_property_6VixNA",
+        "globo_product_options_app_block_qbBnMj",
+        "buy_buttons_LgztLR"
+      ],
+      "settings": {
+        "full_width": true,
+        "show_fixed_add_to_cart": true,
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_bottom",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "thumbnails",
+        "enable_video_autoplay": false,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "tabs_kNAGcW": {
+      "type": "tabs",
+      "blocks": {
+        "tab_gn9cfL": {
+          "type": "tab",
+          "settings": {
+            "title": "Size & materials",
+            "content": "<p>The chain is 15.7\" (40 cm) long with a 2\" (5 cm) extender — easy to adjust.</p><p>Made of high-quality stainless steel; the gold version is plated with 18K gold.<br/><br/>Perfect for effortless everyday wear, with no special care needed.</p>",
+            "page": ""
+          }
+        },
+        "tab_rrRiJK": {
+          "type": "tab",
+          "settings": {
+            "title": "Shipping information",
+            "content": "<p>All orders are packed, prepared and shipped within <strong>24–48 hours</strong>.</p><p>We offer fast worldwide shipping, and the usual delivery time is <strong>4 to 7 days</strong>. Depending on where you live, your items may arrive a little earlier or later.</p><p>Every order comes with a tracking number, so you can follow your package every step of the way.</p>",
+            "page": ""
+          }
+        },
+        "tab_dKAnDm": {
+          "type": "tab",
+          "settings": {
+            "title": "Money-back guarantee",
+            "content": "<p>At <strong>Soraya Paris</strong>, your satisfaction is our top priority. Our goal is to give you an exceptional experience.</p><p>All our products come with a 30-day money-back guarantee. We'll do everything in our power to make sure your experience with <strong>Soraya Paris</strong> is a positive one!</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "tab_gn9cfL",
+        "tab_rrRiJK",
+        "tab_dKAnDm"
+      ],
+      "name": "Tabs",
+      "settings": {
+        "full_width": true,
+        "content_size": "medium",
+        "subheading": "",
+        "title": "",
+        "text_alignment": "center",
+        "first_tab_open": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": ""
+      }
+    },
+    "multi_column_TYF9bY": {
+      "type": "multi-column",
+      "blocks": {
+        "item_p3hxWN": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/6960f0c2-d2c3-4df0-8c7e-5b170107c943.jpg",
+            "column_size": "3",
+            "title": "Elegant, Timeless Design",
+            "heading_tag": "h4",
+            "content": "<p>A minimalist adjustable 15.7–17.7\" (40–45 cm) necklace that goes with every outfit and occasion. Made of 18K gold-plated stainless steel for lasting shine and timeless elegance.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_jFKYnd": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/23e9d82b-04eb-47d9-b9f7-f9a7b1f52035_2_91509786-5fb0-4093-a6a4-b1da82ea757b.jpg",
+            "column_size": "3",
+            "title": "Quality & Everyday Comfort",
+            "heading_tag": "h4",
+            "content": "<p>Hypoallergenic and gentle on the skin, perfect for everyday wear. Each piece is hand-polished and carefully inspected to guarantee a flawless finish.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_PqHrEW": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/475739054_18035319740447336_5777024269477736812_n.jpg",
+            "column_size": "3",
+            "title": "Perfect Gift Idea",
+            "heading_tag": "h4",
+            "content": "<p>Choose an elegant, ready-to-give gift box. A refined present that combines style and durability to celebrate special moments.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "item_p3hxWN",
+        "item_jFKYnd",
+        "item_PqHrEW"
+      ],
+      "name": "Multi-column",
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": true,
+        "gap": "medium",
+        "text_alignment": "center",
+        "subheading": "",
+        "title": "",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "multi_column_bGgjgP": {
+      "type": "multi-column",
+      "blocks": {
+        "item_twccLg": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/98080938eaeb40bc835ee7dc596148ff.HD-1080p-4.8Mbps-35710129 (1).mp4",
+            "column_size": "3",
+            "title": "Eternal Bear Gift Box",
+            "heading_tag": "h4",
+            "content": "<p>An adorable red bear holding an eternal rose and a gold necklace with intertwined hearts. A unique gift to express sincere, lasting love.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_ba3nHc": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/1fcfc46ef55642f3974839d84b1c2886.HD-1080p-3.3Mbps-41522377.mp4",
+            "column_size": "3",
+            "title": "Eternal Rose Gift Box",
+            "heading_tag": "h4",
+            "content": "<p>This refined gift box pairs the beauty of red roses with the delicacy of a sparkling flower-shaped necklace. Presented in a luxurious case, it's perfect for expressing your love, your gratitude, or simply making her happy with style and emotion.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_3fgEhm": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/1761312472.png",
+            "column_size": "3",
+            "title": "Elegance Gift Box",
+            "heading_tag": "h4",
+            "content": "<p>This refined gift box pairs the timeless beauty of red roses with the sparkle of an elegant necklace. The perfect way to say \"I love you\" with elegance and emotion.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "item_twccLg",
+        "item_ba3nHc",
+        "item_3fgEhm"
+      ],
+      "name": "Multi-column",
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "gap": "medium",
+        "text_alignment": "center",
+        "subheading": "Our gift boxes",
+        "title": "A guaranteed surprise",
+        "content": "",
+        "background": "#800020",
+        "background_gradient": "",
+        "text_color": "#ffffff"
+      }
+    },
+    "rich_text_496Ycb": {
+      "type": "rich-text",
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "ss_testimonial_8_A7ndw7": {
+      "type": "ss-testimonial-8",
+      "blocks": {
+        "slide_G9WJLp": {
+          "type": "slide",
+          "settings": {
+            "stars_count": 5,
+            "heading": "Gorgeous",
+            "text": "A gorgeous gift! The rose is stunning and the necklace with our names engraved is perfect. My wife was moved to tears.",
+            "author_date": "Jean D."
+          }
+        },
+        "slide_BWHetM": {
+          "type": "slide",
+          "settings": {
+            "stars_count": 5,
+            "heading": "An unforgettable keepsake",
+            "text": "The gift box is so elegant. The personalized necklace really made the difference. Thank you for this beautiful keepsake!",
+            "author_date": "Claire P."
+          }
+        },
+        "slide_F7Dd9W": {
+          "type": "slide",
+          "settings": {
+            "stars_count": 5,
+            "heading": "An unforgettable gift",
+            "text": "I gave this gift box to my wife for our anniversary and she was absolutely thrilled. The rose is gorgeous and the necklace is high quality. An unforgettable gift!",
+            "author_date": "Marc L"
+          }
+        },
+        "slide_hLAxEe": {
+          "type": "slide",
+          "settings": {
+            "stars_count": 5,
+            "heading": "Elegant and refined",
+            "text": "The gift box is so elegant! The eternal rose is a powerful symbol and the necklace with our names engraved is perfect. A touch of refinement in a gift.",
+            "author_date": "Sophie T."
+          }
+        },
+        "slide_RbECi9": {
+          "type": "slide",
+          "settings": {
+            "stars_count": 5,
+            "heading": "The surprise worked!",
+            "text": "I surprised my girlfriend with this gift box and she cried tears of joy. The personalized necklace really made the difference. Thank you for this wonderful experience!",
+            "author_date": "Pierre G."
+          }
+        },
+        "slide_NFxLBb": {
+          "type": "slide",
+          "settings": {
+            "stars_count": 5,
+            "heading": "Great quality",
+            "text": "I'm impressed by the quality of this gift box. The rose has a timeless beauty and the necklace is delicate and well made. My fiancée loved it!",
+            "author_date": "Benjamin M."
+          }
+        },
+        "slide_ELiHB7": {
+          "type": "slide",
+          "settings": {
+            "stars_count": 5,
+            "heading": "The perfect personalized gift",
+            "text": "Personalizing the necklace was really easy and added a special touch. My mom loved this gift and keeps showing it to everyone. Highly recommend!",
+            "author_date": "Julien F."
+          }
+        }
+      },
+      "block_order": [
+        "slide_G9WJLp",
+        "slide_BWHetM",
+        "slide_F7Dd9W",
+        "slide_hLAxEe",
+        "slide_RbECi9",
+        "slide_NFxLBb",
+        "slide_ELiHB7"
+      ],
+      "disabled": true,
+      "name": "SS - Testimonial #8",
+      "settings": {
+        "heading": "Our customers say it better than we do!",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 40,
+        "heading_size_mobile": 24,
+        "heading_height": 130,
+        "heading_align": "center",
+        "rating_text": "Excellent",
+        "rating_text_custom": false,
+        "rating_text_font": "josefin_sans_n4",
+        "rating_text_size": 24,
+        "rating_text_size_mobile": 20,
+        "rating_text_height": 130,
+        "rating_text_mt": 16,
+        "rating": 4.7,
+        "rating_hide": false,
+        "rating_text_hide": false,
+        "rating_align": "center",
+        "stars_count": 5,
+        "stars_size": 28,
+        "stars_size_mobile": 24,
+        "stars_align": "center",
+        "text": "",
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 20,
+        "text_size_mobile": 16,
+        "text_height": 130,
+        "text_align": "center",
+        "text_mt": 16,
+        "slider_width": 80,
+        "slider_view": 3,
+        "slider_view_mobile": 1.2,
+        "slider_gap": 20,
+        "slider_gap_mobile": 20,
+        "slider_mt": 36,
+        "card_padding_vertical": 32,
+        "card_padding_vertical_mobile": 24,
+        "card_padding_horizontal": 40,
+        "card_padding_horizontal_mobile": 24,
+        "card_radius": 16,
+        "card_border_thickness": 0,
+        "card_shadow": true,
+        "card_heading_custom": false,
+        "card_heading_font": "josefin_sans_n4",
+        "card_heading_size": 24,
+        "card_heading_size_mobile": 20,
+        "card_heading_height": 130,
+        "card_heading_align": "center",
+        "card_heading_mt": 16,
+        "card_text_custom": false,
+        "card_text_font": "josefin_sans_n4",
+        "card_text_size": 14,
+        "card_text_size_mobile": 14,
+        "card_text_height": 150,
+        "card_text_align": "center",
+        "card_text_mt": 16,
+        "card_text_more": "See more",
+        "card_text_less": "See less",
+        "card_count_words": 20,
+        "card_author_date_text_custom": false,
+        "card_author_date_text_font": "josefin_sans_n4",
+        "card_author_date_text_size": 16,
+        "card_author_date_text_size_mobile": 16,
+        "card_author_date_text_height": 130,
+        "card_author_date_text_align": "center",
+        "card_author_date_text_mt": 16,
+        "arrow_size": 50,
+        "arrow_size_mobile": 50,
+        "arrow_icon_size": 28,
+        "arrow_icon_size_mobile": 28,
+        "arrow_border_thickness": 0,
+        "arrow_show_desktop": true,
+        "arrow_show_mobile": false,
+        "dots_size": 12,
+        "dots_size_mobile": 12,
+        "dots_show_desktop": false,
+        "dots_show_mobile": false,
+        "button": "View All",
+        "button_url": "",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 16,
+        "button_size_mobile": 14,
+        "button_height": 100,
+        "button_align": "center",
+        "button_mt": 16,
+        "button_padding_vertical": 20,
+        "button_padding_horizontal": 16,
+        "button_radius": 8,
+        "button_border_thickness": 0,
+        "button_color": "#ffffff",
+        "button_hover_color": "#ffffff",
+        "button_bg_color": "#000000",
+        "button_bg_hover_color": "#000000",
+        "button_border_color": "#000000",
+        "button_border_hover_color": "#000000",
+        "card_bg_color": "#ffffff",
+        "card_border_color": "#000000",
+        "card_shadow_color": "#00b67a",
+        "card_heading_color": "#000000",
+        "card_text_color": "#000000",
+        "card_author_date_text_color": "#000000",
+        "arrow_color": "#000000",
+        "arrow_hover_color": "#000000",
+        "arrow_bg_color": "#ffffff",
+        "arrow_bg_hover_color": "#ffffff",
+        "arrow_border_color": "#ffffff",
+        "arrow_border_hover_color": "#ffffff",
+        "dots_color": "#000000",
+        "heading_color": "#ffffff",
+        "rating_text_color": "#ffffff",
+        "stars_bg_color": "#00b67a",
+        "stars_color": "#ffffff",
+        "text_color": "#ffffff",
+        "background_color": "#ffffff",
+        "background_gradient": "linear-gradient(180deg, rgba(128, 0, 32, 1), rgba(255, 255, 255, 1) 100%)",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 0,
+        "lazy": true
+      }
+    },
+    "multi_column_WVG9ed": {
+      "type": "multi-column",
+      "blocks": {
+        "item_wcJdcg": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/dfg.png",
+            "column_size": "3",
+            "title": "Sophie M.",
+            "heading_tag": "h4",
+            "content": "<p>I ordered this bear for my daughter's 19th birthday. When she discovered the hidden necklace with her initials... she burst into tears! The rose is gorgeous and the necklace is great quality. Fast shipping, 100% recommend.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_mP3d3L": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/fvzs1IMoz_mid.jpg",
+            "column_size": "3",
+            "title": "Marc L.",
+            "heading_tag": "h4",
+            "content": "<p>My girlfriend didn't see it coming at all! The surprise effect is amazing — it took her 5 minutes to figure out she had to turn the rose 😅 The necklace with the date we met engraved is perfect. Gift nailed!</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_P6jYc7": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/guz1RtPFjZ_mid.jpg",
+            "column_size": "3",
+            "title": "Emma R.",
+            "heading_tag": "h4",
+            "content": "<p>Perfect Valentine's Day gift! The rose is really beautiful and looks delicate, but it's actually sturdy. My boyfriend had 'E♡T Forever' engraved and it's exactly what I was hoping for. I wear it every day.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_jxk4nh": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/CUHycauCrF_mid.jpg",
+            "column_size": "3",
+            "title": "Julie D.",
+            "heading_tag": "h4",
+            "content": "<p>For our 5th anniversary with my husband, I chose the red rose with the rose gold necklace. The engraving of our wedding date is crisp and legible. The packaging was beautiful. A keepsake we'll treasure for life!</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_pyz4pT": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/OTTQViMNB_mid.jpg",
+            "column_size": "3",
+            "title": "Thomas B.",
+            "heading_tag": "h4",
+            "content": "<p>My mom loved it! I gave it to her for Mother's Day with 'Mom ♥' engraved. She put it on her dresser and shows the necklace to all her friends. Very happy with my purchase, thank you Soraya Paris.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "item_wcJdcg",
+        "item_mP3d3L",
+        "item_P6jYc7",
+        "item_jxk4nh",
+        "item_pyz4pT"
+      ],
+      "disabled": true,
+      "name": "Multi-column",
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "gap": "medium",
+        "text_alignment": "center",
+        "subheading": "They loved it",
+        "title": "Why not her?",
+        "content": "",
+        "background": "#ffffff",
+        "background_gradient": "",
+        "text_color": "#800020"
+      }
+    },
+    "176097975835e95088": {
+      "type": "apps",
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "faq_wzmqVL": {
+      "type": "faq",
+      "blocks": {
+        "item_E3XFn6": {
+          "type": "item",
+          "settings": {
+            "title": "How long is the chain?",
+            "content": "<p>The chain is 15.7\" (40 cm) long with a 2\" (5 cm) extender, so it adjusts easily to any neck. Ideal for an elegant fit at the collarbone.</p>"
+          }
+        },
+        "item_UPcreW": {
+          "type": "item",
+          "settings": {
+            "title": "Can I give it for a special occasion?",
+            "content": "<p>Any occasion. Birthdays, anniversaries, Valentine's Day, Christmas, engagements, \"just because I love you\"...</p><p>The best gifts don't need an excuse. They come when you think of her. ❤️</p>"
+          }
+        },
+        "item_iefkmr": {
+          "type": "item",
+          "settings": {
+            "title": "Can I shower with it?",
+            "content": "<p><strong>Yes. </strong>The chain is made of high-quality stainless steel with real 18K gold plating. It's waterproof, doesn't tarnish and keeps its shine — even when worn every day.</p>"
+          }
+        },
+        "item_6R8nNA": {
+          "type": "item",
+          "settings": {
+            "title": "What if my jewelry arrives damaged?",
+            "content": "<p>If your jewelry was damaged during shipping, we'll send you a new one at our expense!</p>"
+          }
+        },
+        "item_XhFDHD": {
+          "type": "item",
+          "settings": {
+            "title": "What if I don't like it?",
+            "content": "<p>Don't love it? Send us a message and we'll refund you, no questions asked!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_E3XFn6",
+        "item_UPcreW",
+        "item_iefkmr",
+        "item_6R8nNA",
+        "item_XhFDHD"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "full_width": true,
+        "subheading": "",
+        "title": "Your questions",
+        "content": "",
+        "team_avatar_width": 160,
+        "support_hours": "",
+        "answer_time": "",
+        "button_text": "",
+        "button_url": "",
+        "text_position": "center",
+        "background": "#ffffff",
+        "background_gradient": "",
+        "text_color": "#000000",
+        "heading_color": "",
+        "heading_gradient": "",
+        "button_background": "",
+        "button_text_color": "#1a1a1a",
+        "accordion_background": "#dfdbdc",
+        "accordion_text_color": ""
+      }
+    },
+    "milona_features_jm3Fr4": {
+      "type": "milona-features",
+      "blocks": {
+        "feature_gAfBCD": {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "text": "<p>Free shipping</p>"
+          }
+        },
+        "feature_HpyWwE": {
+          "type": "feature",
+          "settings": {
+            "icon": "box",
+            "text": "<h5>30-day money-back guarantee</h5>"
+          }
+        },
+        "feature_7qVhCU": {
+          "type": "feature",
+          "settings": {
+            "icon": "badge",
+            "text": "<p>Lifetime jewelry warranty</p>"
+          }
+        },
+        "feature_RHMP9g": {
+          "type": "feature",
+          "settings": {
+            "icon": "lock",
+            "text": "<h3>Secure payment</h3>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_gAfBCD",
+        "feature_HpyWwE",
+        "feature_7qVhCU",
+        "feature_RHMP9g"
+      ],
+      "name": "Réassurance",
+      "settings": {
+        "show_heading": true,
+        "heading": "",
+        "heading_size": 32,
+        "heading_color": "#1a1a1a",
+        "columns_desktop": "4",
+        "columns_mobile": "2",
+        "content_alignment": "center",
+        "gap": 24,
+        "max_width": 720,
+        "padding_top": 0,
+        "padding_bottom": 44,
+        "icon_size": 34,
+        "icon_color": "#800020",
+        "text_size": 15,
+        "text_color": "#800020",
+        "background_color": "#ffffff"
+      }
+    },
+    "image_link_blocks_eKnzqR": {
+      "type": "image-link-blocks",
+      "blocks": {
+        "item_zffrPd": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/sdv.png",
+            "stretch_image": true,
+            "link_text": "",
+            "link_url": "shopify://products/collier-ours-personnalise",
+            "background": "",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "item_T6kWzC": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Zeichenflaeche_1089_1516c1fd-e97e-4693-8b70-418b15da1e80.jpg",
+            "stretch_image": true,
+            "link_text": "",
+            "link_url": "shopify://products/globe-eternel-collier-personnalisee",
+            "background": "",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "item_7wkirU": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Capture_d_ecran_2025-10-24_151021_7b6a90cb-f42c-44fc-94c5-f0a412d71898.png",
+            "stretch_image": true,
+            "link_text": "",
+            "link_url": "shopify://products/collier-trefle-coeurs",
+            "background": "",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "item_zffrPd",
+        "item_T6kWzC",
+        "item_7wkirU"
+      ],
+      "disabled": true,
+      "name": "Image link blocks",
+      "settings": {
+        "full_width": false,
+        "block_size": "large",
+        "subheading": "",
+        "title": "Discover our other creations",
+        "content": "",
+        "link_url": "",
+        "link_text": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": ""
+      }
+    }
+  },
+  "order": [
+    "logo_list_YUNwB8",
+    "rich_text_wrkQAe",
+    "main",
+    "tabs_kNAGcW",
+    "multi_column_TYF9bY",
+    "multi_column_bGgjgP",
+    "rich_text_496Ycb",
+    "ss_testimonial_8_A7ndw7",
+    "multi_column_WVG9ed",
+    "176097975835e95088",
+    "faq_wzmqVL",
+    "milona_features_jm3Fr4",
+    "image_link_blocks_eKnzqR"
+  ]
+}

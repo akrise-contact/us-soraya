@@ -1,66 +1,170 @@
 {%- comment -%}
 ----------------------------------------------------------------------------------------------------------------------
-PRODUCT PRICE
+PRODUCT PRICE — version personnalisable via les Réglages du thème
 ----------------------------------------------------------------------------------------------------------------------
-
+ 
 This component generates price list for a given product. It handles the rendering of both price, compare at price,
-sale price and unit price
-
+sale price and unit price.
+ 
+Réglages du thème utilisés (voir settings_schema.json) — s'appliquent partout sur la boutique :
+- settings.product_on_sale_accent   → couleur du prix promo (réglage déjà existant dans Colors > Product)
+- settings.price_compare_color      → couleur du prix barré (nouveau, Colors > Product)
+- settings.price_sale_bold          → mettre le prix promo en gras (nouveau, Product card > Price display)
+- settings.price_compare_strikethrough → afficher ou non le trait barré (nouveau, Product card > Price display)
+- settings.price_size_sm / _default / _lg → taille du texte du prix selon le contexte (nouveau, Product card > Price display)
+- settings.price_font → police du prix : corps de texte, titres, ou générique sans-serif/serif/monospace (nouveau, Product card > Price display)
+ 
+Ce fichier accepte aussi des paramètres "override_*" (voir plus bas) permettant à UN appel précis de
+price-list (par exemple depuis le bloc Price de la page produit) de court-circuiter les réglages
+globaux ci-dessus, sans les modifier pour le reste de la boutique.
+ 
+Tant que ces réglages restent sur leurs valeurs par défaut, le rendu est identique à l'original
+(sauf la couleur du prix promo, qui applique désormais explicitement "On sale accent" — un réglage
+qui existait déjà dans votre thème mais qui n'était pas forcément garanti d'être utilisé ici).
+ 
 ********************************************
 Supported variables
 ********************************************
-
+ 
 * product: the product from which prices are rendered
 * variant: if a variant is specified, then only the price from this variant is rendered (used in product details)
 * line_item: if a line item is specified, then the price from this line item are rendered
 * hide_unit_price: if set to true, unit pricing are hidden (this is useful for elements that are very size constrained)
 * size: can be either "sm" or "lg". If none is passed it will use the standard size
 * alignment: can be "center" to align the prices
+* override_color / override_compare_color: force a color for this render call only (bypasses the global Theme setting)
+* override_weight: "bold", "normal", or blank to use the global Theme setting
+* override_strikethrough: "show", "hide", or blank to use the global Theme setting
+* override_size: a pixel number (e.g. "26"), or blank to use the global Theme setting
+* override_compare_size: a pixel number for the compare-at price specifically, or blank to fall back to override_size / the global Theme setting
+* override_order: "sale_first" (default), "compare_first", or blank to use the global Theme setting
+* override_font: "body", "heading", "sans-serif", "serif", "monospace", or blank to use the global Theme setting
 {%- endcomment -%}
-
+ 
 {%- liquid
   case size
     when 'lg'
       assign regular_price_classes = 'text-lg'
       assign on_sale_price_classes = 'text-lg text-on-sale'
-      assign compare_at_price_classes = 'text-subdued line-through'
+      assign compare_at_price_classes = 'text-subdued'
       assign unit_price_classes = 'text-subdued'
-  
+      assign price_size_setting = settings.price_size_lg
+      assign price_compare_size_setting = settings.price_compare_size_lg
+ 
     when 'sm'
       assign regular_price_classes = 'text-subdued text-sm'
       assign on_sale_price_classes = 'text-on-sale text-sm'
-      assign compare_at_price_classes = 'text-subdued text-sm line-through'
+      assign compare_at_price_classes = 'text-subdued text-sm'
       assign unit_price_classes = 'text-subdued text-sm'
-  
+      assign price_size_setting = settings.price_size_sm
+      assign price_compare_size_setting = settings.price_compare_size_sm
+ 
     else
       assign regular_price_classes = 'text-subdued'
       assign on_sale_price_classes = 'text-on-sale'
-      assign compare_at_price_classes = 'text-subdued line-through'
+      assign compare_at_price_classes = 'text-subdued'
       assign unit_price_classes = 'text-subdued text-sm'
+      assign price_size_setting = settings.price_size_default
+      assign price_compare_size_setting = settings.price_compare_size_default
   endcase
+ 
+  assign effective_size = override_size | default: price_size_setting
+  assign effective_compare_size = override_compare_size | default: price_compare_size_setting | default: effective_size
+ 
+  if override_strikethrough == 'show'
+    assign show_strikethrough = true
+  elsif override_strikethrough == 'hide'
+    assign show_strikethrough = false
+  else
+    assign show_strikethrough = settings.price_compare_strikethrough
+  endif
+ 
+  if show_strikethrough
+    assign compare_at_price_classes = compare_at_price_classes | append: ' line-through'
+  endif
+ 
+  assign effective_weight = override_weight | default: settings.price_sale_weight | default: '400'
+ 
+  assign effective_font = override_font | default: settings.price_font
+ 
+  case effective_font
+    when 'heading'
+      assign price_font_family = settings.heading_font.family | append: ', ' | append: settings.heading_font.fallback_families
+    when 'sans-serif'
+      assign price_font_family = 'sans-serif'
+    when 'serif'
+      assign price_font_family = 'serif'
+    when 'monospace'
+      assign price_font_family = 'monospace'
+    else
+      assign price_font_family = settings.text_font.family | append: ', ' | append: settings.text_font.fallback_families
+  endcase
+ 
+  assign sale_color = override_color | default: settings.product_on_sale_accent
+  assign compare_color = override_compare_color | default: settings.price_compare_color
+ 
+  assign effective_order = override_order | default: settings.price_order | default: 'sale_first'
+  assign price_list_extra_style = ''
+ 
+  if effective_order == 'compare_first'
+    assign sale_order = '2'
+    assign compare_order = '1'
+    assign price_list_extra_style = 'display:inline-flex;align-items:baseline;gap:0.35em;'
+  else
+    assign sale_order = '1'
+    assign compare_order = '2'
+  endif
+ 
+  capture sale_price_style
+    echo 'color: ' | append: sale_color | append: ';'
+    echo 'font-family: ' | append: price_font_family | append: ';'
+    echo 'font-weight: ' | append: effective_weight | append: ';'
+    if effective_size != blank
+      echo 'font-size: ' | append: effective_size | append: 'px;'
+    endif
+    echo 'order: ' | append: sale_order | append: ';'
+  endcapture
+ 
+  capture regular_price_style
+    echo 'font-family: ' | append: price_font_family | append: ';'
+    if effective_size != blank
+      echo 'font-size: ' | append: effective_size | append: 'px;'
+    endif
+  endcapture
+ 
+  capture compare_price_style
+    echo 'font-family: ' | append: price_font_family | append: ';'
+    if compare_color != blank
+      echo 'color: ' | append: compare_color | append: ';'
+    endif
+    if effective_compare_size != blank
+      echo 'font-size: ' | append: effective_compare_size | append: 'px;'
+    endif
+    echo 'order: ' | append: compare_order | append: ';'
+  endcapture
 -%}
-
-<price-list class="price-list {% if size == 'lg' %}price-list--lg{% endif %} {% if text_alignment == 'center' %}justify-center{% endif %}">
+ 
+<price-list class="price-list {% if size == 'lg' %}price-list--lg{% endif %} {% if text_alignment == 'center' %}justify-center{% endif %}" style="{{ price_list_extra_style }}">
   {%- if variant != blank -%}
     {%- comment -%}
     --------------------------------------------------------------------------------------------------------------------
     VARIANT CASE (used on product page, quick view...)
     --------------------------------------------------------------------------------------------------------------------
     {%- endcomment -%}
-    <sale-price class="{% if variant.compare_at_price > variant.price %}{{ on_sale_price_classes }}{% else %}{{ regular_price_classes }}{% endif %}">
+    <sale-price class="{% if variant.compare_at_price > variant.price %}{{ on_sale_price_classes }}{% else %}{{ regular_price_classes }}{% endif %}" style="{% if variant.compare_at_price > variant.price %}{{ sale_price_style }}{% else %}{{ regular_price_style }}{% endif %}">
       <span class="sr-only">{{ 'product.price.sale_price' | t }}</span>
-
+ 
       {%- if settings.currency_code_enabled -%}
         {{- variant.price | money_with_currency -}}
       {%- else -%}
         {{- variant.price | money -}}
       {%- endif -%}
     </sale-price>
-
+ 
     {%- if variant.compare_at_price > variant.price -%}
-      <compare-at-price class="{{ compare_at_price_classes }}">
+      <compare-at-price class="{{ compare_at_price_classes }}" style="{{ compare_price_style }}">
         <span class="sr-only">{{ 'product.price.regular_price' | t }}</span>
-
+ 
         {%- if settings.currency_code_enabled -%}
           {{- variant.compare_at_price | money_with_currency -}}
         {%- else -%}
@@ -74,20 +178,20 @@ Supported variables
     LINE ITEM CASE (used on cart, order page...)
     --------------------------------------------------------------------------------------------------------------------
     {%- endcomment -%}
-    <sale-price class="{% if line_item.original_line_price > line_item.final_line_price %}{{ on_sale_price_classes }}{% else %}{{ regular_price_classes }}{% endif %}">
+    <sale-price class="{% if line_item.original_line_price > line_item.final_line_price %}{{ on_sale_price_classes }}{% else %}{{ regular_price_classes }}{% endif %}" style="{% if line_item.original_line_price > line_item.final_line_price %}{{ sale_price_style }}{% else %}{{ regular_price_style }}{% endif %}">
       <span class="sr-only">{{ 'product.price.sale_price' | t }}</span>
-
+ 
       {%- if settings.currency_code_enabled -%}
         {{- line_item.final_line_price | money_with_currency -}}
       {%- else -%}
         {{- line_item.final_line_price | money -}}
       {%- endif -%}
     </sale-price>
-
+ 
     {%- if line_item.original_line_price > line_item.final_line_price -%}
-      <compare-at-price class="{{ compare_at_price_classes }}">
+      <compare-at-price class="{{ compare_at_price_classes }}" style="{{ compare_price_style }}">
         <span class="sr-only">{{ 'product.price.regular_price' | t }}</span>
-
+ 
         {%- if settings.currency_code_enabled -%}
           {{- line_item.original_line_price | money_with_currency -}}
         {%- else -%}
@@ -103,7 +207,7 @@ Supported variables
     {%- endcomment -%}
     {%- if product.price_varies and product.compare_at_price -%}
       {%- assign cheapest_variant = product.variants | sort: 'price' | first -%}
-
+ 
       {%- capture price_min -%}
         {%- if settings.currency_code_enabled -%}
           {{- cheapest_variant.price | money_with_currency -}}
@@ -111,16 +215,16 @@ Supported variables
           {{- cheapest_variant.price | money -}}
         {%- endif -%}
       {%- endcapture -%}
-
+ 
       {%- if cheapest_variant.price < cheapest_variant.compare_at_price -%}
-        <sale-price class="{{ on_sale_price_classes }}">
+        <sale-price class="{{ on_sale_price_classes }}" style="{{ sale_price_style }}">
           <span class="sr-only">{{ 'product.price.sale_price' | t }}</span>
           {{- 'product.price.from_price_html' | t: price_min: price_min -}}
         </sale-price>
-
-        <compare-at-price class="{{ compare_at_price_classes }}">
+ 
+        <compare-at-price class="{{ compare_at_price_classes }}" style="{{ compare_price_style }}">
           <span class="sr-only">{{ 'product.price.regular_price' | t }}</span>
-
+ 
           {%- if settings.currency_code_enabled -%}
             {{- cheapest_variant.compare_at_price | money_with_currency -}}
           {%- else -%}
@@ -128,25 +232,25 @@ Supported variables
           {%- endif -%}
         </compare-at-price>
       {%- else -%}
-        <sale-price class="{{ regular_price_classes }}">
+        <sale-price class="{{ regular_price_classes }}" style="{{ regular_price_style }}">
           <span class="sr-only">{{ 'product.price.sale_price' | t }}</span>
           {{- 'product.price.from_price_html' | t: price_min: price_min -}}
         </sale-price>
       {%- endif -%}
     {%- elsif product.price < product.compare_at_price -%}
-      <sale-price class="{{ on_sale_price_classes }}">
+      <sale-price class="{{ on_sale_price_classes }}" style="{{ sale_price_style }}">
         <span class="sr-only">{{ 'product.price.sale_price' | t }}</span>
-
+ 
         {%- if settings.currency_code_enabled -%}
           {{- product.price | money_with_currency -}}
         {%- else -%}
           {{- product.price | money -}}
         {%- endif -%}
       </sale-price>
-
-      <compare-at-price class="{{ compare_at_price_classes }}">
+ 
+      <compare-at-price class="{{ compare_at_price_classes }}" style="{{ compare_price_style }}">
         <span class="sr-only">{{ 'product.price.regular_price' | t }}</span>
-
+ 
         {%- if settings.currency_code_enabled -%}
           {{- product.compare_at_price | money_with_currency -}}
         {%- else -%}
@@ -161,7 +265,7 @@ Supported variables
           {{ product.price_min | money }}
         {%- endif -%}
       {%- endcapture -%}
-
+ 
       {%- capture price_max -%}
         {%- if settings.currency_code_enabled -%}
           {{- product.price_max | money_with_currency -}}
@@ -169,15 +273,15 @@ Supported variables
           {{- product.price_max | money -}}
         {%- endif -%}
       {%- endcapture -%}
-
-      <sale-price class="{{ regular_price_classes }}">
+ 
+      <sale-price class="{{ regular_price_classes }}" style="{{ regular_price_style }}">
         <span class="sr-only">{{ 'product.price.sale_price' | t }}</span>
         {{- 'product.price.from_price_html' | t: price_min: price_min, price_max: price_max -}}
       </sale-price>
     {%- else -%}
-      <sale-price class="{{ regular_price_classes }}">
+      <sale-price class="{{ regular_price_classes }}" style="{{ regular_price_style }}">
         <span class="sr-only">{{ 'product.price.sale_price' | t }}</span>
-
+ 
         {%- if settings.currency_code_enabled -%}
           {{- product.price | money_with_currency -}}
         {%- else -%}
@@ -186,18 +290,18 @@ Supported variables
       </sale-price>
     {%- endif -%}
   {%- endif -%}
-
+ 
   {%- unless hide_unit_price -%}
     {%- assign unit_price_item = variant | default: line_item | default: product.selected_or_first_available_variant -%}
-
+ 
     {%- if unit_price_item.unit_price -%}
       <unit-price class="{{ unit_price_classes }}">
         {%- assign unit_price_measurement = unit_price_item.unit_price_measurement -%}
-
+ 
         {%- if unit_price_measurement.reference_value != 1 -%}
           {%- assign reference_value = unit_price_measurement.reference_value -%}
         {%- endif -%}
-
+ 
         ({{ unit_price_item.unit_price | money }}/{{ reference_value }}{{ unit_price_measurement.reference_unit }})
       </unit-price>
     {%- endif -%}

@@ -1,0 +1,413 @@
+{%- comment -%}
+  SECTION : Histoire de la marque (image superposée + texte)
+  --------------------------------------------------
+  Reproduit la mise en page de votre référence : une grande image + une
+  image plus petite superposée dans un coin, avec un titre, un texte et une
+  phrase de clôture à côté. Le texte "Votre histoire en bijoux" est un
+  copywriting original écrit pour Soraya Paris (pas une copie du site de
+  référence) — modifiable dans l'éditeur, avec le contenu par défaut déjà
+  pré-rempli.
+
+  INSTALLATION :
+  1) Enregistrez ce fichier sous : sections/brand-story.liquid
+  2) Éditeur de thème > page voulue > "Ajouter une section" > "Histoire de la marque"
+  3) Uploadez vos 2 images (Image principale + Image secondaire superposée)
+
+  Personnalisable : position des images (gauche/droite), coin de la
+  superposition, tailles, couleurs de bordure, ratio des images, titre
+  (taille/couleur/majuscules/espacement/graisse), texte, phrase de clôture,
+  bouton optionnel, espacements, alignement, ordre sur mobile, etc.
+{%- endcomment -%}
+
+{%- assign s = section.settings -%}
+{%- assign border_color = s.secondary_image_border_color | default: s.background_color -%}
+{%- assign primary_align = 'flex-end' -%}
+{%- if s.secondary_image_position contains 'right' -%}{%- assign primary_align = 'flex-start' -%}{%- endif -%}
+
+{%- case s.heading_weight -%}
+  {%- when 'medium' -%}{%- assign heading_font_weight = 500 -%}
+  {%- when 'semibold' -%}{%- assign heading_font_weight = 600 -%}
+  {%- when 'bold' -%}{%- assign heading_font_weight = 700 -%}
+  {%- else -%}{%- assign heading_font_weight = 400 -%}
+{%- endcase -%}
+
+<div class="brand-story brand-story-{{ section.id }}">
+  <div class="brand-story__inner layout--{{ s.layout }}">
+
+    <div class="brand-story__images">
+      <div class="brand-story__image-primary">
+        {%- if s.image_1 -%}
+          <img
+            src="{{ s.image_1 | image_url: width: 1000 }}"
+            srcset="{{ s.image_1 | image_url: width: 500 }} 500w, {{ s.image_1 | image_url: width: 1000 }} 1000w"
+            sizes="(min-width: 900px) 40vw, 80vw"
+            alt="{{ s.heading | escape }}"
+            loading="lazy"
+          >
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'brand-story__placeholder' }}
+        {%- endif -%}
+      </div>
+
+      <div class="brand-story__image-secondary">
+        {%- if s.image_2 -%}
+          <img
+            src="{{ s.image_2 | image_url: width: 600 }}"
+            srcset="{{ s.image_2 | image_url: width: 300 }} 300w, {{ s.image_2 | image_url: width: 600 }} 600w"
+            sizes="(min-width: 900px) 20vw, 40vw"
+            alt=""
+            loading="lazy"
+          >
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'brand-story__placeholder' }}
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="brand-story__text">
+      {%- if s.subheading != blank -%}
+        <p class="brand-story__subheading">{{ s.subheading | escape }}</p>
+      {%- endif -%}
+
+      {%- if s.heading != blank -%}
+        <h2 class="brand-story__heading">{{ s.heading | escape }}</h2>
+      {%- endif -%}
+
+      {%- if s.content != blank -%}
+        <div class="brand-story__content">{{ s.content }}</div>
+      {%- endif -%}
+
+      {%- if s.tagline != blank -%}
+        <p class="brand-story__tagline">{{ s.tagline | escape }}</p>
+      {%- endif -%}
+
+      {%- if s.show_button and s.button_text != blank -%}
+        <a href="{{ s.button_url | default: '#' }}" class="brand-story__button brand-story__button--{{ s.button_style }}">
+          {{ s.button_text | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+
+  </div>
+</div>
+
+{%- style -%}
+  .brand-story-{{ section.id }} {
+    background-color: {{ s.background_color }};
+    padding-top: {{ s.padding_top }}px;
+    padding-bottom: {{ s.padding_bottom }}px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .brand-story-{{ section.id }} .brand-story__inner {
+    display: flex;
+    flex-direction: column;
+    gap: {{ s.content_spacing | times: 2 }}px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .brand-story-{{ section.id }} .brand-story__images {
+    position: relative;
+    padding-bottom: {{ s.images_bottom_spacing }}px;
+  }
+
+  .brand-story-{{ section.id }} .brand-story__image-primary {
+    width: 82%;
+    display: flex;
+    {%- if primary_align == 'flex-end' -%}
+      margin-left: auto;
+    {%- else -%}
+      margin-right: auto;
+    {%- endif -%}
+    overflow: hidden;
+    border-radius: {{ s.image_radius }}px;
+    aspect-ratio: {{ s.image_aspect_ratio }};
+  }
+
+  .brand-story-{{ section.id }} .brand-story__image-primary img,
+  .brand-story-{{ section.id }} .brand-story__image-primary svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .brand-story-{{ section.id }} .brand-story__image-secondary {
+    position: absolute;
+    width: {{ s.secondary_image_width }}%;
+    aspect-ratio: {{ s.secondary_image_aspect_ratio }};
+    overflow: hidden;
+    border-radius: {{ s.image_radius }}px;
+    border: {{ s.secondary_image_border_width }}px solid {{ border_color }};
+    {%- if s.secondary_image_position == 'bottom-left' -%}
+      left: 0; bottom: -{{ s.secondary_image_offset }}%;
+    {%- elsif s.secondary_image_position == 'bottom-right' -%}
+      right: 0; bottom: -{{ s.secondary_image_offset }}%;
+    {%- elsif s.secondary_image_position == 'top-left' -%}
+      left: 0; top: -{{ s.secondary_image_offset }}%;
+    {%- else -%}
+      right: 0; top: -{{ s.secondary_image_offset }}%;
+    {%- endif -%}
+  }
+
+  .brand-story-{{ section.id }} .brand-story__image-secondary img,
+  .brand-story-{{ section.id }} .brand-story__image-secondary svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .brand-story-{{ section.id }} .brand-story__text {
+    display: flex;
+    flex-direction: column;
+    gap: {{ s.content_spacing }}px;
+    text-align: {{ s.text_alignment }};
+  }
+
+  .brand-story-{{ section.id }} .brand-story__subheading {
+    margin: 0;
+    color: {{ s.subheading_color }};
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .brand-story-{{ section.id }} .brand-story__heading {
+    margin: 0;
+    color: {{ s.heading_color }};
+    font-size: {{ s.heading_size }}px;
+    letter-spacing: {{ s.heading_letter_spacing }}px;
+    text-transform: {% if s.heading_uppercase %}uppercase{% else %}none{% endif %};
+    font-weight: {{ heading_font_weight }};
+    line-height: 1.15;
+  }
+
+  .brand-story-{{ section.id }} .brand-story__content {
+    color: {{ s.text_color }};
+    font-size: {{ s.text_size }}px;
+    line-height: 1.6;
+  }
+  .brand-story-{{ section.id }} .brand-story__content p {
+    margin: 0 0 1em 0;
+  }
+  .brand-story-{{ section.id }} .brand-story__content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .brand-story-{{ section.id }} .brand-story__tagline {
+    margin: 0;
+    color: {{ s.tagline_color }};
+    font-size: {{ s.text_size }}px;
+    font-style: {% if s.tagline_style == 'italic' %}italic{% else %}normal{% endif %};
+  }
+
+  .brand-story-{{ section.id }} .brand-story__button {
+    display: inline-block;
+    width: fit-content;
+    padding: 14px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 15px;
+    border: 1px solid {{ s.button_background_color | default: s.heading_color }};
+  }
+  .brand-story-{{ section.id }} .brand-story__button--solid {
+    background-color: {{ s.button_background_color | default: s.heading_color }};
+    color: {{ s.button_text_color }};
+  }
+  .brand-story-{{ section.id }} .brand-story__button--outline {
+    background-color: transparent;
+    color: {{ s.button_background_color | default: s.heading_color }};
+  }
+
+  @media screen and (max-width: 899px) {
+    .brand-story-{{ section.id }} .brand-story__images {
+      order: {% if s.mobile_image_order == 'text_first' %}2{% else %}1{% endif %};
+    }
+    .brand-story-{{ section.id }} .brand-story__text {
+      order: {% if s.mobile_image_order == 'text_first' %}1{% else %}2{% endif %};
+    }
+  }
+
+  @media screen and (min-width: 900px) {
+    .brand-story-{{ section.id }} .brand-story__inner {
+      flex-direction: row;
+      align-items: {% if s.vertical_alignment == 'center' %}center{% else %}flex-start{% endif %};
+      gap: {{ s.column_gap }}px;
+    }
+    .brand-story-{{ section.id }} .brand-story__inner.layout--image_right {
+      flex-direction: row-reverse;
+    }
+    .brand-story-{{ section.id }} .brand-story__images,
+    .brand-story-{{ section.id }} .brand-story__text {
+      flex: 1 1 50%;
+      min-width: 0;
+    }
+  }
+{%- endstyle -%}
+
+{% schema %}
+{
+  "name": "Histoire de la marque",
+  "tag": "section",
+  "class": "section-brand-story-wrapper",
+  "settings": [
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "image_1", "label": "Image principale" },
+    { "type": "image_picker", "id": "image_2", "label": "Image secondaire (superposée)" },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Position des images",
+      "options": [
+        { "value": "image_left", "label": "Images à gauche, texte à droite" },
+        { "value": "image_right", "label": "Images à droite, texte à gauche" }
+      ],
+      "default": "image_left"
+    },
+    {
+      "type": "select",
+      "id": "secondary_image_position",
+      "label": "Coin de l'image superposée",
+      "options": [
+        { "value": "bottom-left", "label": "Bas gauche" },
+        { "value": "bottom-right", "label": "Bas droite" },
+        { "value": "top-left", "label": "Haut gauche" },
+        { "value": "top-right", "label": "Haut droite" }
+      ],
+      "default": "bottom-left"
+    },
+    { "type": "range", "id": "secondary_image_width", "min": 25, "max": 60, "step": 1, "unit": "%", "label": "Taille de l'image superposée", "default": 42 },
+    { "type": "range", "id": "secondary_image_offset", "min": 0, "max": 20, "step": 1, "unit": "%", "label": "Débordement de l'image superposée", "default": 8 },
+    { "type": "range", "id": "secondary_image_border_width", "min": 0, "max": 24, "step": 1, "unit": "px", "label": "Épaisseur du cadre autour de l'image superposée", "default": 10 },
+    { "type": "color", "id": "secondary_image_border_color", "label": "Couleur du cadre", "info": "Laissez vide pour reprendre la couleur de fond de la section." },
+    { "type": "range", "id": "image_radius", "min": 0, "max": 40, "step": 2, "unit": "px", "label": "Coins arrondis des images", "default": 0 },
+    {
+      "type": "select",
+      "id": "image_aspect_ratio",
+      "label": "Format de l'image principale",
+      "options": [
+        { "value": "1 / 1", "label": "Carré" },
+        { "value": "4 / 5", "label": "Portrait" },
+        { "value": "3 / 4", "label": "Portrait allongé" },
+        { "value": "4 / 3", "label": "Paysage" },
+        { "value": "auto", "label": "Format d'origine" }
+      ],
+      "default": "4 / 5"
+    },
+    {
+      "type": "select",
+      "id": "secondary_image_aspect_ratio",
+      "label": "Format de l'image superposée",
+      "options": [
+        { "value": "1 / 1", "label": "Carré" },
+        { "value": "4 / 5", "label": "Portrait" },
+        { "value": "3 / 4", "label": "Portrait allongé" },
+        { "value": "auto", "label": "Format d'origine" }
+      ],
+      "default": "3 / 4"
+    },
+    { "type": "range", "id": "images_bottom_spacing", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Espace sous les images", "info": "Évite que l'image superposée touche le contenu suivant.", "default": 40 },
+
+    { "type": "header", "content": "Texte" },
+    { "type": "text", "id": "subheading", "label": "Sur-titre (optionnel)" },
+    { "type": "color", "id": "subheading_color", "label": "Couleur du sur-titre", "default": "#6E1F2E" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Votre histoire en bijoux" },
+    { "type": "range", "id": "heading_size", "min": 20, "max": 64, "step": 1, "unit": "px", "label": "Taille du titre", "default": 34 },
+    { "type": "range", "id": "heading_letter_spacing", "min": 0, "max": 6, "step": 0.5, "unit": "px", "label": "Espacement des lettres du titre", "default": 1 },
+    { "type": "checkbox", "id": "heading_uppercase", "label": "Titre en majuscules", "default": true },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Graisse du titre",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "semibold", "label": "Semi-gras" },
+        { "value": "bold", "label": "Gras" }
+      ],
+      "default": "normal"
+    },
+    { "type": "color", "id": "heading_color", "label": "Couleur du titre", "default": "#1A1A1A" },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Texte",
+      "default": "<p>Chaque femme mérite un bijou qui lui ressemble. Chez Soraya Paris, nous créons des pièces personnalisées qui accompagnent vos moments les plus précieux — un prénom, une date, un souvenir gravé pour ne jamais s'effacer.</p><p>Nous imaginons chaque création pour les femmes qui portent en elles force, douceur et une histoire unique à raconter.</p>"
+    },
+    { "type": "color", "id": "text_color", "label": "Couleur du texte", "default": "#333333" },
+    { "type": "range", "id": "text_size", "min": 14, "max": 22, "step": 1, "unit": "px", "label": "Taille du texte", "default": 16 },
+    { "type": "text", "id": "tagline", "label": "Phrase de clôture", "default": "Votre histoire mérite d'être portée. Tout près du cœur." },
+    {
+      "type": "select",
+      "id": "tagline_style",
+      "label": "Style de la phrase de clôture",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italique" }
+      ],
+      "default": "normal"
+    },
+    { "type": "color", "id": "tagline_color", "label": "Couleur de la phrase de clôture", "default": "#1A1A1A" },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alignement du texte",
+      "options": [
+        { "value": "left", "label": "Gauche" },
+        { "value": "center", "label": "Centré" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Alignement vertical (vs images)",
+      "options": [
+        { "value": "top", "label": "Haut" },
+        { "value": "center", "label": "Centré" }
+      ],
+      "default": "center"
+    },
+
+    { "type": "header", "content": "Bouton (optionnel)" },
+    { "type": "checkbox", "id": "show_button", "label": "Afficher un bouton", "default": false },
+    { "type": "text", "id": "button_text", "label": "Texte du bouton", "default": "Découvrir nos collections" },
+    { "type": "url", "id": "button_url", "label": "Lien du bouton" },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Style du bouton",
+      "options": [
+        { "value": "solid", "label": "Plein" },
+        { "value": "outline", "label": "Contour" }
+      ],
+      "default": "solid"
+    },
+    { "type": "color", "id": "button_background_color", "label": "Couleur du bouton", "info": "Laissez vide pour reprendre la couleur du titre." },
+    { "type": "color", "id": "button_text_color", "label": "Couleur du texte du bouton", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Mise en page" },
+    { "type": "range", "id": "column_gap", "min": 20, "max": 120, "step": 4, "unit": "px", "label": "Espace entre images et texte (ordinateur)", "default": 60 },
+    { "type": "range", "id": "content_spacing", "min": 8, "max": 48, "step": 2, "unit": "px", "label": "Espace entre les éléments de texte", "default": 20 },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Marge intérieure haute", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Marge intérieure basse", "default": 80 },
+    { "type": "color", "id": "background_color", "label": "Couleur de fond", "default": "#FFFFFF" },
+    {
+      "type": "select",
+      "id": "mobile_image_order",
+      "label": "Ordre sur mobile",
+      "options": [
+        { "value": "images_first", "label": "Images en premier" },
+        { "value": "text_first", "label": "Texte en premier" }
+      ],
+      "default": "images_first"
+    }
+  ],
+  "presets": [
+    { "name": "Histoire de la marque" }
+  ]
+}
+{% endschema %}

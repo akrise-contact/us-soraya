@@ -1,0 +1,804 @@
+{%- comment -%}
+------------------------------------------------------------------------------
+BLOC « UPSELL (OFFRE PRODUIT) »
+------------------------------------------------------------------------------
+Rendu par le bloc product_upsell de la section Product page
+(voir snippets/product-info.liquid et sections/main-product.liquid).
+Tout se règle dans l’éditeur de thème : jusqu’à 3 produits, textes, offre,
+couleurs, tailles, polices, activation par défaut, copie de la gravure.
+
+Ajout au panier : le bracelet est ajouté juste avant la requête d’ajout du
+produit principal, quel que soit l’outil qui la fait (thème, Globo, etc.).
+
+Important : le prix affiché doit correspondre à une réduction automatique
+active dans Shopify (Réductions), sinon le prix normal est facturé.
+{%- endcomment -%}
+
+{%- liquid
+  assign bs = block.settings
+  assign lang = request.locale.iso_code | downcase | slice: 0, 2
+
+  assign d_badge = 'Gift set offer'
+  assign d_title = 'Complete your gift'
+  assign d_text = 'Add the matching bracelet, engraved just like the necklace.'
+  assign d_savings = 'You save [montant]'
+  assign d_sub = 'Engraving to match the necklace'
+
+  assign tr_badge = d_badge
+  assign tr_title = d_title
+  assign tr_text = d_text
+  assign tr_savings = d_savings
+  assign tr_sub = d_sub
+  assign t_free = 'Free'
+  assign t_variant = 'Choose a variant'
+
+  case lang
+    when 'fr'
+      assign tr_badge = 'Offre coffret'
+      assign tr_title = 'Complétez votre cadeau'
+      assign tr_text = 'Ajoutez le bracelet assorti, gravé comme le collier.'
+      assign tr_savings = 'Vous économisez [montant]'
+      assign tr_sub = 'Gravure assortie au collier'
+      assign t_free = 'Offert'
+      assign t_variant = 'Choisir la variante'
+    when 'en'
+      assign tr_badge = 'Gift set offer'
+      assign tr_title = 'Complete your gift'
+      assign tr_text = 'Add the matching bracelet, engraved just like the necklace.'
+      assign tr_savings = 'You save [montant]'
+      assign tr_sub = 'Engraving to match the necklace'
+      assign t_free = 'Free'
+      assign t_variant = 'Choose a variant'
+    when 'de'
+      assign tr_badge = 'Geschenkset-Angebot'
+      assign tr_title = 'Vervollständigen Sie Ihr Geschenk'
+      assign tr_text = 'Fügen Sie das passende Armband hinzu, graviert wie die Halskette.'
+      assign tr_savings = 'Sie sparen [montant]'
+      assign tr_sub = 'Gravur passend zur Halskette'
+      assign t_free = 'Gratis'
+      assign t_variant = 'Variante wählen'
+    when 'es'
+      assign tr_badge = 'Oferta cofre'
+      assign tr_title = 'Completa tu regalo'
+      assign tr_text = 'Añade la pulsera a juego, grabada como el collar.'
+      assign tr_savings = 'Ahorras [montant]'
+      assign tr_sub = 'Grabado a juego con el collar'
+      assign t_free = 'Gratis'
+      assign t_variant = 'Elegir variante'
+    when 'it'
+      assign tr_badge = 'Offerta cofanetto'
+      assign tr_title = 'Completa il tuo regalo'
+      assign tr_text = 'Aggiungi il bracciale abbinato, inciso come la collana.'
+      assign tr_savings = 'Risparmi [montant]'
+      assign tr_sub = 'Incisione abbinata alla collana'
+      assign t_free = 'In omaggio'
+      assign t_variant = 'Scegli la variante'
+  endcase
+
+  assign badge_text = bs.badge
+  if badge_text == d_badge
+    assign badge_text = tr_badge
+  endif
+
+  assign title_text = bs.title
+  if title_text == d_title
+    assign title_text = tr_title
+  endif
+
+  assign intro_text = bs.text
+  if intro_text == d_text
+    assign intro_text = tr_text
+  endif
+
+  assign savings_text = bs.savings_text | default: d_savings
+  if savings_text == d_savings
+    assign savings_text = tr_savings
+  endif
+
+  case bs.title_font_source
+    when 'custom'
+      assign title_font_css = bs.title_font.family | append: ', ' | append: bs.title_font.fallback_families
+    when 'body'
+      assign title_font_css = 'var(--text-font-family, inherit)'
+    else
+      assign title_font_css = 'var(--heading-font-family, inherit)'
+  endcase
+
+  case bs.text_font_source
+    when 'custom'
+      assign text_font_css = bs.text_font.family | append: ', ' | append: bs.text_font.fallback_families
+    when 'heading'
+      assign text_font_css = 'var(--heading-font-family, inherit)'
+    else
+      assign text_font_css = 'inherit'
+  endcase
+
+  assign variant_style = bs.variant_style | default: 'pills'
+  assign current_variant = product.selected_or_first_available_variant
+  assign main_variant_ids = product.variants | map: 'id' | join: ','
+  assign item_count = 0
+  assign total_saving = 0
+-%}
+
+{%- capture items_html -%}
+  {%- for i in (1..3) -%}
+    {%- liquid
+      assign k = i | append: ''
+      assign key_product = 'product_' | append: k
+      assign up = bs[key_product]
+      assign item_ok = true
+      if up == blank or up.available == false or up.id == product.id
+        assign item_ok = false
+      endif
+    -%}
+
+    {%- if item_ok -%}
+      {%- liquid
+        assign item_count = item_count | plus: 1
+
+        assign key_label = 'label_' | append: k
+        assign key_sub = 'subtitle_' | append: k
+        assign key_mode = 'price_mode_' | append: k
+        assign key_value = 'price_value_' | append: k
+        assign key_compare = 'compare_' | append: k
+        assign key_on = 'default_on_' | append: k
+        assign key_copy = 'copy_props_' | append: k
+        assign key_match = 'match_variant_' | append: k
+
+        assign item_label = bs[key_label] | default: up.title
+        assign item_sub = bs[key_sub]
+        if item_sub == d_sub
+          assign item_sub = tr_sub
+        endif
+
+        assign mode = bs[key_mode] | default: 'none'
+        assign raw_value = bs[key_value] | strip | replace: ',', '.'
+        assign num_value = raw_value | plus: 0
+        assign show_compare = bs[key_compare]
+        assign item_on = bs[key_on]
+        assign copy_props = bs[key_copy]
+        assign match_variant = bs[key_match]
+
+        assign selected_variant = up.first_available_variant
+
+        if match_variant and current_variant
+          for uv in up.variants
+            if uv.available
+              assign uv_key = uv.title | downcase | strip
+              for ov in current_variant.options
+                assign ov_key = ov | downcase | strip
+                if ov_key == uv_key
+                  assign selected_variant = uv
+                endif
+              endfor
+            endif
+          endfor
+        endif
+
+        assign show_choices = true
+        if variant_style == 'hidden' or up.has_only_default_variant
+          assign show_choices = false
+        endif
+
+        assign sel_price_text = ''
+        assign sel_compare_text = ''
+        assign sel_saving = 0
+        assign sel_image = up.featured_image
+      -%}
+
+      {%- capture choices_html -%}
+        {%- for uv in up.variants -%}
+          {%- liquid
+            case mode
+              when 'fixed'
+                if raw_value != blank
+                  assign uv_offer = num_value | times: 100 | round
+                  if uv_offer > uv.price
+                    assign uv_offer = uv.price
+                  endif
+                else
+                  assign uv_offer = uv.price
+                endif
+              when 'percent'
+                assign keep = 100 | minus: num_value | at_least: 0
+                assign uv_offer = uv.price | times: keep | divided_by: 100 | round
+              when 'amount'
+                assign off = num_value | times: 100 | round
+                assign uv_offer = uv.price | minus: off | at_least: 0
+              when 'free'
+                assign uv_offer = 0
+              else
+                assign uv_offer = uv.price
+            endcase
+
+            assign uv_compare = 0
+            if show_compare
+              if uv_offer < uv.price
+                assign uv_compare = uv.price
+              elsif uv.compare_at_price > uv.price
+                assign uv_compare = uv.compare_at_price
+              endif
+            endif
+
+            assign uv_saving = uv.price | minus: uv_offer | at_least: 0
+
+            if mode == 'free'
+              assign uv_price_text = t_free
+            else
+              assign uv_price_text = uv_offer | money
+            endif
+
+            assign uv_compare_text = ''
+            if uv_compare > 0
+              assign uv_compare_text = uv_compare | money
+            endif
+
+            assign uv_image = ''
+            if uv.featured_image
+              assign uv_image = uv.featured_image | image_url: width: 280
+            endif
+
+            if uv.id == selected_variant.id
+              assign sel_price_text = uv_price_text
+              assign sel_compare_text = uv_compare_text
+              assign sel_saving = uv_saving
+              if uv.featured_image
+                assign sel_image = uv.featured_image
+              endif
+            endif
+          -%}
+
+          {%- capture choice_attributes -%}data-pu-choice data-variant-id='{{ uv.id }}' data-match='{{ uv.title | downcase | strip | escape }}' data-price='{{ uv_price_text | escape }}' data-compare='{{ uv_compare_text | escape }}' data-saving='{{ uv_saving }}' data-saving-formatted='{{ uv_saving | money | escape }}'{% if uv_image != blank %} data-image='{{ uv_image }}'{% endif %}{%- endcapture -%}
+
+          {%- if show_choices == false -%}
+            <span {{ choice_attributes }}></span>
+          {%- elsif variant_style == 'dropdown' -%}
+            <option value='{{ uv.id }}' {{ choice_attributes }}{% if uv.id == selected_variant.id %} selected{% endif %}{% unless uv.available %} disabled{% endunless %}>{{ uv.title | escape }}</option>
+          {%- else -%}
+            <button type='button' class='pu__pill' role='radio' aria-checked='{% if uv.id == selected_variant.id %}true{% else %}false{% endif %}' {{ choice_attributes }}{% unless uv.available %} disabled{% endunless %}>{{ uv.title | escape }}</button>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+
+      {%- liquid
+        if item_on
+          assign total_saving = total_saving | plus: sel_saving
+        endif
+      -%}
+
+      <div class='pu__item{% if item_on %} is-selected{% endif %}' data-pu-item data-key='{{ k }}' data-copy-props='{{ copy_props }}' data-match-variant='{{ match_variant }}'>
+        <label class='pu__main'>
+          <input type='checkbox' class='pu__input' data-pu-toggle aria-label='{{ item_label | escape }}'{% if item_on %} checked{% endif %}>
+          <span class='pu__control' aria-hidden='true'></span>
+          {%- if sel_image != blank -%}
+            <span class='pu__media'>
+              {{- sel_image | image_url: width: 280 | image_tag: loading: 'lazy', sizes: '140px', widths: '140,280', alt: item_label -}}
+            </span>
+          {%- endif -%}
+          <span class='pu__info'>
+            <span class='pu__name'>{{ item_label | escape }}</span>
+            {%- if item_sub != blank -%}
+              <span class='pu__sub'>{{ item_sub | escape }}</span>
+            {%- endif -%}
+          </span>
+          <span class='pu__prices'>
+            <span class='pu__price' data-pu-price>{{ sel_price_text }}</span>
+            <s class='pu__compare' data-pu-compare{% if sel_compare_text == blank %} hidden{% endif %}>{{ sel_compare_text }}</s>
+          </span>
+        </label>
+
+        {%- if show_choices -%}
+          {%- if variant_style == 'dropdown' -%}
+            <div class='pu__variants'>
+              <select class='pu__select' aria-label='{{ t_variant | escape }}'>{{ choices_html }}</select>
+            </div>
+          {%- else -%}
+            <div class='pu__variants' role='radiogroup' aria-label='{{ t_variant | escape }}'>{{ choices_html }}</div>
+          {%- endif -%}
+        {%- else -%}
+          <div hidden>{{ choices_html }}</div>
+        {%- endif -%}
+
+        <input type='hidden' data-pu-variant value='{{ selected_variant.id }}'>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- assign total_saving_money = total_saving | money -%}
+
+{%- if item_count > 0 or request.design_mode -%}
+  {%- if bs.title_font_source == 'custom' or bs.text_font_source == 'custom' -%}
+    <style>
+      {%- if bs.title_font_source == 'custom' -%}
+        {%- assign title_font_bold = bs.title_font | font_modify: 'weight', 'bold' -%}
+        {{ bs.title_font | font_face: font_display: 'swap' }}
+        {%- if title_font_bold -%}{{ title_font_bold | font_face: font_display: 'swap' }}{%- endif -%}
+      {%- endif -%}
+      {%- if bs.text_font_source == 'custom' -%}
+        {%- assign text_font_bold = bs.text_font | font_modify: 'weight', 'bold' -%}
+        {{ bs.text_font | font_face: font_display: 'swap' }}
+        {%- if text_font_bold -%}{{ text_font_bold | font_face: font_display: 'swap' }}{%- endif -%}
+      {%- endif -%}
+    </style>
+  {%- endif -%}
+
+  <style>
+    #pu-{{ block.id }} {
+      --pu-bg: {{ bs.background | default: 'transparent' }};
+      --pu-border: {{ bs.border_color | default: 'transparent' }};
+      --pu-item-bg: {{ bs.item_background | default: 'transparent' }};
+      --pu-accent: {{ bs.accent | default: '#800020' }};
+      --pu-selected-bg: {{ bs.selected_background | default: 'transparent' }};
+      --pu-title-color: {{ bs.title_color | default: 'inherit' }};
+      --pu-text-color: {{ bs.text_color | default: 'inherit' }};
+      --pu-price-color: {{ bs.price_color | default: 'inherit' }};
+      --pu-compare-color: {{ bs.compare_color | default: 'inherit' }};
+      --pu-badge-bg: {{ bs.badge_background | default: '#800020' }};
+      --pu-badge-color: {{ bs.badge_text_color | default: '#ffffff' }};
+      --pu-img: {{ bs.image_size }}px;
+      --pu-img-radius: {{ bs.image_radius }}px;
+      --pu-pad: {{ bs.padding }}px;
+      --pu-radius: {{ bs.radius }}px;
+      --pu-bw: {{ bs.border_width }}px;
+      --pu-title-size: {{ bs.title_size }}px;
+      --pu-title-weight: {{ bs.title_weight | default: '700' }};
+      --pu-text-size: {{ bs.text_size }}px;
+      --pu-name-size: {{ bs.name_size }}px;
+      --pu-price-size: {{ bs.price_size }}px;
+      --pu-badge-size: {{ bs.badge_size }}px;
+      --pu-title-font: {{ title_font_css }};
+      --pu-text-font: {{ text_font_css }};
+      margin: {{ bs.margin_top }}px 0 {{ bs.margin_bottom }}px;
+    }
+
+    .pu { position: relative; padding: var(--pu-pad); background: var(--pu-bg); border: var(--pu-bw) solid var(--pu-border); border-radius: var(--pu-radius); color: var(--pu-text-color); font-family: var(--pu-text-font); font-size: var(--pu-text-size); line-height: 1.45; text-align: start; }
+    .pu__head { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 14px; }
+    .pu__badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: var(--pu-badge-bg); color: var(--pu-badge-color); font-size: var(--pu-badge-size); font-weight: 700; line-height: 1.3; letter-spacing: .08em; text-transform: uppercase; }
+    .pu__badge svg { width: 1.15em; height: 1.15em; flex-shrink: 0; }
+    .pu__title { margin: 0; color: var(--pu-title-color); font-family: var(--pu-title-font); font-size: var(--pu-title-size); font-weight: var(--pu-title-weight); line-height: 1.25; }
+    .pu__title--upper { text-transform: uppercase; letter-spacing: .06em; }
+    .pu__text { margin: 0; }
+    .pu__list { display: grid; gap: 10px; }
+    .pu__item { position: relative; padding: 12px; background: var(--pu-item-bg); border: 1px solid var(--pu-border); border-radius: max(calc(var(--pu-radius) - 4px), 0px); transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease; }
+    .pu__item.is-selected { background: var(--pu-selected-bg); border-color: var(--pu-accent); box-shadow: inset 0 0 0 1px var(--pu-accent); }
+    .pu__main { display: flex; align-items: center; gap: 12px; margin: 0; cursor: pointer; }
+    .pu__input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
+    .pu__control { position: relative; flex: 0 0 auto; width: 22px; height: 22px; border: 1.5px solid rgba(0, 0, 0, .28); border-radius: 50%; background: #fff; transition: background-color .2s ease, border-color .2s ease; }
+    .pu__control::after { content: ''; position: absolute; left: 6.5px; top: 2.5px; width: 5px; height: 10px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); opacity: 0; transition: opacity .15s ease; }
+    .pu__input:checked + .pu__control { background: var(--pu-accent); border-color: var(--pu-accent); }
+    .pu__input:checked + .pu__control::after { opacity: 1; }
+    .pu__input:focus-visible + .pu__control { outline: 2px solid var(--pu-accent); outline-offset: 2px; }
+    .pu--toggle .pu__control { order: 10; width: 44px; height: 24px; border: 0; border-radius: 999px; background: #d5d5d5; }
+    .pu--toggle .pu__control::after { left: 3px; top: 3px; width: 18px; height: 18px; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, .25); transform: none; opacity: 1; transition: transform .2s ease; }
+    .pu--toggle .pu__input:checked + .pu__control::after { transform: translateX(20px); }
+    .pu__media { flex: 0 0 var(--pu-img); width: var(--pu-img); height: var(--pu-img); overflow: hidden; border-radius: var(--pu-img-radius); background: #fff; }
+    .pu__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .pu__info { display: flex; flex: 1 1 auto; flex-direction: column; gap: 2px; min-width: 0; }
+    .pu__name { color: var(--pu-title-color); font-family: var(--pu-title-font); font-size: var(--pu-name-size); font-weight: 600; line-height: 1.3; }
+    .pu__sub { font-size: .9em; line-height: 1.35; }
+    .pu__prices { display: flex; flex: 0 0 auto; flex-direction: column; align-items: flex-end; text-align: end; }
+    .pu__price { color: var(--pu-price-color); font-size: var(--pu-price-size); font-weight: 700; line-height: 1.2; white-space: nowrap; }
+    .pu__compare { color: var(--pu-compare-color); font-size: .85em; white-space: nowrap; }
+    .pu__variants { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; padding-inline-start: calc(22px + 12px + var(--pu-img) + 12px); }
+    .pu--toggle .pu__variants { padding-inline-start: calc(var(--pu-img) + 12px); }
+    .pu__pill { margin: 0; padding: 5px 12px; border: 1px solid rgba(0, 0, 0, .18); border-radius: 999px; background: #fff; color: var(--pu-title-color); font: inherit; font-size: .85em; line-height: 1.3; cursor: pointer; transition: border-color .2s ease, color .2s ease; }
+    .pu__pill[aria-checked='true'] { border-color: var(--pu-accent); color: var(--pu-accent); box-shadow: inset 0 0 0 1px var(--pu-accent); font-weight: 600; }
+    .pu__pill:disabled { opacity: .4; text-decoration: line-through; cursor: not-allowed; }
+    .pu__select { -webkit-appearance: none; appearance: none; width: auto; min-width: 120px; height: auto; margin: 0; padding: 6px 30px 6px 12px; border: 1px solid rgba(0, 0, 0, .18); border-radius: 8px; background: #fff url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2710%27 height=%276%27 viewBox=%270 0 10 6%27%3E%3Cpath d=%27M1 1l4 4 4-4%27 stroke=%27%23333%27 stroke-width=%271.5%27 fill=%27none%27/%3E%3C/svg%3E') no-repeat right 10px center; color: var(--pu-title-color); font: inherit; font-size: .9em; cursor: pointer; }
+    .pu__savings { display: flex; align-items: center; gap: 6px; margin: 12px 0 0; color: var(--pu-accent); font-size: .92em; font-weight: 600; }
+    .pu__savings svg { width: 1.1em; height: 1.1em; flex-shrink: 0; }
+    .pu__empty { margin: 0; padding: 12px; border: 1px dashed rgba(0, 0, 0, .25); border-radius: 8px; font-size: 13px; }
+    @media screen and (max-width: 480px) {
+      .pu__variants, .pu--toggle .pu__variants { padding-inline-start: 0; }
+    }
+  </style>
+
+  <div id='pu-{{ block.id }}' class='pu pu--{{ bs.control_style | default: 'check' }}' data-pu='{{ block.id }}' data-form-id='{{ form_id | escape }}' data-main-variants='{{ main_variant_ids }}' data-currency='{{ cart.currency.iso_code }}'>
+    {%- if badge_text != blank or title_text != blank or intro_text != blank -%}
+      <div class='pu__head'>
+        {%- if badge_text != blank -%}
+          <span class='pu__badge'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><rect x='3' y='8' width='18' height='4' rx='1'/><path d='M12 8v13'/><path d='M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7'/><path d='M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5'/></svg>{{ badge_text | escape }}</span>
+        {%- endif -%}
+        {%- if title_text != blank -%}
+          <p class='pu__title{% if bs.title_uppercase %} pu__title--upper{% endif %}'>{{ title_text | escape }}</p>
+        {%- endif -%}
+        {%- if intro_text != blank -%}
+          <p class='pu__text'>{{ intro_text }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if item_count > 0 -%}
+      <div class='pu__list'>{{ items_html }}</div>
+    {%- else -%}
+      <p class='pu__empty'>Select a product in this block's settings (Product 1).</p>
+    {%- endif -%}
+
+    {%- if bs.show_savings and item_count > 0 -%}
+      <p class='pu__savings' data-pu-savings data-template='{{ savings_text | escape }}'{% if total_saving <= 0 %} hidden{% endif %}>
+        <svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'><path d='M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z'/><circle cx='7.5' cy='7.5' r='1.5'/></svg>
+        <span data-pu-savings-text>{{ savings_text | escape | replace: '[montant]', total_saving_money }}</span>
+      </p>
+    {%- endif -%}
+  </div>
+
+  <script>
+    (function () {
+      if (window.__productUpsellInit) return;
+      window.__productUpsellInit = true;
+
+      var state = {};
+      var root = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+      var nativeFetch = window.fetch ? window.fetch.bind(window) : null;
+
+      function boxesFor(formId) {
+        var all = document.querySelectorAll('[data-pu]');
+        var found = [];
+        for (var i = 0; i < all.length; i++) {
+          if (all[i].getAttribute('data-form-id') === formId) found.push(all[i]);
+        }
+        return found;
+      }
+
+      function keyOf(item) {
+        var box = item.closest('[data-pu]');
+        return (box ? box.getAttribute('data-pu') : '') + ':' + item.getAttribute('data-key');
+      }
+
+      function choiceOf(item) {
+        var input = item.querySelector('[data-pu-variant]');
+        if (!input) return null;
+        var choices = item.querySelectorAll('[data-pu-choice]');
+        for (var i = 0; i < choices.length; i++) {
+          if (choices[i].getAttribute('data-variant-id') === input.value) return choices[i];
+        }
+        return null;
+      }
+
+      function setVariant(item, variantId) {
+        var input = item.querySelector('[data-pu-variant]');
+        if (input) input.value = variantId;
+      }
+
+      function remember(item, field, value) {
+        var key = keyOf(item);
+        state[key] = state[key] || {};
+        state[key][field] = value;
+      }
+
+      function formatMoney(cents, box) {
+        var currency = (window.Shopify && window.Shopify.currency && window.Shopify.currency.active) || box.getAttribute('data-currency') || 'EUR';
+        try {
+          return new Intl.NumberFormat(document.documentElement.lang || 'fr', { style: 'currency', currency: currency }).format(cents / 100);
+        } catch (error) {
+          return (cents / 100).toFixed(2) + ' ' + currency;
+        }
+      }
+
+      function refreshItem(item) {
+        var toggle = item.querySelector('[data-pu-toggle]');
+        item.classList.toggle('is-selected', !!(toggle && toggle.checked));
+        var choice = choiceOf(item);
+        if (!choice) return;
+
+        var price = item.querySelector('[data-pu-price]');
+        var compare = item.querySelector('[data-pu-compare]');
+        var image = item.querySelector('.pu__media img');
+
+        if (price) price.textContent = choice.getAttribute('data-price') || '';
+        if (compare) {
+          var compareText = choice.getAttribute('data-compare') || '';
+          compare.textContent = compareText;
+          compare.hidden = compareText === '';
+        }
+        if (image && choice.getAttribute('data-image')) {
+          image.removeAttribute('srcset');
+          image.setAttribute('src', choice.getAttribute('data-image'));
+        }
+
+        var pills = item.querySelectorAll('.pu__pill');
+        for (var i = 0; i < pills.length; i++) {
+          pills[i].setAttribute('aria-checked', pills[i] === choice ? 'true' : 'false');
+        }
+        var select = item.querySelector('.pu__select');
+        if (select) select.value = choice.getAttribute('data-variant-id');
+      }
+
+      function refreshBox(box) {
+        if (!box) return;
+        var items = box.querySelectorAll('[data-pu-item]');
+        var total = 0;
+        var count = 0;
+        var single = '';
+
+        for (var i = 0; i < items.length; i++) {
+          refreshItem(items[i]);
+          var toggle = items[i].querySelector('[data-pu-toggle]');
+          var choice = choiceOf(items[i]);
+          if (toggle && toggle.checked && choice) {
+            var saving = parseInt(choice.getAttribute('data-saving') || '0', 10);
+            if (saving > 0) {
+              total += saving;
+              count++;
+              single = choice.getAttribute('data-saving-formatted') || '';
+            }
+          }
+        }
+
+        var savings = box.querySelector('[data-pu-savings]');
+        if (!savings) return;
+        if (total > 0) {
+          var amount = count === 1 && single ? single : formatMoney(total, box);
+          var text = savings.querySelector('[data-pu-savings-text]');
+          if (text) text.textContent = (savings.getAttribute('data-template') || '').replace('[montant]', amount);
+          savings.hidden = false;
+        } else {
+          savings.hidden = true;
+        }
+      }
+
+      function restoreBox(box) {
+        var items = box.querySelectorAll('[data-pu-item]');
+        for (var i = 0; i < items.length; i++) {
+          var saved = state[keyOf(items[i])];
+          if (!saved) continue;
+          var toggle = items[i].querySelector('[data-pu-toggle]');
+          if (toggle && typeof saved.on === 'boolean') toggle.checked = saved.on;
+          if (saved.variant) {
+            var choices = items[i].querySelectorAll('[data-pu-choice]');
+            for (var j = 0; j < choices.length; j++) {
+              if (choices[j].getAttribute('data-variant-id') === saved.variant && !choices[j].disabled) {
+                setVariant(items[i], saved.variant);
+                break;
+              }
+            }
+          }
+        }
+        refreshBox(box);
+      }
+
+      document.addEventListener('click', function (event) {
+        var pill = event.target && event.target.closest ? event.target.closest('.pu__pill') : null;
+        if (!pill || pill.disabled) return;
+        var item = pill.closest('[data-pu-item]');
+        if (!item) return;
+        event.preventDefault();
+        setVariant(item, pill.getAttribute('data-variant-id'));
+        remember(item, 'variant', pill.getAttribute('data-variant-id'));
+        var toggle = item.querySelector('[data-pu-toggle]');
+        if (toggle && !toggle.checked) {
+          toggle.checked = true;
+          remember(item, 'on', true);
+        }
+        refreshBox(item.closest('[data-pu]'));
+      });
+
+      document.addEventListener('change', function (event) {
+        var target = event.target;
+        if (!target || !target.closest) return;
+        var item = target.closest('[data-pu-item]');
+        if (!item) return;
+        if (target.hasAttribute('data-pu-toggle')) remember(item, 'on', target.checked);
+        if (target.classList.contains('pu__select')) {
+          setVariant(item, target.value);
+          remember(item, 'variant', target.value);
+        }
+        refreshBox(item.closest('[data-pu]'));
+      });
+
+      document.addEventListener('variant:change', function (event) {
+        var detail = event.detail || {};
+        var variant = detail.variant;
+        var formId = detail.formId || (event.target && event.target.id);
+        if (!variant || !formId) return;
+        var values = [];
+        (variant.options || []).forEach(function (value) {
+          values.push(String(value).toLowerCase().trim());
+        });
+        var boxes = boxesFor(formId);
+        for (var b = 0; b < boxes.length; b++) {
+          var items = boxes[b].querySelectorAll('[data-pu-item]');
+          for (var i = 0; i < items.length; i++) {
+            if (items[i].getAttribute('data-match-variant') !== 'true') continue;
+            var saved = state[keyOf(items[i])];
+            if (saved && saved.variant) continue;
+            var choices = items[i].querySelectorAll('[data-pu-choice]');
+            for (var j = 0; j < choices.length; j++) {
+              if (!choices[j].disabled && values.indexOf(choices[j].getAttribute('data-match')) !== -1) {
+                setVariant(items[i], choices[j].getAttribute('data-variant-id'));
+                break;
+              }
+            }
+          }
+          refreshBox(boxes[b]);
+        }
+      });
+
+      if (window.MutationObserver) {
+        new MutationObserver(function (mutations) {
+          for (var i = 0; i < mutations.length; i++) {
+            var added = mutations[i].addedNodes;
+            for (var j = 0; j < added.length; j++) {
+              var node = added[j];
+              if (node.nodeType !== 1) continue;
+              if (node.hasAttribute('data-pu')) {
+                restoreBox(node);
+              } else if (node.querySelectorAll) {
+                var inner = node.querySelectorAll('[data-pu]');
+                for (var k = 0; k < inner.length; k++) restoreBox(inner[k]);
+              }
+            }
+          }
+        }).observe(document.documentElement, { childList: true, subtree: true });
+      }
+
+      function cleanProps(target, key, value) {
+        if (!key || key.charAt(0) === '_') return;
+        if (typeof value !== 'string' || value.trim() === '') return;
+        target[key] = value;
+      }
+
+      function readRequest(body) {
+        var ids = [];
+        var props = {};
+
+        function fromPairs(pairs) {
+          pairs.forEach(function (value, key) {
+            if (key === 'id' || (key.indexOf('items[') === 0 && key.slice(-4) === '[id]')) ids.push(String(value));
+            if (key.indexOf('properties[') === 0 && key.charAt(key.length - 1) === ']') cleanProps(props, key.slice(11, -1), value);
+            var marker = key.indexOf('[properties][');
+            if (marker !== -1 && key.charAt(key.length - 1) === ']') cleanProps(props, key.slice(marker + 13, -1), value);
+          });
+        }
+
+        function fromObject(source) {
+          if (!source || typeof source !== 'object') return;
+          for (var key in source) {
+            if (Object.prototype.hasOwnProperty.call(source, key)) cleanProps(props, key, source[key]);
+          }
+        }
+
+        try {
+          if (typeof FormData !== 'undefined' && body instanceof FormData) {
+            fromPairs(body);
+          } else if (typeof URLSearchParams !== 'undefined' && body instanceof URLSearchParams) {
+            fromPairs(body);
+          } else if (typeof body === 'string') {
+            var trimmed = body.trim();
+            if (trimmed.charAt(0) === '{') {
+              var json = JSON.parse(trimmed);
+              if (json.id) {
+                ids.push(String(json.id));
+                fromObject(json.properties);
+              }
+              (json.items || []).forEach(function (line) {
+                if (line && line.id) {
+                  ids.push(String(line.id));
+                  fromObject(line.properties);
+                }
+              });
+            } else {
+              fromPairs(new URLSearchParams(trimmed));
+            }
+          }
+        } catch (error) {}
+
+        return { ids: ids, props: props };
+      }
+
+      function prepareUpsell(url, body) {
+        if (!nativeFetch || !url || String(url).indexOf('cart/add') === -1) return null;
+        var request = readRequest(body);
+        if (!request.ids.length) return null;
+
+        var payload = [];
+        var now = Date.now();
+        var boxes = document.querySelectorAll('[data-pu]');
+
+        for (var b = 0; b < boxes.length; b++) {
+          var box = boxes[b];
+          var mains = (box.getAttribute('data-main-variants') || '').split(',');
+          var matched = false;
+          for (var m = 0; m < request.ids.length; m++) {
+            if (mains.indexOf(request.ids[m]) !== -1) {
+              matched = true;
+              break;
+            }
+          }
+          if (!matched) continue;
+          if (box.__puLast && now - box.__puLast < 3000) continue;
+
+          var formProps = {};
+          var form = document.getElementById(box.getAttribute('data-form-id'));
+          if (form) {
+            try {
+              new FormData(form).forEach(function (value, key) {
+                if (key.indexOf('properties[') === 0 && key.charAt(key.length - 1) === ']') cleanProps(formProps, key.slice(11, -1), value);
+              });
+            } catch (error) {}
+          }
+
+          var items = box.querySelectorAll('[data-pu-item]');
+          var added = false;
+          for (var i = 0; i < items.length; i++) {
+            var toggle = items[i].querySelector('[data-pu-toggle]');
+            var input = items[i].querySelector('[data-pu-variant]');
+            if (!toggle || !toggle.checked || !input || !input.value) continue;
+
+            var properties = {};
+            if (items[i].getAttribute('data-copy-props') === 'true') {
+              var key;
+              for (key in formProps) {
+                if (Object.prototype.hasOwnProperty.call(formProps, key)) properties[key] = formProps[key];
+              }
+              for (key in request.props) {
+                if (Object.prototype.hasOwnProperty.call(request.props, key)) properties[key] = request.props[key];
+              }
+            }
+            properties._upsell = 'oui';
+            payload.push({ id: parseInt(input.value, 10), quantity: 1, properties: properties });
+            added = true;
+          }
+          if (added) box.__puLast = now;
+        }
+
+        if (!payload.length) return null;
+
+        return nativeFetch(root + 'cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+          body: JSON.stringify({ items: payload })
+        }).then(function () {}, function () {});
+      }
+
+      if (nativeFetch) {
+        window.fetch = function (input, init) {
+          var args = arguments;
+          var url = typeof input === 'string' ? input : (input && (input.url || input.href)) || '';
+          var job = null;
+          try {
+            job = prepareUpsell(url, init && init.body);
+          } catch (error) {
+            job = null;
+          }
+          if (!job) return nativeFetch.apply(window, args);
+          return job.then(function () {
+            return nativeFetch.apply(window, args);
+          });
+        };
+      }
+
+      if (window.XMLHttpRequest) {
+        var xhrOpen = XMLHttpRequest.prototype.open;
+        var xhrSend = XMLHttpRequest.prototype.send;
+
+        XMLHttpRequest.prototype.open = function (method, url, async) {
+          this.__puUrl = url;
+          this.__puAsync = arguments.length < 3 || async !== false;
+          return xhrOpen.apply(this, arguments);
+        };
+
+        XMLHttpRequest.prototype.send = function (body) {
+          var xhr = this;
+          var args = arguments;
+          var job = null;
+          if (xhr.__puAsync) {
+            try {
+              job = prepareUpsell(xhr.__puUrl, body);
+            } catch (error) {
+              job = null;
+            }
+          }
+          if (!job) return xhrSend.apply(xhr, args);
+          job.then(function () {
+            xhrSend.apply(xhr, args);
+          });
+        };
+      }
+
+      var initial = document.querySelectorAll('[data-pu]');
+      for (var n = 0; n < initial.length; n++) restoreBox(initial[n]);
+    })();
+  </script>
+{%- endif -%}

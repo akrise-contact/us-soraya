@@ -1,0 +1,401 @@
+{% comment %}
+  Section "FAQ Accordéon"
+  - Tout est modifiable depuis le personnalisateur de thème : titre, sous-titre,
+    couleurs, catégories et questions/réponses (blocs), et la possibilité
+    d'imposer une police différente si tu le souhaites.
+  - Par défaut, AUCUNE police n'est forcée : le texte hérite automatiquement
+    de la police déjà utilisée sur ton site. Si tu veux une police différente
+    juste pour cette section, active "Utiliser des polices personnalisées"
+    ci-dessous dans les réglages de la section.
+{% endcomment %}
+
+<div class="faq-section faq-section-{{ section.id }}">
+  {% if section.settings.heading != blank %}
+    <h1 class="faq-title">{{ section.settings.heading }}</h1>
+  {% endif %}
+  {% if section.settings.subheading != blank %}
+    <div class="faq-subtitle">{{ section.settings.subheading }}</div>
+  {% endif %}
+
+  {% assign category_open = false %}
+  {% for block in section.blocks %}
+    {% case block.type %}
+
+      {% when 'category' %}
+        {% if category_open %}
+          </div>
+        {% endif %}
+        <div class="faq-category" {{ block.shopify_attributes }}>
+          <h2 class="faq-category-title">{{ block.settings.title }}</h2>
+        {% assign category_open = true %}
+
+      {% when 'question' %}
+        <details class="faq-item" {{ block.shopify_attributes }}>
+          <summary class="faq-question">
+            <span>{{ block.settings.question }}</span>
+            <span class="faq-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </summary>
+          <div class="faq-answer">{{ block.settings.answer }}</div>
+        </details>
+
+      {% when 'text' %}
+        <div class="faq-closing" {{ block.shopify_attributes }}>{{ block.settings.content }}</div>
+
+    {% endcase %}
+  {% endfor %}
+  {% if category_open %}
+    </div>
+  {% endif %}
+</div>
+
+{% if section.settings.override_fonts %}
+  {{ section.settings.heading_font | font_face: font_display: 'swap' }}
+  {% unless section.settings.body_font == section.settings.heading_font %}
+    {{ section.settings.body_font | font_face: font_display: 'swap' }}
+  {% endunless %}
+{% endif %}
+
+<style>
+  .faq-section-{{ section.id }} {
+    --faq-accent: {{ section.settings.accent_color }};
+    --faq-text: {{ section.settings.text_color }};
+    --faq-muted: {{ section.settings.muted_text_color }};
+    --faq-border: {{ section.settings.border_color }};
+    background-color: {{ section.settings.background_color }};
+    max-width: 700px;
+    margin: 0 auto;
+    padding: {{ section.settings.padding_top }}px 20px {{ section.settings.padding_bottom }}px;
+  }
+  {% if section.settings.override_fonts %}
+    .faq-section-{{ section.id }} .faq-title,
+    .faq-section-{{ section.id }} .faq-category-title,
+    .faq-section-{{ section.id }} .faq-question {
+      font-family: {{ section.settings.heading_font.family }}, {{ section.settings.heading_font.fallback_families }};
+    }
+    .faq-section-{{ section.id }} .faq-subtitle,
+    .faq-section-{{ section.id }} .faq-answer,
+    .faq-section-{{ section.id }} .faq-closing {
+      font-family: {{ section.settings.body_font.family }}, {{ section.settings.body_font.fallback_families }};
+    }
+  {% endif %}
+  .faq-section-{{ section.id }} .faq-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 16px;
+    color: var(--faq-text);
+  }
+  .faq-section-{{ section.id }} .faq-subtitle {
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--faq-muted);
+    margin: 0 0 48px;
+  }
+  .faq-section-{{ section.id }} .faq-category { margin-bottom: 40px; }
+  .faq-section-{{ section.id }} .faq-category-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--faq-text);
+    margin: 0 0 16px;
+  }
+  .faq-section-{{ section.id }} .faq-item {
+    border-top: 1px solid var(--faq-border);
+  }
+  .faq-section-{{ section.id }} .faq-item:last-child {
+    border-bottom: 1px solid var(--faq-border);
+  }
+  .faq-section-{{ section.id }} .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 4px;
+    font-size: 17px;
+    color: var(--faq-text);
+    cursor: pointer;
+    list-style: none;
+  }
+  .faq-section-{{ section.id }} .faq-question::-webkit-details-marker { display: none; }
+  .faq-section-{{ section.id }} .faq-icon {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    color: var(--faq-text);
+    transition: transform 0.25s ease;
+  }
+  .faq-section-{{ section.id }} .faq-icon svg { width: 100%; height: 100%; }
+  .faq-section-{{ section.id }} details[open] .faq-icon { transform: rotate(180deg); }
+  .faq-section-{{ section.id }} .faq-answer {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--faq-muted);
+    padding: 0 4px 20px;
+  }
+  .faq-section-{{ section.id }} .faq-answer p { margin: 0 0 12px; }
+  .faq-section-{{ section.id }} .faq-answer p:last-child { margin-bottom: 0; }
+  .faq-section-{{ section.id }} .faq-answer a { color: var(--faq-accent); text-decoration: underline; }
+  .faq-section-{{ section.id }} .faq-closing {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--faq-muted);
+    text-align: center;
+    margin: 0 0 20px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "FAQ Accordéon",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titre",
+      "default": "FAQ & Contact"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Sous-titre",
+      "default": "<p>La réponse à votre question se trouve probablement dans la FAQ suivante 👍</p>"
+    },
+    {
+      "type": "header",
+      "content": "Couleurs"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Couleur du texte (titres, questions)",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "muted_text_color",
+      "label": "Couleur du texte (réponses, sous-titre)",
+      "default": "#444444"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Couleur d'accent (liens)",
+      "default": "#800020"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Couleur des séparateurs",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Couleur de fond",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Espacement"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Espace au-dessus",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Espace en-dessous",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Police"
+    },
+    {
+      "type": "paragraph",
+      "content": "Par défaut, cette section utilise déjà la police de ton thème. Active l'option ci-dessous seulement si tu veux une police différente pour cette section précise."
+    },
+    {
+      "type": "checkbox",
+      "id": "override_fonts",
+      "label": "Utiliser des polices personnalisées pour cette section",
+      "default": false
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Police des titres",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "font_picker",
+      "id": "body_font",
+      "label": "Police du texte",
+      "default": "assistant_n4"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Catégorie",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre de la catégorie",
+          "default": "Nouvelle catégorie"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Votre question ici"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Réponse",
+          "default": "<p>Votre réponse ici.</p>"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Texte libre",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Contenu",
+          "default": "<p>Texte libre.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Accordéon",
+      "blocks": [
+        { "type": "category", "settings": { "title": "Commande" } },
+        { "type": "question", "settings": {
+            "question": "Je n'ai pas reçu de confirmation de commande",
+            "answer": "<p>Un e-mail de confirmation vous est envoyé automatiquement après votre paiement. S'il n'apparaît pas, pensez à vérifier vos spams et à rechercher \"Soraya Paris\" dans votre boîte mail.</p><p>Toujours rien après 10 minutes ? Contactez notre service client via le formulaire de contact (en bas) ou par e-mail à contact@sorayaparis.com. Sans réponse de notre part sous 24h, vérifiez à nouveau vos spams.</p>"
+        }},
+        { "type": "question", "settings": {
+            "question": "Je n'ai pas la bonne adresse e-mail",
+            "answer": "<p>Pas de souci, nous pouvons corriger l'adresse liée à votre commande et vous renvoyer les e-mails de confirmation et d'expédition. Contactez-nous via le formulaire ou à contact@sorayaparis.com.</p><p>Si votre colis est déjà parti, le transporteur ne sera pas informé du changement et ne vous enverra pas le suivi — mais vous pourrez toujours le suivre depuis notre site.</p>"
+        }},
+        { "type": "question", "settings": {
+            "question": "Puis-je modifier mon adresse de livraison ?",
+            "answer": "<p>Oui, dans les 48h suivant la commande. Passé ce délai, la commande entre en préparation et les informations ne peuvent plus être modifiées.</p><p>Contactez-nous rapidement (en précisant la nouvelle adresse 😉) via le formulaire ou à contact@sorayaparis.com.</p>"
+        }},
+        { "type": "question", "settings": {
+            "question": "J'ai fait une erreur sur les gravures",
+            "answer": "<p>Une modification reste possible le jour même de la commande, avant 23h CET. Après cette heure, la commande entre en préparation et ne peut plus être changée.</p><p>Contactez-nous vite via le formulaire ou à contact@sorayaparis.com.</p>"
+        }},
+        { "type": "question", "settings": {
+            "question": "Puis-je annuler ma commande ?",
+            "answer": "<p>Oui, si la commande a été passée avant 23h CET le jour même. Passé ce délai, elle entre en préparation et ne peut plus être annulée.</p><p>Contactez-nous d'urgence via le formulaire ou à contact@sorayaparis.com.</p>"
+        }},
+
+        { "type": "category", "settings": { "title": "Expédition" } },
+        { "type": "question", "settings": {
+            "question": "Comment puis-je suivre ma commande ?",
+            "answer": "<p>Rendez-vous dans la rubrique \"Suivi de votre commande\" en bas de notre site, ou cliquez ici.</p>"
+        }},
+        { "type": "question", "settings": {
+            "question": "Comment saisir les informations pour suivre ma commande ?",
+            "answer": "<p>Il vous faut :</p><p>— L'e-mail utilisé pour la commande<br>— Le numéro de commande (commence par #, ex. #65842 — à ne pas confondre avec le numéro de suivi ; avec ou sans #, ça fonctionne)</p>"
+        }},
+        { "type": "question", "settings": {
+            "question": "Pouvez-vous livrer dans mon pays ?",
+            "answer": "<p>Nous livrons presque partout, sauf : France DOM-TOM, Argentine, Ukraine, Cuba, Iran, Libye, Soudan, Syrie, Turkménistan.</p><p>D'autres zones peuvent aussi être exclues ponctuellement. Si c'est le cas, la commande ne pourra pas être finalisée au moment du paiement.</p>"
+        }},
+        { "type": "question", "settings": {
+            "question": "Quand recevrai-je ma commande ?",
+            "answer": "<p>Préparation et expédition : 1 à 3 jours ouvrés. Livraison : 6 à 12 jours en moyenne selon votre pays.</p><p>Chaque commande est suivie grâce à un numéro de suivi.</p>"
+        }},
+        { "type": "question", "settings": {
+            "question": "Je n'ai pas reçu mon e-mail de suivi, que dois-je faire ?",
+            "answer": "<p>Il arrive sous 1 à 3 jours ouvrés. Rien après ce délai ? Vérifiez vos spams ou cherchez \"Soraya Paris\" dans votre boîte mail.</p><p>Sinon, contactez-nous via le formulaire ou à contact@sorayaparis.com.</p>"
+        }},
+        { "type": "question", "settings": {
+            "question": "Quand ma commande sera-t-elle expédiée ?",
+            "answer": "<p>En général sous 1 à 3 jours ouvrés (sauf mention contraire sur la fiche produit). Ce délai peut s'allonger légèrement en période de forte affluence (Saint-Valentin, fête des mères, Noël).</p>"
+        }},
+        { "type": "question", "settings": {
+            "question": "Mon numéro de suivi ne fonctionne pas, que dois-je faire ?",
+            "answer": "<p>Les infos de suivi n'apparaissent que 3 à 6 jours ouvrés après l'e-mail de confirmation d'expédition, le temps que le transporteur mette à jour son système. Patientez un peu, tout devrait s'afficher.</p>"
+        }},
+        { "type": "question", "settings": {
+            "question": "Ma commande est \"livrée\" mais je ne l'ai pas encore reçue",
+            "answer": "<p>Le colis a parfois été remis à un(e) réceptionniste, un(e) concierge, ou déposé chez un voisin par erreur. Un petit tour de vérification suffit souvent à le retrouver.</p><p>Toujours introuvable ? Faites une réclamation auprès du transporteur — notre service client vous en demandera une copie pour organiser un renvoi.</p>"
+        }},
+
+        { "type": "category", "settings": { "title": "Nos roses éternelles" } },
+        { "type": "question", "settings": {
+            "question": "Qu'est-ce qu'une rose éternelle ?",
+            "answer": "<p>Une vraie rose, conservée grâce à un procédé spécial qui préserve sa couleur et sa douceur pendant des années, sans eau ni soleil. Un symbole d'amour durable, parfait en cadeau ou en déco.</p>"
+        }},
+        { "type": "question", "settings": {
+            "question": "Quelle est la durée de vie de la rose éternelle ?",
+            "answer": "<p>Plusieurs années, en conservant tout son éclat. Chaque rose est aussi délicatement parfumée pour une expérience encore plus sensorielle.</p><p>Quelques conseils pour la préserver :<br>— Évitez la lumière directe du soleil, privilégiez un endroit frais et ombragé<br>— Évitez l'humidité, ne jamais l'arroser<br>— Manipulez-la délicatement<br>— Rangez-la dans sa vitrine (avec couvercle) pour la protéger de la poussière</p>"
+        }},
+        { "type": "question", "settings": {
+            "question": "Comment prendre soin de ma rose éternelle ?",
+            "answer": "<p>Aucun entretien nécessaire : gardez-la simplement dans son écrin, à l'abri du soleil, de la chaleur et de l'humidité. Elle restera aussi belle qu'au premier jour, pour longtemps.</p>"
+        }},
+        { "type": "question", "settings": {
+            "question": "Les couleurs des roses éternelles sont-elles naturelles ?",
+            "answer": "<p>Certaines teintes sont naturelles, d'autres sont sublimées pendant la conservation pour élargir notre palette de couleurs — toutes aussi belles les unes que les autres.</p>"
+        }},
+        { "type": "question", "settings": {
+            "question": "Les roses éternelles sont-elles respectueuses de l'environnement ?",
+            "answer": "<p>Oui : notre procédé de conservation est écoresponsable, et sa longévité réduit le gaspillage par rapport à une rose fraîche coupée.</p>"
+        }},
+
+        { "type": "category", "settings": { "title": "Retours et remboursements" } },
+        { "type": "question", "settings": {
+            "question": "Comment retourner un produit ?",
+            "answer": "<p><strong>Produit personnalisé :</strong> pas de retour ni de remboursement possible, la pièce étant réalisée sur mesure.</p><p><strong>Produit non personnalisé :</strong> retour possible sous 30 jours après réception, pour un remboursement complet. Les frais de retour sont à votre charge, et l'article doit revenir dans l'état reçu (non utilisé, non modifié, non endommagé).</p><p>Pour lancer un retour, contactez-nous via le formulaire ou à contact@sorayaparis.com.</p>"
+        }},
+        { "type": "question", "settings": {
+            "question": "J'ai reçu un produit défectueux",
+            "answer": "<p>Nous remplaçons tout produit défectueux ou abîmé pendant le transport. Prenez une photo et écrivez-nous sous 3 jours après réception à contact@sorayaparis.com.</p>"
+        }},
+        { "type": "question", "settings": {
+            "question": "J'ai reçu les mauvaises gravures",
+            "answer": "<p>Toutes nos excuses — cela arrive rarement, mais nous restons humains ! Nous remplaçons le bijou gratuitement après avoir reconfirmé la gravure avec vous.</p><p>Envoyez-nous une photo sous 3 jours après réception à contact@sorayaparis.com.</p>"
+        }},
+
+        { "type": "category", "settings": { "title": "Vous ne trouvez pas vos réponses ?" } },
+        { "type": "text", "settings": {
+            "content": "<p>Pas de réponse sous 24h ? Vérifiez vos spams, nos e-mails y atterrissent parfois.</p><p>Toujours rien (notamment avec icloud, outlook, hotmail) ? Écrivez-nous directement depuis votre messagerie à contact@sorayaparis.com — et vérifiez bien l'orthographe de votre adresse avant d'envoyer 😊</p>"
+        }}
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,761 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "liquid_pDyTtx": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<style>\n  .avika-offer {\n    max-width: 560px;\n    background: #f2f2f2;\n    border-radius: 14px;\n    padding: 8px 16px;\n    font-family: Inter, Arial, sans-serif;\n    color: #111;\n    margin-top: 10px;\n  }\n\n  .avika-offer__row {\n    display: flex;\n    align-items: center;\n    gap: 14px;\n  }\n\n  .avika-offer__icon {\n    width: clamp(44px, 7vw, 60px);\n    height: clamp(44px, 7vw, 60px);\n    flex-shrink: 0;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n  }\n\n  .avika-offer__icon img {\n    width: 100%;\n    height: 100%;\n    object-fit: contain;\n    display: block;\n  }\n\n  .avika-offer__text {\n    font-size: clamp(13px, 1.6vw, 15px);\n    line-height: 1.35;\n    color: #111;\n    max-width: 420px;\n  }\n\n  .avika-offer__text strong {\n    font-weight: 700;\n  }\n\n  @media (max-width: 480px) {\n    .avika-offer {\n      padding: 6px 14px;\n      border-radius: 12px;\n    }\n    .avika-offer__text {\n      max-width: 100%;\n    }\n  }\n</style>\n\n{%- liquid\n  assign locale = request.locale.iso_code | downcase\n\n  assign t_today = \"Today only\"\n  assign t_free  = \"FREE earrings\"\n  assign t_end   = \"with this gift box\"\n  assign t_emoji = \" 🎁\"\n\n  if locale contains 'it'\n    assign t_today = \"Solo per oggi\"\n    assign t_free  = \"orecchini in OMAGGIO\"\n    assign t_end   = \"con l’acquisto di questo cofanetto\"\n  elsif locale contains 'es'\n    assign t_today = \"Solo por hoy\"\n    assign t_free  = \"pendientes GRATIS\"\n    assign t_end   = \"con la compra de este cofre\"\n  elsif locale contains 'de'\n    assign t_today = \"Nur heute\"\n    assign t_free  = \"Ohrringe GRATIS\"\n    assign t_end   = \"beim Kauf dieses Geschenksets\"\n  endif\n-%}\n\n<div class=\"avika-offer\" role=\"note\" aria-label=\"Today's offer\">\n  <div class=\"avika-offer__row\">\n    <div class=\"avika-offer__icon\">\n      <img\n        src=\"https://cdn.shopify.com/s/files/1/0969/9147/8097/files/Design_sans_titre_11.png?v=1768171085\"\n        alt=\"Free earrings\"\n        loading=\"lazy\"\n      >\n    </div>\n\n    <div class=\"avika-offer__text\">\n      <strong>{{ t_today }}</strong> – {{ t_free }} {{ t_end }}{{ t_emoji }}\n    </div>\n  </div>\n</div>"
+          }
+        },
+        "liquid_gm7V3p": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<div style=\"display:flex;align-items:center;gap:6px;font-family:Arial, sans-serif; margin-bottom: 12px;\">\n  <!-- Étoiles pleines -->\n  <div style=\"display:flex;align-items:center;\">\n    {% for i in (1..5) %}\n      <svg xmlnxs=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" fill=\"#800020\" viewBox=\"0 0 24 24\" style=\"margin-right:2px;\">\n        <path d=\"M12 .587l3.668 7.429 8.2 1.192-5.934 5.784 1.402 8.174L12 18.896l-7.336 3.87 1.402-8.174L.132 9.208l8.2-1.192z\"/>\n      </svg>\n    {% endfor %}\n  </div>\n\n  <!-- Texte des avis multilingue -->\n  <div style=\"font-size:14px;color:#333;\">\n    <strong>4.8/5</strong>\n    {% if request.locale.iso_code == 'fr' %}\n      (1,317 avis vérifiés)\n    {% elsif request.locale.iso_code == 'es' %}\n      (1,317 reseñas verificadas)\n    {% elsif request.locale.iso_code == 'it' %}\n      (1,317 recensioni verificate)\n    {% elsif request.locale.iso_code == 'de' %}\n      (1.317 verifizierte Bewertungen)\n    {% else %}\n      (1,317 verified reviews)\n    {% endif %}\n  </div>\n</div>"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h3"
+          }
+        },
+        "price_8pnHDq": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false,
+            "price_color": "#800020",
+            "price_compare_color": "#505050",
+            "price_weight": "700",
+            "price_strikethrough": "",
+            "price_size": "22",
+            "price_compare_size": "16",
+            "price_order": "",
+            "price_font": "heading",
+            "show_promo_badge": true,
+            "promo_badge_text": "-50% fall sale",
+            "promo_badge_background": "#800020",
+            "promo_badge_text_color": "#ffffff",
+            "promo_badge_shape": "rounded",
+            "promo_badge_border_color": "",
+            "promo_badge_border_width": 2,
+            "promo_badge_font_size": 12,
+            "promo_badge_padding_v": 2,
+            "promo_badge_padding_h": 8,
+            "extra_text": "",
+            "extra_text_color": ""
+          }
+        },
+        "liquid_pKVN8L": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "{% assign lang = request.locale.iso_code %}\n\n<!-- Bullet points -->\n<ul style=\"list-style: none; padding: 0; margin: 0;\">\n\n  <!-- Ligne 1 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">✿</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Un bijou contre son cœur chaque jour</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Ein Schmuckstück nah am Herzen jeden Tag</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Un gioiello vicino al suo cuore ogni giorno</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Una joya cerca de su corazón cada día</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">A jewel close to her heart every day</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">A jewel close to her heart every day</span>\n    {% endcase %}\n  </li>\n\n  <!-- Ligne 2 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">❀</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Une vraie rose qui dure éternellement</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Eine echte Rose, die für immer hält</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Una vera rosa che dura per sempre</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Una rosa real que dura para siempre</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">A real rose that lasts forever</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">A real rose that lasts forever</span>\n    {% endcase %}\n  </li>\n\n  <!-- Ligne 3 -->\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">♡</span>\n    {% case lang %}\n      {% when 'fr' %}<span style=\"color:#000;font-weight:600;\">Collier garanti à vie • Résistant à l'eau</span>\n      {% when 'de' %}<span style=\"color:#000;font-weight:600;\">Halskette mit lebenslanger Garantie • Wasserfest</span>\n      {% when 'it' %}<span style=\"color:#000;font-weight:600;\">Collana garantita a vita • Resistente all'acqua</span>\n      {% when 'es' %}<span style=\"color:#000;font-weight:600;\">Collar con garantía de por vida • Resistente al agua</span>\n      {% when 'en' %}<span style=\"color:#000;font-weight:600;\">Lifetime guarantee necklace • Water resistant</span>\n      {% else %}<span style=\"color:#000;font-weight:600;\">Lifetime guarantee necklace • Water resistant</span>\n    {% endcase %}\n  </li>\n\n</ul>"
+          }
+        },
+        "optis_color_swatch_se_product_variant_FJfKct": {
+          "type": "shopify://apps/optis-color-swatch/blocks/se-product-variant/ad128d8f-5ebd-45ad-954a-7dd4c4226109",
+          "settings": {}
+        },
+        "product_variations_KF3YrY": {
+          "type": "product_variations",
+          "settings": {
+            "option_name": "",
+            "option_value_metafield": "",
+            "products": [],
+            "selector_style": "swatch"
+          }
+        },
+        "line_item_property_6HiUf8": {
+          "type": "line_item_property",
+          "settings": {
+            "label": "Right heart engraving",
+            "type": "text",
+            "required": false,
+            "allow_long_text": false,
+            "max_length": 10
+          }
+        },
+        "line_item_property_nhfXmr": {
+          "type": "line_item_property",
+          "settings": {
+            "label": "Left heart engraving",
+            "type": "text",
+            "required": false,
+            "allow_long_text": false,
+            "max_length": 10
+          }
+        },
+        "product_upsell_eE4mnw": {
+          "type": "product_upsell",
+          "settings": {
+            "badge": "Gift set offer",
+            "title": "Complete your gift",
+            "text": "Add the matching bracelet, engraved just like the necklace.",
+            "show_savings": true,
+            "savings_text": "You save [montant]",
+            "product_1": "bracelet-personnalise",
+            "label_1": "",
+            "subtitle_1": "Engraving to match the necklace",
+            "price_mode_1": "fixed",
+            "price_value_1": "14,90",
+            "compare_1": true,
+            "default_on_1": true,
+            "copy_props_1": true,
+            "match_variant_1": true,
+            "product_2": "",
+            "label_2": "",
+            "subtitle_2": "",
+            "price_mode_2": "percent",
+            "price_value_2": "",
+            "compare_2": true,
+            "default_on_2": true,
+            "copy_props_2": false,
+            "match_variant_2": true,
+            "product_3": "",
+            "label_3": "",
+            "subtitle_3": "",
+            "price_mode_3": "percent",
+            "price_value_3": "",
+            "compare_3": true,
+            "default_on_3": true,
+            "copy_props_3": false,
+            "match_variant_3": true,
+            "control_style": "check",
+            "variant_style": "pills",
+            "image_size": 72,
+            "image_radius": 10,
+            "padding": 16,
+            "radius": 14,
+            "border_width": 1,
+            "margin_top": 4,
+            "margin_bottom": 8,
+            "background": "#FFFFFF",
+            "border_color": "#FFFFFF",
+            "item_background": "#F0EFEF",
+            "selected_background": "#fbeef0",
+            "accent": "#800020",
+            "title_color": "#1a1a1a",
+            "text_color": "#555555",
+            "price_color": "#800020",
+            "compare_color": "#8a8a8a",
+            "badge_background": "#800020",
+            "badge_text_color": "#ffffff",
+            "title_font_source": "heading",
+            "title_font": "josefin_sans_n4",
+            "text_font_source": "body",
+            "text_font": "josefin_sans_n4",
+            "title_size": 17,
+            "title_weight": "700",
+            "title_uppercase": false,
+            "text_size": 14,
+            "name_size": 15,
+            "price_size": 16,
+            "badge_size": 11
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": false,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "#960025",
+            "atc_button_text_color": "#ffffff",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "image_nQ3i3P": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/frsor.png",
+            "alignment": "center",
+            "max_width": 500
+          }
+        }
+      },
+      "block_order": [
+        "liquid_pDyTtx",
+        "liquid_gm7V3p",
+        "title",
+        "price_8pnHDq",
+        "liquid_pKVN8L",
+        "optis_color_swatch_se_product_variant_FJfKct",
+        "product_variations_KF3YrY",
+        "line_item_property_6HiUf8",
+        "line_item_property_nhfXmr",
+        "product_upsell_eE4mnw",
+        "buy_buttons",
+        "image_nQ3i3P"
+      ],
+      "settings": {
+        "full_width": true,
+        "show_fixed_add_to_cart": true,
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_bottom",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "free_scroll",
+        "enable_video_autoplay": false,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "tabs_exFE47": {
+      "type": "tabs",
+      "blocks": {
+        "tab_Pnaqf3": {
+          "type": "tab",
+          "settings": {
+            "title": "Engraving ideas",
+            "content": "<p><strong>- Initials</strong>: A + B or A ♡ B<br/><strong>- Names</strong>: Emma / Ross<br/><strong>- Date</strong>: 05/01/2014<br/><strong>- Roman numerals</strong>: V.XVI.MMXX<br/><strong>- Quotes</strong>:<br/>&nbsp;&nbsp;- Forever / and always<br/>&nbsp;&nbsp;- I love you / Forever<br/><strong>- Symbols</strong>: ♥ ❤ ♡ ✿ ❀ ✽ ★ ☆ ☘ ☾ ∞<br/>⚠️ Choose simple symbols for a legible engraving.</p>",
+            "page": ""
+          }
+        },
+        "tab_RWVKND": {
+          "type": "tab",
+          "settings": {
+            "title": "Details",
+            "content": "<p><span style=\"text-decoration:underline\"><strong>All our gift boxes also include a gift bag</strong></span><strong>, perfect for gifting and creating an unforgettable moment.</strong></p><p>Our Eternal Love Box with hidden personalized necklace is a gift that lasts a lifetime. Featuring a real preserved rose that will last forever, this gift is the perfect symbol of eternal love.</p><p>Turn the rose to reveal a handmade necklace personalized with the engravings of your choice.</p><p><strong>Details:</strong><br/></p><ul><li>Certified 316L stainless steel — water-resistant and tarnish-free<br/></li><li>Made with the utmost care</li></ul><p><strong>Engraving:</strong></p><ul><li>Up to 15 characters on each heart</li></ul><p><strong>Quality:</strong></p><ul><li>Hypoallergenic: our jewelry is guaranteed nickel-free, cadmium-free and lead-free.</li><li>Water-resistant and tarnish-free</li><li>2-year warranty</li></ul><p><strong>Dimensions:</strong></p><ul><li>Necklace length: 17.3\" + 2\" extender (44 cm + 5 cm)</li></ul>",
+            "page": ""
+          }
+        },
+        "tab_e6czLe": {
+          "type": "tab",
+          "settings": {
+            "title": "Shipping & delivery",
+            "content": "<p>All orders are packed, prepared and shipped within <strong>24–72 hours</strong>.</p><p>We offer fast worldwide shipping, and the usual delivery time is <strong>6 to 12 days</strong>. Depending on where you live, your items may arrive a little earlier or later.</p><p>Every order comes with a tracking number, so you can follow your package every step of the way.</p>",
+            "page": ""
+          }
+        },
+        "tab_7VYzhD": {
+          "type": "tab",
+          "settings": {
+            "title": "Money-back guarantee",
+            "content": "<p>At <strong>Soraya Paris</strong>, your satisfaction is our top priority. Our goal is to give you an exceptional experience. All our products come with a 30-day money-back guarantee. We'll do everything in our power to make sure your experience with <strong>Soraya Paris</strong> is a positive one!<br/><br/></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "tab_Pnaqf3",
+        "tab_RWVKND",
+        "tab_e6czLe",
+        "tab_7VYzhD"
+      ],
+      "name": "Tabs",
+      "settings": {
+        "full_width": true,
+        "content_size": "medium",
+        "subheading": "",
+        "title": "",
+        "text_alignment": "center",
+        "first_tab_open": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": ""
+      }
+    },
+    "multi_column_rT6yeD": {
+      "type": "multi-column",
+      "blocks": {
+        "item_JfTQ4R": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260823_230154_d8f4454a-14d5-42f9-90dc-8fc6c1bfce90.png",
+            "column_size": "3",
+            "title": "The Moment That Will Melt Her Heart",
+            "heading_tag": "h4",
+            "content": "<p>Imagine her face when she pulls out the drawer... and discovers the personalized necklace hidden behind the eternal rose.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_NKd3C6": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/dsqf.png",
+            "column_size": "3",
+            "title": "A Love That Never Fades",
+            "heading_tag": "h4",
+            "content": "<p>Our eternal rose stays beautiful for a lifetime, just like your love. The 2-heart necklace, in 316L steel with a lifetime warranty, can be engraved with her name or a secret message.</p><p></p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_UXB3Kd": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/gfdzv.webp",
+            "column_size": "3",
+            "title": "A Gift Box She'll Keep Forever",
+            "heading_tag": "h4",
+            "content": "<p>Presented in a luxurious ready-to-give box, this gift isn't just unwrapped — it's experienced. Don't make her wait any longer for this moment.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "item_JfTQ4R",
+        "item_NKd3C6",
+        "item_UXB3Kd"
+      ],
+      "name": "Multi-column",
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": true,
+        "gap": "medium",
+        "text_alignment": "center",
+        "subheading": "",
+        "title": "",
+        "content": "",
+        "background": "#ffffff",
+        "background_gradient": "",
+        "text_color": "#1a1a1a"
+      }
+    },
+    "rich_text_WzXYat": {
+      "type": "rich-text",
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "ss_testimonial_8_DzpeTC": {
+      "type": "ss-testimonial-8",
+      "blocks": {
+        "slide_iGEjAU": {
+          "type": "slide",
+          "settings": {
+            "stars_count": 5,
+            "heading": "Gorgeous",
+            "text": "A gorgeous gift! The rose is stunning and the necklace with our names engraved is perfect. My wife was moved to tears.",
+            "author_date": "Jean D."
+          }
+        },
+        "slide_7jixfz": {
+          "type": "slide",
+          "settings": {
+            "stars_count": 5,
+            "heading": "An unforgettable keepsake",
+            "text": "The gift box is so elegant. The personalized necklace really made the difference. Thank you for this beautiful keepsake!",
+            "author_date": "Claire P."
+          }
+        },
+        "slide_EEF6FE": {
+          "type": "slide",
+          "settings": {
+            "stars_count": 5,
+            "heading": "An unforgettable gift",
+            "text": "I gave this gift box to my wife for our anniversary and she was absolutely thrilled. The rose is gorgeous and the necklace is high quality. An unforgettable gift!",
+            "author_date": "Marc L"
+          }
+        },
+        "slide_c4FrMW": {
+          "type": "slide",
+          "settings": {
+            "stars_count": 5,
+            "heading": "Elegant and refined",
+            "text": "The gift box is so elegant! The eternal rose is a powerful symbol and the necklace with our names engraved is perfect. A touch of refinement in a gift.",
+            "author_date": "Sophie T."
+          }
+        },
+        "slide_ygf3a7": {
+          "type": "slide",
+          "settings": {
+            "stars_count": 5,
+            "heading": "The surprise worked!",
+            "text": "I surprised my girlfriend with this gift box and she cried tears of joy. The personalized necklace really made the difference. Thank you for this wonderful experience!",
+            "author_date": "Pierre G."
+          }
+        },
+        "slide_KgYx3b": {
+          "type": "slide",
+          "settings": {
+            "stars_count": 5,
+            "heading": "Great quality",
+            "text": "I'm impressed by the quality of this gift box. The rose has a timeless beauty and the necklace is delicate and well made. My fiancée loved it!",
+            "author_date": "Benjamin M."
+          }
+        },
+        "slide_hcLwbU": {
+          "type": "slide",
+          "settings": {
+            "stars_count": 5,
+            "heading": "The perfect personalized gift",
+            "text": "Personalizing the necklace was really easy and added a special touch. My mom loved this gift and keeps showing it to everyone. Highly recommend!",
+            "author_date": "Julien F."
+          }
+        }
+      },
+      "block_order": [
+        "slide_iGEjAU",
+        "slide_7jixfz",
+        "slide_EEF6FE",
+        "slide_c4FrMW",
+        "slide_ygf3a7",
+        "slide_KgYx3b",
+        "slide_hcLwbU"
+      ],
+      "name": "SS - Testimonial #8",
+      "settings": {
+        "heading": "Our customers say it better than we do!",
+        "heading_custom": false,
+        "heading_font": "poppins_n4",
+        "heading_size": 40,
+        "heading_size_mobile": 24,
+        "heading_height": 130,
+        "heading_align": "center",
+        "rating_text": "Excellent",
+        "rating_text_custom": false,
+        "rating_text_font": "poppins_n4",
+        "rating_text_size": 24,
+        "rating_text_size_mobile": 20,
+        "rating_text_height": 130,
+        "rating_text_mt": 16,
+        "rating": 4.8,
+        "rating_hide": false,
+        "rating_text_hide": false,
+        "rating_align": "center",
+        "stars_count": 5,
+        "stars_size": 28,
+        "stars_size_mobile": 24,
+        "stars_align": "center",
+        "text": "",
+        "text_custom": false,
+        "text_font": "poppins_n4",
+        "text_size": 20,
+        "text_size_mobile": 16,
+        "text_height": 130,
+        "text_align": "center",
+        "text_mt": 16,
+        "slider_width": 80,
+        "slider_view": 3,
+        "slider_view_mobile": 1.2,
+        "slider_gap": 20,
+        "slider_gap_mobile": 20,
+        "slider_mt": 36,
+        "card_padding_vertical": 32,
+        "card_padding_vertical_mobile": 24,
+        "card_padding_horizontal": 40,
+        "card_padding_horizontal_mobile": 24,
+        "card_radius": 16,
+        "card_border_thickness": 0,
+        "card_shadow": true,
+        "card_heading_custom": false,
+        "card_heading_font": "poppins_n4",
+        "card_heading_size": 24,
+        "card_heading_size_mobile": 20,
+        "card_heading_height": 130,
+        "card_heading_align": "center",
+        "card_heading_mt": 16,
+        "card_text_custom": false,
+        "card_text_font": "poppins_n4",
+        "card_text_size": 14,
+        "card_text_size_mobile": 14,
+        "card_text_height": 150,
+        "card_text_align": "center",
+        "card_text_mt": 16,
+        "card_text_more": "See more",
+        "card_text_less": "See less",
+        "card_count_words": 20,
+        "card_author_date_text_custom": false,
+        "card_author_date_text_font": "josefin_sans_n4",
+        "card_author_date_text_size": 16,
+        "card_author_date_text_size_mobile": 16,
+        "card_author_date_text_height": 130,
+        "card_author_date_text_align": "center",
+        "card_author_date_text_mt": 16,
+        "arrow_size": 50,
+        "arrow_size_mobile": 50,
+        "arrow_icon_size": 28,
+        "arrow_icon_size_mobile": 28,
+        "arrow_border_thickness": 0,
+        "arrow_show_desktop": true,
+        "arrow_show_mobile": false,
+        "dots_size": 11,
+        "dots_size_mobile": 12,
+        "dots_show_desktop": false,
+        "dots_show_mobile": false,
+        "button": "",
+        "button_url": "",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 16,
+        "button_size_mobile": 14,
+        "button_height": 100,
+        "button_align": "center",
+        "button_mt": 16,
+        "button_padding_vertical": 20,
+        "button_padding_horizontal": 16,
+        "button_radius": 8,
+        "button_border_thickness": 0,
+        "button_color": "#ffffff",
+        "button_hover_color": "#ffffff",
+        "button_bg_color": "#000000",
+        "button_bg_hover_color": "#000000",
+        "button_border_color": "#000000",
+        "button_border_hover_color": "#000000",
+        "card_bg_color": "#ffffff",
+        "card_border_color": "#000000",
+        "card_shadow_color": "#800020",
+        "card_heading_color": "#000000",
+        "card_text_color": "#000000",
+        "card_author_date_text_color": "#000000",
+        "arrow_color": "#000000",
+        "arrow_hover_color": "#000000",
+        "arrow_bg_color": "#ffffff",
+        "arrow_bg_hover_color": "#ffffff",
+        "arrow_border_color": "#ffffff",
+        "arrow_border_hover_color": "#ffffff",
+        "dots_color": "#000000",
+        "heading_color": "#1a1a1a",
+        "rating_text_color": "#000000",
+        "stars_bg_color": "#800020",
+        "stars_color": "#ffffff",
+        "text_color": "#000000",
+        "background_color": "#fff3f5",
+        "background_gradient": "linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1) 100%)",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 0,
+        "lazy": true
+      }
+    },
+    "faq_7ytpep": {
+      "type": "faq",
+      "blocks": {
+        "item_ngf99X": {
+          "type": "item",
+          "settings": {
+            "title": "What's included in my order?",
+            "content": "<ul><li>An eternal rose bear</li><li>Your personalized necklace</li><li>A gift bag</li><li>A protective shipping box</li></ul><p><br/>Everything's included, nothing to add. It's ready to give. ✨</p>"
+          }
+        },
+        "item_pVWjbG": {
+          "type": "item",
+          "settings": {
+            "title": "Is the necklace water-resistant?",
+            "content": "<p>Yes, 316L stainless steel plated with 18K gold. Resistant to water and sweat, and hypoallergenic.</p><p>She can wear it every day, even in the shower (although we recommend taking it off to extend the life of the gold plating).</p>"
+          }
+        },
+        "item_eicLT8": {
+          "type": "item",
+          "settings": {
+            "title": "What occasions is it perfect for?",
+            "content": "<p>Any occasion. Birthdays, anniversaries, Valentine's Day, Christmas, engagements, \"just because I love you\"...</p><p>The best gifts don't need an excuse. They come when you think of her. ❤️</p>"
+          }
+        },
+        "item_CTEYdm": {
+          "type": "item",
+          "settings": {
+            "title": "What if my jewelry arrives damaged?",
+            "content": "<p>If your jewelry was damaged during shipping, we'll send you a new one at our expense!</p>"
+          }
+        },
+        "item_ranF8z": {
+          "type": "item",
+          "settings": {
+            "title": "What if I don't like it?",
+            "content": "<p>Don't love it? Send us a message and we'll refund you, no questions asked!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_ngf99X",
+        "item_pVWjbG",
+        "item_eicLT8",
+        "item_CTEYdm",
+        "item_ranF8z"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "full_width": true,
+        "subheading": "",
+        "title": "Your questions",
+        "content": "",
+        "team_avatar_width": 160,
+        "support_hours": "",
+        "answer_time": "",
+        "button_text": "",
+        "button_url": "",
+        "text_position": "center",
+        "background": "#ffffff",
+        "background_gradient": "",
+        "text_color": "#000000",
+        "heading_color": "",
+        "heading_gradient": "",
+        "button_background": "",
+        "button_text_color": "#1a1a1a",
+        "accordion_background": "#dfdbdc",
+        "accordion_text_color": ""
+      }
+    },
+    "image_link_blocks_wkzTbP": {
+      "type": "image-link-blocks",
+      "blocks": {
+        "item_WAfAtn": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/sdv.png",
+            "stretch_image": true,
+            "link_text": "",
+            "link_url": "",
+            "background": "",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "item_cMQiqD": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Zeichenflaeche_1089_1516c1fd-e97e-4693-8b70-418b15da1e80.jpg",
+            "stretch_image": true,
+            "link_text": "",
+            "link_url": "shopify://products/globe-eternel-collier-personnalisee",
+            "background": "",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "item_7pNbLm": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Capture_d_ecran_2025-10-24_151021_7b6a90cb-f42c-44fc-94c5-f0a412d71898.png",
+            "stretch_image": true,
+            "link_text": "",
+            "link_url": "shopify://products/collier-trefle-coeurs",
+            "background": "",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "item_WAfAtn",
+        "item_cMQiqD",
+        "item_7pNbLm"
+      ],
+      "disabled": true,
+      "name": "Image link blocks",
+      "settings": {
+        "full_width": false,
+        "block_size": "large",
+        "subheading": "",
+        "title": "Discover our other creations",
+        "content": "",
+        "link_url": "",
+        "link_text": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": ""
+      }
+    },
+    "milona_features_QLd3Kw": {
+      "type": "milona-features",
+      "blocks": {
+        "feature_8nqxey": {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "text": "<p>Free shipping</p>"
+          }
+        },
+        "feature_eFE8XV": {
+          "type": "feature",
+          "settings": {
+            "icon": "box",
+            "text": "<h5>30-day money-back guarantee</h5>"
+          }
+        },
+        "feature_VjLXRY": {
+          "type": "feature",
+          "settings": {
+            "icon": "badge",
+            "text": "<p>Lifetime jewelry warranty</p>"
+          }
+        },
+        "feature_NzbanQ": {
+          "type": "feature",
+          "settings": {
+            "icon": "lock",
+            "text": "<h3>Secure payment</h3>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_8nqxey",
+        "feature_eFE8XV",
+        "feature_VjLXRY",
+        "feature_NzbanQ"
+      ],
+      "name": "Réassurance",
+      "settings": {
+        "show_heading": true,
+        "heading": "",
+        "heading_size": 32,
+        "heading_color": "#1a1a1a",
+        "columns_desktop": "4",
+        "columns_mobile": "2",
+        "content_alignment": "center",
+        "gap": 24,
+        "max_width": 720,
+        "padding_top": 0,
+        "padding_bottom": 44,
+        "icon_size": 34,
+        "icon_color": "#800020",
+        "text_size": 15,
+        "text_color": "#800020",
+        "background_color": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "tabs_exFE47",
+    "multi_column_rT6yeD",
+    "rich_text_WzXYat",
+    "ss_testimonial_8_DzpeTC",
+    "faq_7ytpep",
+    "image_link_blocks_wkzTbP",
+    "milona_features_QLd3Kw"
+  ]
+}

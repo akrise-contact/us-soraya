@@ -27,7 +27,7 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 96 }}">
       <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180 }}">
     {%- endif -%}
-
+ {%- render 'social-meta-tags' -%}
     {%- comment -%}Few prefetch to increase performance on commonly used third-parties{%- endcomment -%}
     <link rel="preconnect" href="https://cdn.shopify.com">
     <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
@@ -41,7 +41,7 @@ NOTE TO DEVELOPERS: welcome to Impact theme! We hope that you will enjoy editing
       <link rel="preload" href="{{ settings.text_font | font_url }}" as="font" type="font/woff2" crossorigin>
     {%- endunless -%}
 
-    {%- render 'social-meta-tags' -%}
+   
     {%- render 'microdata-schema' -%}
     {%- render 'css-variables' -%}
     {%- render 'js-variables' -%}

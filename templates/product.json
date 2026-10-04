@@ -1,1 +1,661 @@
-{"sections":{"main":{"type":"main-product","blocks":{"vendor":{"type":"vendor","settings":{}},"title":{"type":"title","settings":{}},"badges":{"type":"badges","settings":{}},"price":{"type":"price","settings":{}},"rating":{"type":"rating","settings":{}},"payment_terms":{"type":"payment_terms","settings":{}},"separator":{"type":"separator","settings":{}},"description":{"type":"description","settings":{}},"variant_picker":{"type":"variant_picker","settings":{}},"quantity_selector":{"type":"quantity_selector","settings":{}},"buy_buttons":{"type":"buy_buttons","settings":{}},"pickup_availability":{"type":"pickup_availability","settings":{}}},"block_order":["vendor","title","badges","price","rating","payment_terms","separator","description","variant_picker","quantity_selector","buy_buttons"],"settings":{}},"related-products":{"type":"related-products","settings":{}}},"order":["main","related-products"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "liquid_VARkdh": {
+          "type": "liquid",
+          "disabled": true,
+          "settings": {
+            "liquid": "<div style=\"display:flex;justify-content:center;align-items:center;\nbackground:#f5f5f5;padding:8px 18px;border-radius:9999px;\nfont-family:Arial, sans-serif;font-size:13.5px;font-weight:700;\ncolor:#000;text-transform:uppercase;margin:auto;max-width:fit-content;\">\n  {% if request.locale.iso_code == 'es' %}Elegido el mejor regalo de 2025 🏆{% else %}Voted best gift of 2025 🏆{% endif %}\n</div>"
+          }
+        },
+        "text_gf99Ta": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>Eternal Bear & Personalized Necklace</h2>"
+          }
+        },
+        "liquid_9gHiLK": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<div style=\"display:flex;align-items:center;gap:6px;font-family:Arial, sans-serif; margin-bottom: 12px;\">\n  <!-- Étoiles pleines -->\n  <div style=\"display:flex;align-items:center;\">\n    {% for i in (1..5) %}\n      <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" fill=\"#800020\" viewBox=\"0 0 24 24\" style=\"margin-right:2px;\">\n        <path d=\"M12 .587l3.668 7.429 8.2 1.192-5.934 5.784 1.402 8.174L12 18.896l-7.336 3.87 1.402-8.174L.132 9.208l8.2-1.192z\"/>\n      </svg>\n    {% endfor %}\n  </div>\n  <!-- Texte des avis -->\n  <div style=\"font-size:14px;color:#333;\">\n    <strong>4.8/5</strong> {% if request.locale.iso_code == 'es' %}(1,318 reseñas verificadas){% else %}(1,318 verified reviews){% endif %}\n  </div>\n</div>\n\n<!-- Prix -->\n<div style=\"margin-bottom: 12px;\">\n  <div class=\"price-container\">\n    {%- assign sp_v = product.selected_or_first_available_variant -%}\n    <span class=\"sale-price\">{{ sp_v.price | money }}</span>\n    {%- if sp_v.compare_at_price > sp_v.price %}\n    <span class=\"compare-price\">{{ sp_v.compare_at_price | money }}</span>\n    {%- endif %}\n  </div>\n</div>\n\n<!-- Bullet points -->\n<ul style=\"list-style: none; padding: 0; margin: 0;\">\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 4px;\">✿</span>\n    <span style=\"color: #000; font-weight: 600;\"> {% if request.locale.iso_code == 'es' %}Una joya cerca de su corazón cada día{% else %}A jewel close to her heart every day{% endif %}</span>\n  </li>\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">❀</span>\n    <span style=\"color: #000; font-weight: 600;\">{% if request.locale.iso_code == 'es' %}Un momento que nunca olvidará{% else %}A moment she'll never forget{% endif %}</span>\n  </li>\n  <li style=\"display: flex; align-items: center; margin-bottom: 8px;\">\n    <span style=\"color:#800020; font-size: 16px; margin-right: 6px;\">♡</span>\n    <span style=\"color: #000; font-weight: 600;\">{% if request.locale.iso_code == 'es' %}Sorpresa garantizada, recuerdo imborrable{% else %}Guaranteed surprise, lasting memory{% endif %}</span>\n  </li>\n</ul>\n\n<style>\n  .price-container {\n    display: inline-flex;\n    align-items: center;\n    gap: 10px;\n  }\n\n  .sale-price {\n    font-size: 24px;\n    font-weight: 600;\n    color: #800020;\n  }\n\n  .compare-price {\n    font-size: 18px;\n    color: #000;\n    text-decoration: line-through;\n  }\n</style>"
+          }
+        },
+        "globo_product_options_app_block_AEPQ89": {
+          "type": "shopify://apps/globo-product-options/blocks/app-block/fdc9fad5-1a0f-4bd4-9c8a-1af6a6eef6b8",
+          "settings": {
+            "product": ""
+          }
+        },
+        "collapsible_text_E6xMtK": {
+          "type": "collapsible_text",
+          "settings": {
+            "icon": "none",
+            "icon_width": 20,
+            "title": "Engraving ideas",
+            "content": "<p><strong>Couple's initials (A+B, A ♡ B)</strong><br/>Simple, timeless, powerful.<br/><br/><strong>Names (Julie / David)</strong><br/>A declaration engraved forever.<br/><br/><strong>Special date (05/01/2014)</strong><br/>The day you met, your wedding, your moment.<br/><br/><strong>Roman numerals (V.XVI.MMXX)</strong><br/>Classic, sophisticated elegance.<br/><br/><strong>Romantic quotes:</strong><br/>- Forever / and always<br/>- You & Me / Forever<br/>- I love you / Always<br/><br/>Each quote is an engraved promise that captures the eternity of your feelings. Choose the ones that resonate most with your story.<br/><br/><strong>Symbols (♥❤♡✿❀✽★✯☆☘☾∞)</strong><br/>Express the inexpressible with symbols: heart, star, flower or infinity, adding a layer of emotion to your jewelry.<br/><br/>⚠️ Please only choose from the symbols listed to ensure an error-free engraving.<br/><br/>⚠️ The shorter your message, the more legible and refined the engraving. For the best result, keep it simple.<br/><br/></p>",
+            "page": ""
+          }
+        },
+        "line_item_property_3EQCLQ": {
+          "type": "line_item_property",
+          "settings": {
+            "label": "Right heart engraving",
+            "type": "text",
+            "required": false,
+            "allow_long_text": false,
+            "max_length": 10
+          }
+        },
+        "line_item_property_HB9FGi": {
+          "type": "line_item_property",
+          "settings": {
+            "label": "Left heart engraving",
+            "type": "text",
+            "required": false,
+            "allow_long_text": false,
+            "max_length": 10
+          }
+        },
+        "buy_buttons_LgztLR": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": false,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "#c9a961",
+            "atc_button_text_color": "#ffffff",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "image_rxAFKX": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Copie_de_DUPLIQUEZ_POUR_MODIFIER_fb860632-9614-4681-be95-413bedace9e0.png",
+            "alignment": "center",
+            "max_width": 310
+          }
+        },
+        "liquid_FPMx4r": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Payment Options</title>\n    <style>\n        body.unique-body-Pay123 {\n            font-family: Arial, sans-serif;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n            background-color: #f9f9f9;\n        }\n        .unique-payment-container-Xyz456 {\n            text-align: center;\n        }\n        .unique-payment-options-Abc789 {\n            display: flex;\n            justify-content: center;\n            gap: 10px;\n        }\n        .unique-payment-options-Abc789 img {\n            width: 50px;\n            height: auto;\n        }\n    </style>\n</head>\n<body class=\"unique-body-Pay123\">\n    <div class=\"unique-payment-container-Xyz456\">\n        <div class=\"unique-payment-options-Abc789\">\n            <img src=\"https://www.svgrepo.com/show/14823/amex.svg\" alt=\"AMEX\">\n            <img src=\"https://www.svgrepo.com/show/508402/apple-pay.svg\" alt=\"Apple Pay\">\n            <img src=\"https://www.svgrepo.com/show/508703/mastercard.svg\" alt=\"MasterCard\">\n            <img src=\"https://www.svgrepo.com/show/508716/paypal.svg\" alt=\"PayPal\">\n            <img src=\"https://www.svgrepo.com/show/508690/google-pay.svg\" alt=\"Google Pay\">\n            <img src=\"https://www.svgrepo.com/show/508730/visa-classic.svg\" alt=\"VISA\">\n        </div>\n    </div>\n</body>\n</html>"
+          }
+        },
+        "essential_countdown_timer_app_block_FwawXQ": {
+          "type": "shopify://apps/essential-countdown-timer/blocks/app-block/722378e8-5a70-4eae-aa89-9e44e8e9f6de",
+          "settings": {
+            "id": ""
+          }
+        },
+        "image_aqbxPV": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/LIVRAISON_GRATUITE_1.png",
+            "alignment": "center",
+            "max_width": 500
+          }
+        }
+      },
+      "block_order": [
+        "liquid_VARkdh",
+        "text_gf99Ta",
+        "liquid_9gHiLK",
+        "globo_product_options_app_block_AEPQ89",
+        "collapsible_text_E6xMtK",
+        "line_item_property_3EQCLQ",
+        "line_item_property_HB9FGi",
+        "buy_buttons_LgztLR",
+        "image_rxAFKX",
+        "liquid_FPMx4r",
+        "essential_countdown_timer_app_block_FwawXQ",
+        "image_aqbxPV"
+      ],
+      "settings": {
+        "full_width": true,
+        "show_fixed_add_to_cart": true,
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_bottom",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "thumbnails",
+        "enable_video_autoplay": false,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "tabs_kNAGcW": {
+      "type": "tabs",
+      "blocks": {
+        "tab_gn9cfL": {
+          "type": "tab",
+          "settings": {
+            "title": "Details",
+            "content": "<p><span style=\"text-decoration:underline\"><strong>All our gift boxes also include a gift bag</strong></span><strong>, perfect for gifting and creating an unforgettable moment.</strong></p><p>Our Eternal Bear Gift Box with hidden personalized necklace is a gift that lasts a lifetime. Featuring a real preserved rose that will last forever, this gift is the perfect symbol of eternal love.</p><p>Turn the rose to reveal a handmade necklace personalized with the engravings of your choice.</p><p><strong>Details:</strong><br/></p><ul><li>Certified 316L stainless steel — water-resistant and tarnish-free<br/></li><li>Made with the utmost care</li></ul><p><strong>Engraving:</strong></p><ul><li>Up to 15 characters on each heart</li></ul><p><strong>Quality:</strong></p><ul><li>Hypoallergenic: our jewelry is guaranteed nickel-free, cadmium-free and lead-free.</li><li>Water-resistant and tarnish-free</li><li>2-year warranty</li></ul><p><strong>Dimensions:</strong></p><ul><li>Necklace length: 17.3\" + 2\" extender (44 cm + 5 cm)</li></ul>",
+            "page": ""
+          }
+        },
+        "tab_rrRiJK": {
+          "type": "tab",
+          "settings": {
+            "title": "Shipping information",
+            "content": "<p>All orders are packed, prepared and shipped within <strong>1 to 3 business days</strong>.</p><p>We offer fast worldwide shipping, and the usual delivery time is <strong>6 to 12 days</strong>. Depending on where you live, your items may arrive a little earlier or later.</p><p>Every order comes with a tracking number, so you can follow your package every step of the way.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "tab_gn9cfL",
+        "tab_rrRiJK"
+      ],
+      "name": "Tabs",
+      "settings": {
+        "full_width": true,
+        "content_size": "medium",
+        "subheading": "",
+        "title": "",
+        "text_alignment": "center",
+        "first_tab_open": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": ""
+      }
+    },
+    "testimonials_fwRNiJ": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_8tNjVK": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/pexels-italo-melo-881954-2379005.jpg",
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 5,
+            "author": "Julien R.",
+            "title": "",
+            "content": "<p>I was worried it would look cheap, but when the package arrived I was relieved. The bear is so cute, the rose is really beautiful, and my wife never expected to find the hidden necklace.</p>"
+          }
+        },
+        "testimonial_V4VVhY": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/pexels-elletakesphotos-1680175.jpg",
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 5,
+            "author": "Lucas D.",
+            "title": "",
+            "content": "<p>Order with your eyes closed. All her friends asked me where I found it.</p>"
+          }
+        },
+        "testimonial_48Cg3G": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/pexels-divinetechygirl-1181424.jpg",
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 5,
+            "author": "Sophie M.",
+            "title": "",
+            "content": "<p>I ordered this bear for my daughter's 19th birthday. She burst into tears! The rose is gorgeous and the necklace is great quality. 100% recommend.</p>"
+          }
+        },
+        "testimonial_BhFDEn": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/pexels-stefanstefancik-91227_c7f75afe-5e82-468b-b650-7e362a46d20b.jpg",
+            "round_avatar": true,
+            "show_rating": true,
+            "rating": 5,
+            "author": "Marc T.",
+            "title": "",
+            "content": "<p>My girlfriend told me it was the most beautiful gift she'd ever received. She put it right on her nightstand and wears the necklace every day. Honestly, for the price, it's a steal.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_8tNjVK",
+        "testimonial_V4VVhY",
+        "testimonial_48Cg3G",
+        "testimonial_BhFDEn"
+      ],
+      "disabled": true,
+      "name": "Testimonials",
+      "settings": {
+        "full_width": true,
+        "stack_testimonials": false,
+        "subheading": "",
+        "title": "",
+        "content": "",
+        "link_url": "",
+        "link_text": "",
+        "background": "#ffffff",
+        "background_gradient": "",
+        "text_color": "#800020",
+        "heading_color": "",
+        "heading_gradient": "",
+        "testimonial_card_background": "",
+        "testimonial_card_text_color": ""
+      }
+    },
+    "multi_column_bGgjgP": {
+      "type": "multi-column",
+      "blocks": {
+        "item_twccLg": {
+          "type": "item",
+          "settings": {
+            "video": "shopify://files/videos/98080938eaeb40bc835ee7dc596148ff.HD-1080p-4.8Mbps-35710129 (1).mp4",
+            "column_size": "3",
+            "title": "A Sentimental Surprise",
+            "heading_tag": "h4",
+            "content": "<p>Imagine her reaction when she turns the crank to reveal the personalized necklace hidden behind the rose... ♥</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_ba3nHc": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Light_Pink_and_Red_bear_rose.jpg",
+            "column_size": "3",
+            "title": "An Eternal Symbol of Love",
+            "heading_tag": "h4",
+            "content": "<p>Our eternal rose will stay beautiful for a lifetime, just like the love you feel for your special someone. A gift that stands the test of time and never loses its magic.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_3fgEhm": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/3_collier_3_gravures.jpg",
+            "column_size": "3",
+            "title": "Built to last",
+            "heading_tag": "h4",
+            "content": "<p>Made of 316L stainless steel, the necklace comes with a lifetime warranty.</p><p>Hypoallergenic, lead-free and nickel-free.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "item_twccLg",
+        "item_ba3nHc",
+        "item_3fgEhm"
+      ],
+      "name": "Multi-column",
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "gap": "medium",
+        "text_alignment": "center",
+        "subheading": "",
+        "title": "",
+        "content": "",
+        "background": "#800020",
+        "background_gradient": "",
+        "text_color": "#ffffff"
+      }
+    },
+    "image_link_blocks_mi6HGM": {
+      "type": "image-link-blocks",
+      "blocks": {
+        "item_VpBzf6": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/3L9Oig5B_4t_mid.jpg",
+            "stretch_image": true,
+            "link_text": "My wife",
+            "link_url": "",
+            "background": "",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "item_bcxW8D": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/475739054_18035319740447336_5777024269477736812_n_22b310c6-3a29-4d7a-83a8-618d2a85f541.jpg",
+            "stretch_image": true,
+            "link_text": "My daughter",
+            "link_url": "",
+            "background": "",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "item_amf74E": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Capture_d_ecran_2025-10-20_193624.png",
+            "stretch_image": true,
+            "link_text": "My girlfriend",
+            "link_url": "",
+            "background": "",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "item_bJXJP9": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/dfg.png",
+            "stretch_image": true,
+            "link_text": "My mom",
+            "link_url": "",
+            "background": "",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "item_pFDdc3": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "stretch_image": true,
+            "link_text": "My granddaughter",
+            "link_url": "",
+            "background": "",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "item_6hYiBh": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/9ENsnDYQ__mid.jpg",
+            "stretch_image": true,
+            "link_text": "My grandma",
+            "link_url": "",
+            "background": "",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "item_9bbqn4": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/pexels-kadiravsarr-15011080_c9b5673d-27b7-4851-83d1-70cbba5a3163.jpg",
+            "stretch_image": true,
+            "link_text": "My sister",
+            "link_url": "",
+            "background": "",
+            "text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "item_VpBzf6",
+        "item_bcxW8D",
+        "item_amf74E",
+        "item_bJXJP9",
+        "item_pFDdc3",
+        "item_6hYiBh",
+        "item_9bbqn4"
+      ],
+      "name": "Image link blocks",
+      "settings": {
+        "full_width": false,
+        "block_size": "medium",
+        "subheading": "",
+        "title": "Whether it's for...",
+        "content": "",
+        "link_url": "",
+        "link_text": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": ""
+      }
+    },
+    "rich_text_496Ycb": {
+      "type": "rich-text",
+      "blocks": {
+        "richtext_UC7RRn": {
+          "type": "richtext",
+          "settings": {
+            "content": "<h1>THEY LOVED IT</h1>"
+          }
+        }
+      },
+      "block_order": [
+        "richtext_UC7RRn"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "multi_column_WVG9ed": {
+      "type": "multi-column",
+      "blocks": {
+        "item_wcJdcg": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/dfg.png",
+            "column_size": "3",
+            "title": "Sophie M.",
+            "heading_tag": "h4",
+            "content": "<p>I ordered this bear for my daughter's 19th birthday. When she discovered the hidden necklace with her initials... she burst into tears! The rose is gorgeous and the necklace is great quality. Fast shipping, 100% recommend.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_mP3d3L": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/fvzs1IMoz_mid.jpg",
+            "column_size": "3",
+            "title": "Marc L.",
+            "heading_tag": "h4",
+            "content": "<p>My girlfriend didn't see it coming at all! The surprise effect is amazing — it took her 5 minutes to figure out she had to turn the rose 😅 The necklace with the date we met engraved is perfect. Gift nailed!</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_P6jYc7": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/guz1RtPFjZ_mid.jpg",
+            "column_size": "3",
+            "title": "Emma R.",
+            "heading_tag": "h4",
+            "content": "<p>Perfect Valentine's Day gift! The rose is really beautiful and looks delicate, but it's actually sturdy. My boyfriend had 'E♡T Forever' engraved and it's exactly what I was hoping for. I wear it every day.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_jxk4nh": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/CUHycauCrF_mid.jpg",
+            "column_size": "3",
+            "title": "Julie D.",
+            "heading_tag": "h4",
+            "content": "<p>For our 5th anniversary with my husband, I chose the red rose with the rose gold necklace. The engraving of our wedding date is crisp and legible. The packaging was beautiful. A keepsake we'll treasure for life!</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_pyz4pT": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/OTTQViMNB_mid.jpg",
+            "column_size": "3",
+            "title": "Thomas B.",
+            "heading_tag": "h4",
+            "content": "<p>My mom loved it! I gave it to her for Mother's Day with 'Mom ♥' engraved. She put it on her dresser and shows the necklace to all her friends. Very happy with my purchase, thank you Soraya Paris.</p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "item_wcJdcg",
+        "item_mP3d3L",
+        "item_P6jYc7",
+        "item_jxk4nh",
+        "item_pyz4pT"
+      ],
+      "disabled": true,
+      "name": "Multi-column",
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "gap": "medium",
+        "text_alignment": "center",
+        "subheading": "They loved it",
+        "title": "Why not her?",
+        "content": "",
+        "background": "#ffffff",
+        "background_gradient": "",
+        "text_color": "#800020"
+      }
+    },
+    "1760564483dd304696": {
+      "type": "apps",
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "1760089153b2b5ee4b": {
+      "type": "apps",
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "176097975835e95088": {
+      "type": "apps",
+      "settings": {
+        "full_width": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "faq_wzmqVL": {
+      "type": "faq",
+      "blocks": {
+        "item_8ggLJ6": {
+          "type": "item",
+          "settings": {
+            "title": "What's included in my order?",
+            "content": "<ul><li>An eternal rose bear</li><li>Your personalized necklace</li><li>A gift bag</li><li>A protective shipping box</li></ul><p><br/>Everything's included, nothing to add. It's ready to give. ✨</p>"
+          }
+        },
+        "item_E3XFn6": {
+          "type": "item",
+          "settings": {
+            "title": "Is the necklace water-resistant?",
+            "content": "<p>Yes, 316L stainless steel plated with 18K gold. Resistant to water and sweat, and hypoallergenic.</p><p>She can wear it every day, even in the shower (although we recommend taking it off to extend the life of the gold plating).</p>"
+          }
+        },
+        "item_UPcreW": {
+          "type": "item",
+          "settings": {
+            "title": "What occasions is it perfect for?",
+            "content": "<p>Any occasion. Birthdays, anniversaries, Valentine's Day, Christmas, engagements, \"just because I love you\"...</p><p>The best gifts don't need an excuse. They come when you think of her. ❤️</p>"
+          }
+        },
+        "item_6R8nNA": {
+          "type": "item",
+          "settings": {
+            "title": "What if my jewelry arrives damaged?",
+            "content": "<p>If your jewelry was damaged during shipping, we'll send you a new one at our expense!</p>"
+          }
+        },
+        "item_XhFDHD": {
+          "type": "item",
+          "settings": {
+            "title": "What if I don't like it?",
+            "content": "<p>Don't love it? Send us a message and we'll refund you, no questions asked!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_8ggLJ6",
+        "item_E3XFn6",
+        "item_UPcreW",
+        "item_6R8nNA",
+        "item_XhFDHD"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "full_width": true,
+        "subheading": "",
+        "title": "Your questions",
+        "content": "",
+        "team_avatar_width": 160,
+        "support_hours": "",
+        "answer_time": "",
+        "button_text": "",
+        "button_url": "",
+        "text_position": "center",
+        "background": "#ffffff",
+        "background_gradient": "",
+        "text_color": "#000000",
+        "heading_color": "",
+        "heading_gradient": "",
+        "button_background": "",
+        "button_text_color": "#1a1a1a",
+        "accordion_background": "#dfdbdc",
+        "accordion_text_color": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "tabs_kNAGcW",
+    "testimonials_fwRNiJ",
+    "multi_column_bGgjgP",
+    "image_link_blocks_mi6HGM",
+    "rich_text_496Ycb",
+    "multi_column_WVG9ed",
+    "1760564483dd304696",
+    "1760089153b2b5ee4b",
+    "176097975835e95088",
+    "faq_wzmqVL"
+  ]
+}

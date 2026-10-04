@@ -1,1 +1,543 @@
-{"sections":{"slideshow":{"type":"slideshow","blocks":{"slide-1":{"type":"image","settings":{"content_max_width":780,"mobile_text_position":"place-self-center text-center","desktop_text_position":"sm:place-self-center sm:text-center","subheading":"Tell your story","title":"Slide title","heading_tag":"h0","button_text":"","button_link":"","text_color":"#ffffff","button_background":"#ffffff","button_text_color":"#000000","overlay_color":"#000000","overlay_opacity":30,"background":"","background_gradient":""}},"slide-2":{"type":"image","settings":{"content_max_width":780,"mobile_text_position":"place-self-center text-center","desktop_text_position":"sm:place-self-center sm:text-center","subheading":"Tell your story","title":"Slide title","heading_tag":"h0","button_text":"","button_link":"","text_color":"#ffffff","button_background":"#ffffff","button_text_color":"#000000","overlay_color":"#000000","overlay_opacity":30,"background":"","background_gradient":""}}},"block_order":["slide-1","slide-2"],"settings":{"full_width":true,"allow_transparent_header":true,"image_size":"auto","controls_type":"numbers","transition_type":"fade_with_text","autoplay":true,"cycle_speed":6,"background":"#F2F2F2","background_gradient":"linear-gradient(60deg, rgba(60, 65, 68, 1), rgba(23, 29, 33, 1) 98%)"}},"image-link-blocks":{"type":"image-link-blocks","blocks":{"1664424046b00c932c-0":{"type":"item","settings":{"stretch_image":true,"link_text":"","link_url":"","background":"","text_color":"#ffffff","overlay_color":"#000000","overlay_opacity":0}},"1664424046b00c932c-1":{"type":"item","settings":{"stretch_image":true,"link_text":"","link_url":"","background":"","text_color":"#ffffff","overlay_color":"#000000","overlay_opacity":0}},"1664424046b00c932c-2":{"type":"item","settings":{"stretch_image":true,"link_text":"","link_url":"","background":"","text_color":"#ffffff","overlay_color":"#000000","overlay_opacity":0}},"1664424046b00c932c-3":{"type":"item","settings":{"stretch_image":true,"link_text":"","link_url":"","background":"","text_color":"#ffffff","overlay_color":"#000000","overlay_opacity":0}},"e4a0ef18-1856-4ddd-83d8-871a60d7acac":{"type":"item","settings":{"stretch_image":true,"link_text":"","link_url":"","background":"","text_color":"#ffffff","overlay_color":"#000000","overlay_opacity":0}}},"block_order":["1664424046b00c932c-0","1664424046b00c932c-1","1664424046b00c932c-2","1664424046b00c932c-3","e4a0ef18-1856-4ddd-83d8-871a60d7acac"],"settings":{"full_width":false,"block_size":"medium","subheading":"","title":"","content":"","link_url":"","link_text":"","background":"","background_gradient":"","text_color":"","heading_color":"","heading_gradient":""}},"scrolling-text":{"type":"scrolling-text","settings":{"full_width":true,"text":"Promotion text","text_size":"large","text_style":"fill","scrolling_mode":"auto","scrolling_speed":5,"background":"","background_gradient":"","text_color":"","text_gradient":""}},"collection-list":{"type":"collection-list","blocks":{"collection-1":{"type":"collection","settings":{"collection":"","subheading":"","title":"","url":"","heading_tag":"h2","text_position":"place-self-center text-center","text_color":"#ffffff","overlay_color":"#000000","overlay_opacity":30}},"collection-2":{"type":"collection","settings":{"collection":"","subheading":"","title":"","url":"","heading_tag":"h2","text_position":"place-self-center text-center","text_color":"#ffffff","overlay_color":"#000000","overlay_opacity":30}},"collection-3":{"type":"collection","settings":{"collection":"","subheading":"","title":"","url":"","heading_tag":"h2","text_position":"place-self-center text-center","text_color":"#ffffff","overlay_color":"#000000","overlay_opacity":30}}},"block_order":["collection-1","collection-2","collection-3"],"settings":{"full_width":true,"stack_collections":false,"collections_per_row":3,"show_progress_bar":false,"subheading":"","title":"Collection list","content":"","link_url":"","link_text":"View all","background":"","background_gradient":"","text_color":"","heading_color":"","heading_gradient":""}},"featured-collection":{"type":"featured-collection","settings":{"collection":"","products":[],"full_width":true,"stack_products":false,"show_progress_bar":false,"products_count":6,"products_per_row_mobile":"2","products_per_row_desktop":4,"subheading":"","title":"Featured collection","content":"","link_url":"","link_text":"View all","background":"","background_gradient":"","text_color":"","heading_color":"","heading_gradient":"","product_card_background":"","product_card_text_color":""}},"impact-text":{"type":"impact-text","blocks":{"1664424181b38582d5-0":{"type":"item","settings":{"title":"100%","subheading":"Showcase a benefit of your product","content":"","button_text":"","button_url":"","animate_impact_text":false,"animate_impact_text_duration":2}}},"block_order":["1664424181b38582d5-0"],"settings":{"full_width":true,"stack_mobile":true,"text_alignment":"center","impact_text_style":"fill","text_divider":"none","impact_text_size_ratio":1,"background":"","background_gradient":"","heading_text_color":"","heading_gradient":"linear-gradient(180deg, rgba(26, 26, 26, 0.2), rgba(26, 26, 26, 0) 100%)","text_color":"","button_background":"","button_text_color":""}},"image-with-text-overlay":{"type":"image-with-text-overlay","blocks":{"1664424230c4756b0e-0":{"type":"subheading","settings":{"text":"Subheading"}},"1664424230c4756b0e-1":{"type":"heading","settings":{"text":"Image with text overlay","heading_tag":"h1"}},"1664424230c4756b0e-2":{"type":"richtext","settings":{"content":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>"}}},"block_order":["1664424230c4756b0e-0","1664424230c4756b0e-1","1664424230c4756b0e-2"],"settings":{"full_width":true,"allow_transparent_header":false,"enable_parallax":false,"image_size":"auto","mobile_text_position":"place-self-center text-center","desktop_text_position":"sm:place-self-center sm:text-center","text_color":"#ffffff","overlay_color":"#000000","overlay_opacity":30}},"media-grid":{"type":"media-grid","blocks":{"item-1":{"type":"image","settings":{"title":"Promote your products","heading_tag":"h4","link_url":"","link_text":"","mobile_text_position":"place-self-center text-center","desktop_column_span":2,"desktop_row_span":2,"desktop_text_position":"sm:place-self-center sm:text-center","background":"#000000","background_gradient":"","text_color":"#ffffff","text_gradient":"","button_background":"#000000","button_text_color":"#ffffff","overlay_color":"#000000","overlay_opacity":0}},"item-2":{"type":"image","settings":{"title":"Promote your products","heading_tag":"h4","link_url":"","link_text":"","mobile_text_position":"place-self-center text-center","desktop_column_span":1,"desktop_row_span":1,"desktop_text_position":"sm:place-self-center sm:text-center","background":"#000000","background_gradient":"","text_color":"#ffffff","text_gradient":"","button_background":"#000000","button_text_color":"#ffffff","overlay_color":"#000000","overlay_opacity":0}},"item-3":{"type":"image","settings":{"title":"Promote your products","heading_tag":"h4","link_url":"","link_text":"","mobile_text_position":"place-self-center text-center","desktop_column_span":1,"desktop_row_span":1,"desktop_text_position":"sm:place-self-center sm:text-center","background":"#000000","background_gradient":"","text_color":"#ffffff","text_gradient":"","button_background":"#000000","button_text_color":"#ffffff","overlay_color":"#000000","overlay_opacity":0}},"29246d34-c6e0-4373-84f6-b15e57736a00":{"type":"image","settings":{"title":"Promote your products","heading_tag":"h4","link_url":"","link_text":"","mobile_text_position":"place-self-center text-center","desktop_column_span":2,"desktop_row_span":1,"desktop_text_position":"sm:place-self-center sm:text-center","background":"#000000","background_gradient":"","text_color":"#ffffff","text_gradient":"","button_background":"#000000","button_text_color":"#ffffff","overlay_color":"#000000","overlay_opacity":0}}},"block_order":["item-1","item-2","item-3","29246d34-c6e0-4373-84f6-b15e57736a00"],"settings":{"full_width":true,"reduce_width":false,"desktop_row_height":290,"background":"","background_gradient":""}},"before-after-image":{"type":"before-after-image","settings":{"full_width":true,"subheading":"","title":"Before\/after","content":"<p>Showcase your product benefit by using before\/after image comparison.<\/p>","expand_image":false,"text_position":"center","before_after_text_position":"bottom","before_text":"Before","after_text":"After","drag_initial_position":50,"background":"","background_gradient":"","text_color":"","before_text_color":"#ffffff","after_text_color":"#ffffff"}},"press":{"type":"press","blocks":{"16644243327ba53d2a-0":{"type":"quote","settings":{"logo_width":100,"author":"","content":"Share info about what your customers say about your products.","show_rating":false,"rating":4}},"16644243327ba53d2a-1":{"type":"quote","settings":{"logo_width":100,"author":"","content":"Or share content about your promotion, offers...","show_rating":false,"rating":4}}},"block_order":["16644243327ba53d2a-0","16644243327ba53d2a-1"],"settings":{"full_width":true,"content_size":"medium","background":"","background_gradient":"","text_color":"","heading_color":"","heading_gradient":"","logo_item_background":"","logo_item_border":""}},"hot-spots":{"type":"hot-spots","blocks":{"1664424434f5b7d0e0-0":{"type":"item","settings":{"horizontal_position":24,"vertical_position":70,"horizontal_position_mobile":24,"vertical_position_mobile":70,"icon_width":32,"title":"Feature name","content":"<p>Share useful information about your product features.<\/p>"}},"1664424434f5b7d0e0-1":{"type":"item","settings":{"horizontal_position":62,"vertical_position":14,"horizontal_position_mobile":62,"vertical_position_mobile":14,"icon_width":32,"title":"Feature name","content":"<p>Share useful information about your product features.<\/p>"}},"1664424434f5b7d0e0-2":{"type":"item","settings":{"horizontal_position":83,"vertical_position":75,"horizontal_position_mobile":83,"vertical_position_mobile":75,"icon_width":32,"title":"Feature name","content":"<p>Share useful information about your product features.<\/p>"}}},"block_order":["1664424434f5b7d0e0-0","1664424434f5b7d0e0-1","1664424434f5b7d0e0-2"],"settings":{"full_width":true,"title":"","content":"","button_text":"","button_url":"","desktop_text_position":"place-self-start text-start","image_background":"","image_background_gradient":"","overlay_color":"#000000","overlay_opacity":0,"overlay_text_color":"#ffffff","overlay_button_background":"","overlay_button_text_color":"","hot_spot_dot_background":"#ffffff","hot_spot_dot_text_color":"#000000","hot_spot_content_background":"#ffffff","hot_spot_content_text_color":"#000000","hot_spot_content_opacity":90,"hot_spot_content_blur_radius":3}},"multiple-images-with-text":{"type":"multiple-images-with-text","blocks":{"1664424486a2b084ab-0":{"type":"item","settings":{"image_rotation_degrees":-2,"subheading":"","title":"Heading 1","content":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>","button_url":"","button_text":""}},"1664424486a2b084ab-1":{"type":"item","settings":{"image_rotation_degrees":1.5,"subheading":"","title":"Heading 2","content":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>","button_url":"","button_text":""}}},"block_order":["1664424486a2b084ab-0","1664424486a2b084ab-1"],"settings":{"full_width":true,"images_layout":"scattered","collage_images_alignment":"middle","background":"","background_gradient":"","text_color":"","button_background":"","button_text_color":""}},"featured-product":{"type":"featured-product","blocks":{"vendor":{"type":"vendor","settings":{}},"title":{"type":"title","settings":{"heading_tag":"h2"}},"badges":{"type":"badges","settings":{}},"price":{"type":"price","settings":{"show_taxes_notice":false}},"rating":{"type":"rating","settings":{"show_empty":false}},"separator":{"type":"separator","settings":{}},"description":{"type":"description","settings":{"collapse_content":false}},"variant-picker":{"type":"variant_picker","settings":{"hide_sold_out_variants":false,"stack_blocks":true,"selector_style":"block","swatch_selector_style":"color","size_chart_page":""}},"quantity-selector":{"type":"quantity_selector","settings":{}},"buy-buttons":{"type":"buy_buttons","settings":{"show_payment_button":true,"atc_button_background":"","atc_button_text_color":"","payment_button_background":"","payment_button_text_color":""}}},"block_order":["vendor","title","badges","price","rating","separator","description","variant-picker","quantity-selector","buy-buttons"],"settings":{"full_width":false,"product":"","desktop_media_width":55,"desktop_media_layout":"carousel_thumbnails_left","mobile_media_size":"expanded","mobile_carousel_control":"floating_dots","enable_video_autoplay":true,"enable_video_looping":false,"enable_image_zoom":true,"max_image_zoom_level":3,"background":"#ffffff","background_gradient":"","text_color":"","input_background":"rgba(0,0,0,0)","input_text_color":""}},"faq":{"type":"faq","blocks":{"166442457738b23caf-0":{"type":"item","settings":{"title":"Do you ship overseas?","content":"<p>Yes, we ship all over the world. Shipping costs will apply, and will be added at checkout. We run discounts and promotions all year, so stay tuned for exclusive deals.<\/p>"}},"166442457738b23caf-1":{"type":"item","settings":{"title":"How long will it take to get my orders?","content":"<p>It depends on where you are. Orders processed here will take 5-7 business days to arrive. Overseas deliveries can take anywhere from 7-16 days. Delivery details will be provided in your confirmation email.<\/p>"}},"166442457738b23caf-2":{"type":"item","settings":{"title":"Any question?","content":"<p>You can contact us through our contact page! We will be happy to assist you.<\/p>"}}},"block_order":["166442457738b23caf-0","166442457738b23caf-1","166442457738b23caf-2"],"settings":{"full_width":false,"subheading":"","title":"FAQ","content":"<p>Use this text to share information about your product or shipping policies.<\/p>","team_avatar_width":160,"support_hours":"Our customer support is available Monday to Friday: 8am-8:30pm.","answer_time":"Average answer time: 24h","button_text":"","button_url":"","text_position":"start","background":"#ffffff","background_gradient":"","text_color":"","heading_color":"","heading_gradient":"","button_background":"","button_text_color":"","accordion_background":"","accordion_text_color":""}}},"order":["slideshow","image-link-blocks","scrolling-text","collection-list","featured-collection","impact-text","image-with-text-overlay","media-grid","before-after-image","press","hot-spots","multiple-images-with-text","featured-product","faq"]}
+{
+  "sections": {
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "slide-2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Main_Image_Desktop_-_Fete_des_Meres_-_Sylvie_Jewels.jpg",
+            "mobile_image": "shopify://shop_images/Design_sans_titre.png",
+            "content_max_width": 820,
+            "mobile_text_position": "place-self-center text-center",
+            "desktop_text_position": "sm:place-self-center sm:text-center",
+            "subheading": "",
+            "title": "",
+            "heading_tag": "h0",
+            "button_text": "",
+            "button_link": "",
+            "text_color": "#ffffff",
+            "button_background": "#ffffff",
+            "button_text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
+            "background": "",
+            "background_gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide-2"
+      ],
+      "settings": {
+        "full_width": true,
+        "allow_transparent_header": true,
+        "show_initial_transition": false,
+        "image_size": "auto",
+        "controls_type": "numbers",
+        "transition_type": "fade",
+        "autoplay": true,
+        "cycle_speed": 6,
+        "background": "#f2f2f2",
+        "background_gradient": "linear-gradient(60deg, rgba(60, 65, 68, 1), rgba(23, 29, 33, 1) 98%)"
+      }
+    },
+    "featured_collection_WMBmxH": {
+      "type": "featured-collection",
+      "name": "Featured collection",
+      "settings": {
+        "collection": "",
+        "products": [
+          "collier-ours-personnalise",
+          "globe-eternel-collier-personnalisee",
+          "rose-eternelle",
+          "coeur-eternel",
+          "coffret-trefle-rose-eternelle-avec-collier-grave",
+          "coffret-harmonie-rose-eternelle-avec-collier-grave"
+        ],
+        "full_width": true,
+        "stack_products": false,
+        "show_progress_bar": true,
+        "show_badges": true,
+        "badge_background_color": "",
+        "badge_text_color": "",
+        "products_count": 9,
+        "products_per_row_mobile": "2",
+        "mobile_card_width": 74,
+        "products_per_row_tablet": "4",
+        "tablet_card_width": 36,
+        "products_per_row_desktop": 5,
+        "row_gap": 16,
+        "column_gap": 16,
+        "subheading": "",
+        "subheading_color": "",
+        "subheading_size": 14,
+        "subheading_uppercase": false,
+        "title": "OUR BEST SELLERS",
+        "heading_size": 30,
+        "heading_letter_spacing": 2,
+        "heading_uppercase": true,
+        "heading_weight": "semibold",
+        "heading_alignment": "center",
+        "heading_spacing_bottom": 24,
+        "show_heading_background": false,
+        "heading_background_color": "",
+        "heading_background_opacity": 100,
+        "heading_padding": 12,
+        "content": "",
+        "link_url": "",
+        "link_text": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "#800020",
+        "heading_color": "",
+        "heading_gradient": "",
+        "row_background": "",
+        "product_card_background": "#ffffff",
+        "product_card_text_color": "#000000",
+        "card_border_color": "#ffffff",
+        "card_border_width": 10,
+        "card_border_radius": 0,
+        "override_price_style": false,
+        "price_color": "",
+        "compare_price_color": "",
+        "button_background": "",
+        "button_icon_color": ""
+      }
+    },
+    "shop_by_category_jAx7wG": {
+      "type": "shop-by-category",
+      "blocks": {
+        "category_EMVLM8": {
+          "type": "category",
+          "settings": {
+            "collection": "coffret-rose-eternelles",
+            "custom_image": "shopify://shop_images/475739054_18035319740447336_5777024269477736812_n.jpg",
+            "custom_title": "Gift Boxes",
+            "custom_link": ""
+          }
+        },
+        "category_Cre8zH": {
+          "type": "category",
+          "settings": {
+            "collection": "collier",
+            "custom_image": "shopify://shop_images/1il_1140xN.4338619688_qy98.webp",
+            "custom_title": "Necklaces",
+            "custom_link": ""
+          }
+        },
+        "category_qFXpMJ": {
+          "type": "category",
+          "settings": {
+            "collection": "bague",
+            "custom_image": "shopify://shop_images/INITIALB.jpg",
+            "custom_title": "Rings",
+            "custom_link": ""
+          }
+        },
+        "category_9AbVGf": {
+          "type": "category",
+          "settings": {
+            "collection": "bracelet",
+            "custom_image": "shopify://shop_images/il_1588xN.5537821710_dvgl_1.webp",
+            "custom_title": "Bracelets",
+            "custom_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_EMVLM8",
+        "category_Cre8zH",
+        "category_qFXpMJ",
+        "category_9AbVGf"
+      ],
+      "name": "Vitrine collections",
+      "settings": {
+        "show_heading": true,
+        "heading": "Our Collections",
+        "heading_size": 32,
+        "heading_color": "#6e1f2e",
+        "heading_uppercase": true,
+        "heading_letter_spacing": 2,
+        "heading_alignment": "center",
+        "show_divider": false,
+        "columns_desktop": "4",
+        "mobile_layout": "grid",
+        "columns_mobile": "2",
+        "gap": 20,
+        "image_aspect_ratio": "3 / 4",
+        "image_radius": 2,
+        "enable_hover_zoom": true,
+        "background_color": "#ffffff",
+        "padding_top": 56,
+        "padding_bottom": 44,
+        "enable_overlay": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "text_position": "overlay_bottom",
+        "label_alignment": "center",
+        "label_font_size": 15,
+        "label_letter_spacing": 1.5,
+        "label_uppercase": true,
+        "label_weight": "medium",
+        "label_text_color": "#1a1a1a",
+        "show_label_background": true,
+        "label_background_color": "#ffffff",
+        "label_background_opacity": 100,
+        "label_padding": 10
+      }
+    },
+    "brand_story_t4aHBM": {
+      "type": "brand-story",
+      "name": "Histoire de la marque",
+      "settings": {
+        "image_1": "shopify://shop_images/hf_20260822_152246_0eb39ea1-7555-4700-992c-e5912075c8d2.png",
+        "image_2": "shopify://shop_images/Zeichenflaeche_1089_1516c1fd-e97e-4693-8b70-418b15da1e80.jpg",
+        "layout": "image_left",
+        "secondary_image_position": "bottom-left",
+        "secondary_image_width": 42,
+        "secondary_image_offset": 8,
+        "secondary_image_border_width": 10,
+        "secondary_image_border_color": "",
+        "image_radius": 0,
+        "image_aspect_ratio": "4 / 5",
+        "secondary_image_aspect_ratio": "3 / 4",
+        "images_bottom_spacing": 40,
+        "subheading": "",
+        "subheading_color": "#6e1f2e",
+        "heading": "JEWELRY FOR EVERY MEMORY",
+        "heading_size": 34,
+        "heading_letter_spacing": 1,
+        "heading_uppercase": true,
+        "heading_weight": "semibold",
+        "heading_color": "#1a1a1a",
+        "content": "<p>You don't need an occasion to treat yourself. A name, a date, a memory — engraved forever in a piece of jewelry that's truly you.</p><p>Thousands of women have already fallen for theirs. Now it's your turn to treat yourself to a little something.</p>",
+        "text_color": "#333333",
+        "text_size": 16,
+        "tagline": "Your story deserves to be worn. Close to the heart.",
+        "tagline_style": "normal",
+        "tagline_color": "#1a1a1a",
+        "text_alignment": "left",
+        "vertical_alignment": "center",
+        "show_button": true,
+        "button_text": "Our Best Sellers",
+        "button_url": "",
+        "button_style": "solid",
+        "button_background_color": "#800020",
+        "button_text_color": "#ffffff",
+        "column_gap": 60,
+        "content_spacing": 20,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#ffffff",
+        "mobile_image_order": "images_first"
+      }
+    },
+    "testimonials_16_gR67UU": {
+      "type": "testimonials-16",
+      "blocks": {
+        "item_TwXANe": {
+          "type": "item",
+          "settings": {
+            "review_image": "shopify://shop_images/uRNjnObQl.jpg",
+            "stars_count": 5,
+            "heading": "Flawless engraving",
+            "text": "The name is perfectly legible and centered, not a single flaw.",
+            "author_date": "Léa M"
+          }
+        },
+        "item_PEGVXn": {
+          "type": "item",
+          "settings": {
+            "review_image": "shopify://shop_images/1781281804__0__6L4e8aX0__02h98OiNg__original.webp",
+            "stars_count": 5,
+            "heading": "Beyond my expectations",
+            "text": "I didn't think personalized jewelry could have such a beautiful finish.",
+            "author_date": "Camille R"
+          }
+        },
+        "item_dnAcBx": {
+          "type": "item",
+          "settings": {
+            "review_image": "shopify://shop_images/1781281770__0__BNQpxCKz__SVa0oXo8a__original.webp",
+            "stars_count": 5,
+            "heading": "Beautifully packaged",
+            "text": "The gift box is gorgeous, perfect for gifting without having to wrap it yourself.",
+            "author_date": "Élise F"
+          }
+        },
+        "item_7ggTVt": {
+          "type": "item",
+          "settings": {
+            "review_image": "shopify://shop_images/1781281886__0__6F0b-RLI__TMMqVZT7u__original.webp",
+            "stars_count": 5,
+            "heading": "Highly recommend!",
+            "text": "My second order from Soraya Paris, and just as happy as the first time.",
+            "author_date": "Marie L"
+          }
+        },
+        "item_E6j6xz": {
+          "type": "item",
+          "settings": {
+            "review_image": "shopify://shop_images/dMMSFMnyF.jpg",
+            "stars_count": 5,
+            "heading": "Amazing service",
+            "text": "Small sizing issue with an exchange, resolved in under 24 hours by customer service.",
+            "author_date": "Charlotte V"
+          }
+        },
+        "item_p9YzAb": {
+          "type": "item",
+          "settings": {
+            "review_image": "shopify://shop_images/0pGWd6ORc.jpg",
+            "stars_count": 5,
+            "heading": "Stunning jewelry",
+            "text": "The ring is delicate and elegant, exactly like the photos.",
+            "author_date": "Océane R"
+          }
+        },
+        "item_DKJT6n": {
+          "type": "item",
+          "settings": {
+            "review_image": "shopify://shop_images/1781282126__0__kzcNqy-R__k6-VraK5q__original.webp",
+            "stars_count": 5,
+            "heading": "Top quality",
+            "text": "The gold plating hasn't tarnished after several weeks of daily wear.",
+            "author_date": "Julie B"
+          }
+        },
+        "item_ekBbct": {
+          "type": "item",
+          "settings": {
+            "review_image": "shopify://shop_images/1781281645__1__ZhmJkwPI__GezEg54K8__original.webp",
+            "stars_count": 5,
+            "heading": "The perfect gift",
+            "text": "The necklace is even more beautiful in person. The engraving is crisp and perfectly centered.",
+            "author_date": "Manon D"
+          }
+        },
+        "item_RFXmHJ": {
+          "type": "item",
+          "settings": {
+            "review_image": "shopify://shop_images/1781281770__1__csVfSKJT___d4TypLTF__original.webp",
+            "stars_count": 5,
+            "heading": "Love at first sight",
+            "text": "I bought it as a gift and I'm thrilled. Elegant craftsmanship and beautiful packaging 🎁💍",
+            "author_date": "Joanna S."
+          }
+        }
+      },
+      "block_order": [
+        "item_TwXANe",
+        "item_PEGVXn",
+        "item_dnAcBx",
+        "item_7ggTVt",
+        "item_E6j6xz",
+        "item_p9YzAb",
+        "item_DKJT6n",
+        "item_ekBbct",
+        "item_RFXmHJ"
+      ],
+      "name": "SS - Testimonial #16",
+      "settings": {
+        "content_align": "center",
+        "content_align_mobile": "center",
+        "heading": "Over 50,000 happy customers already trust us.",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 40,
+        "heading_size_mobile": 24,
+        "heading_height": 130,
+        "rating_text": "Excellent",
+        "rating_text_custom": false,
+        "rating_text_font": "josefin_sans_n4",
+        "rating_text_size": 24,
+        "rating_text_size_mobile": 20,
+        "rating_text_height": 130,
+        "rating_text_mt": 16,
+        "rating_text_mt_mobile": 16,
+        "rating": 4.7,
+        "rating_hide": false,
+        "rating_text_hide": false,
+        "stars_count": 5,
+        "stars_size": 28,
+        "stars_size_mobile": 24,
+        "text": "",
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 20,
+        "text_size_mobile": 16,
+        "text_height": 130,
+        "text_mt": 16,
+        "text_mt_mobile": 16,
+        "scrolling_velocity": 80,
+        "scrolling_velocity_mobile": 100,
+        "reverse_direction": false,
+        "pause_hover": true,
+        "scrolling_mt": 36,
+        "scrolling_mt_mobile": 36,
+        "scrolling_gap": 20,
+        "scrolling_gap_mobile": 20,
+        "card_width": 360,
+        "card_width_mobile": 280,
+        "card_padding_vertical": 36,
+        "card_padding_vertical_mobile": 28,
+        "card_padding_horizontal": 40,
+        "card_padding_horizontal_mobile": 24,
+        "card_radius": 16,
+        "card_border_thickness": 0,
+        "card_shadow_style": "2",
+        "card_content_align": "center",
+        "card_content_align_mobile": "center",
+        "card_height": false,
+        "card_heading_custom": false,
+        "card_heading_font": "josefin_sans_n4",
+        "card_heading_size": 24,
+        "card_heading_size_mobile": 20,
+        "card_heading_height": 130,
+        "card_heading_mt": 16,
+        "card_heading_mt_mobile": 16,
+        "card_text_custom": false,
+        "card_text_font": "josefin_sans_n4",
+        "card_text_size": 14,
+        "card_text_size_mobile": 14,
+        "card_text_height": 150,
+        "card_text_mt": 16,
+        "card_text_mt_mobile": 16,
+        "card_text_more": "",
+        "card_text_less": "",
+        "card_count_words": 60,
+        "review_image_bleed": true,
+        "review_image_fit": "cover",
+        "review_image_ratio": "1 / 1",
+        "review_image_radius": 12,
+        "review_image_bg_color": "#f0f0f0",
+        "review_image_spacing": 20,
+        "author_image_size": 56,
+        "author_image_size_mobile": 40,
+        "author_image_position": "inline_text",
+        "card_author_date_text_custom": false,
+        "card_author_date_text_font": "josefin_sans_n4",
+        "card_author_date_text_size": 16,
+        "card_author_date_text_size_mobile": 16,
+        "card_author_date_text_height": 130,
+        "card_author_date_text_mt": 16,
+        "card_author_date_text_mt_mobile": 16,
+        "button": "",
+        "button_url": "",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 16,
+        "button_size_mobile": 14,
+        "button_height": 100,
+        "button_align": "center",
+        "button_align_mobile": "center",
+        "button_mt": 32,
+        "button_mt_mobile": 28,
+        "button_padding_vertical": 16,
+        "button_padding_vertical_mobile": 16,
+        "button_padding_horizontal": 20,
+        "button_padding_horizontal_mobile": 20,
+        "button_radius": 8,
+        "button_border_thickness": 1,
+        "button_style": "outline",
+        "button_color": "#ffffff",
+        "button_hover_color": "#000000",
+        "button_bg_color": "#000000",
+        "button_bg_hover_color": "#ffffff",
+        "button_border_color": "#000000",
+        "button_border_hover_color": "#000000",
+        "card_bg_color": "#ffffff",
+        "card_border_color": "#000000",
+        "card_heading_color": "#000000",
+        "card_text_color": "#000000",
+        "card_author_date_text_color": "#000000",
+        "view_color": "#000000",
+        "heading_color": "#000000",
+        "rating_text_color": "#000000",
+        "stars_bg_color": "#800020",
+        "stars_color": "#ffffff",
+        "text_color": "#000000",
+        "background_color": "#ffffff",
+        "background_gradient": "linear-gradient(259deg, rgba(255, 255, 255, 1) 100%, rgba(255, 255, 255, 1) 100%)",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 0,
+        "lazy": true
+      }
+    },
+    "milona_features_RJRjRh": {
+      "type": "milona-features",
+      "blocks": {
+        "feature_4LKbwA": {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "text": "<p>Free shipping</p>"
+          }
+        },
+        "feature_DdQRg8": {
+          "type": "feature",
+          "settings": {
+            "icon": "box",
+            "text": "<h5>30-day money-back guarantee</h5>"
+          }
+        },
+        "feature_AE7gNg": {
+          "type": "feature",
+          "settings": {
+            "icon": "badge",
+            "text": "<p>Lifetime jewelry warranty</p>"
+          }
+        },
+        "feature_wdCFnp": {
+          "type": "feature",
+          "settings": {
+            "icon": "lock",
+            "text": "<h3>Secure payment</h3>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_4LKbwA",
+        "feature_DdQRg8",
+        "feature_AE7gNg",
+        "feature_wdCFnp"
+      ],
+      "name": "Réassurance",
+      "settings": {
+        "show_heading": true,
+        "heading": "Why choose Soraya Paris",
+        "heading_size": 32,
+        "heading_color": "#1a1a1a",
+        "columns_desktop": "4",
+        "columns_mobile": "2",
+        "content_alignment": "center",
+        "gap": 32,
+        "max_width": 920,
+        "padding_top": 24,
+        "padding_bottom": 64,
+        "icon_size": 40,
+        "icon_color": "#800020",
+        "text_size": 16,
+        "text_color": "#800020",
+        "background_color": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "slideshow",
+    "featured_collection_WMBmxH",
+    "shop_by_category_jAx7wG",
+    "brand_story_t4aHBM",
+    "testimonials_16_gR67UU",
+    "milona_features_RJRjRh"
+  ]
+}

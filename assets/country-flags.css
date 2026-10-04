@@ -1,6 +1,6 @@
 .country-flags {
-  background: -webkit-image-set(url("//75gpnn-mp.myshopify.com/cdn/shop/t/2/assets/country-flags.png?v=37230036826556269641731260376") 1x, url("//75gpnn-mp.myshopify.com/cdn/shop/t/2/assets/country-flags-2x.png?v=119388446682176363021731260376") 2x) no-repeat top left;
-  background: image-set(url("//75gpnn-mp.myshopify.com/cdn/shop/t/2/assets/country-flags.png?v=37230036826556269641731260376") 1x, url("//75gpnn-mp.myshopify.com/cdn/shop/t/2/assets/country-flags-2x.png?v=119388446682176363021731260376") 2x) no-repeat top left;
+  background: -webkit-image-set(url("country-flags.png") 1x, url("country-flags-2x.png") 2x) no-repeat top left;
+  background: image-set(url("country-flags.png") 1x, url("country-flags-2x.png") 2x) no-repeat top left;
   width: 20px;
   height: 20px;
   flex-shrink: 0;

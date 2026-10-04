@@ -5,44 +5,114 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
-        "message": {
+        "message_ht8WyQ": {
           "type": "message",
           "settings": {
-            "text": "Announce something here"
+            "text": "Free shipping",
+            "url": ""
+          }
+        },
+        "message_HNeAgg": {
+          "type": "message",
+          "settings": {
+            "text": "FALL SALE – Up to 50% OFF",
+            "url": ""
           }
         }
       },
       "block_order": [
-        "message"
+        "message_ht8WyQ",
+        "message_HNeAgg"
       ],
       "settings": {
         "enable_sticky": false,
+        "autoplay": false,
+        "cycle_speed": 15,
         "text_size": "text-xs",
         "navigation_mode": "scrolling",
         "scrolling_speed": 10,
-        "background": "#1a1a1a",
+        "background": "#800020",
+        "background_gradient": "",
         "text_color": "#ffffff"
       }
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "mega_menu_i7emFm": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "",
+            "layout": "horizontal",
+            "submenu_style": "bold_heading",
+            "image_heading_1": "",
+            "image_link_1": "",
+            "image_text_color_1": "#ffffff",
+            "image_heading_2": "",
+            "image_link_2": "",
+            "image_text_color_2": "#ffffff",
+            "image_heading_3": "",
+            "image_link_3": "",
+            "image_text_color_3": "#ffffff",
+            "product": "",
+            "product_card_background": "",
+            "product_card_text_color": "",
+            "promo_content_layout": "grid",
+            "stretch_promo": false,
+            "drawer_link_image": "hide"
+          }
+        }
+      },
+      "block_order": [
+        "mega_menu_i7emFm"
+      ],
       "settings": {
-        "enable_sticky": true,
-        "hide_on_scroll": false,
-        "logo": "{{shop.brand.logo}}",
-        "logo_max_width": 120,
+        "enable_sticky": false,
+        "hide_on_scroll": true,
+        "logo": "shopify://shop_images/SORAYA_1000_x_250_px.png",
+        "logo_max_width": 145,
         "logo_mobile_max_width": 100,
         "menu": "main-menu",
-        "menu_open_trigger": "click",
-        "opening_from": "bottom",
-        "layout": "logo_left_navigation_center",
-        "show_social_media": true,
-        "show_country_flag": true,
+        "sidebar_menu": "",
+        "secondary_menu": "",
+        "menu_open_trigger": "hover",
+        "opening_from": "left",
+        "layout": "logo_left_navigation_inline",
+        "show_social_media": false,
+        "show_locale_selector": false,
+        "show_country_selector": false,
+        "show_country_flag": false,
         "show_country_name": false,
-        "transparent_header_text_color": "#ffffff",
+        "transparent_header_text_color": "#1a1a1a",
         "reduce_padding": false,
-        "background_opacity": 100,
-        "background_blur_radius": 0
+        "force_solid_background": true,
+        "background_color": "#505050",
+        "background_opacity": 31,
+        "background_blur_radius": 8,
+        "show_header_border": true,
+        "header_border_color": "#e5e5e5",
+        "show_header_shadow": true,
+        "header_shadow_opacity": 26,
+        "drawer_background_color": "#ffffff",
+        "drawer_text_color": "#1a1a1a",
+        "show_drawer_dividers": true,
+        "drawer_divider_color": "#e5e5e5",
+        "menu_font_size": 15,
+        "menu_font_weight": "500",
+        "menu_text_transform": "none",
+        "override_menu_font": false,
+        "menu_font": "assistant_n4",
+        "logo_subtitle": "Paris",
+        "logo_subtitle_font_source": "custom",
+        "logo_subtitle_font": "poppins_n4",
+        "logo_subtitle_size": 11,
+        "logo_subtitle_size_mobile": 8,
+        "logo_subtitle_letter_spacing": 45,
+        "logo_subtitle_gap": 2,
+        "logo_subtitle_alignment": "center",
+        "logo_subtitle_uppercase": true,
+        "logo_subtitle_color": "",
+        "logo_subtitle_hide_mobile": false
       }
     }
   },
