@@ -1,0 +1,366 @@
+{%- comment -%}
+  Avertissement « gravure manquante » : s'affiche sur tous les produits qui ont des champs de personnalisation
+  (blocs « Propriété d'article » de la fiche produit) quand le client ne remplit aucun champ.
+  Tous les textes, couleurs et le comportement se règlent dans l'éditeur de thème.
+{%- endcomment -%}
+{%- if section.settings.enabled and section.settings.cart_note and section.settings.cart_box -%}
+  <style>
+    .engraving-cart-note {
+      display: block !important;
+      list-style: none !important;
+      margin: 6px 0 0 !important;
+      padding: {{ section.settings.padding_v }}px {{ section.settings.padding_h }}px !important;
+      border: {{ section.settings.border_width }}px solid {{ section.settings.border_color }} !important;
+      background: {{ section.settings.background_color }} !important;
+      color: {{ section.settings.text_color }} !important;
+      border-radius: {{ section.settings.radius }}px !important;
+      font-size: {{ section.settings.cart_font_size }}px !important;
+      font-weight: {{ section.settings.font_weight }} !important;
+      font-style: {% if section.settings.italic %}italic{% else %}normal{% endif %} !important;
+      line-height: 1.35 !important;
+    }
+    .engraving-cart-note .kaching-cart-item__property-label { display: none !important; }
+    .engraving-cart-note .kaching-cart-item__property-value {
+      color: inherit !important;
+      font-size: inherit !important;
+      font-weight: inherit !important;
+      font-style: inherit !important;
+    }
+    .engraving-cart-note .kaching-cart-item__property-value::before { content: "\26A0\FE0F  "; }
+  </style>
+  <script>
+    (function () {
+      var WARN = '\u26a0';
+      function mark() {
+        document.querySelectorAll('.kaching-cart-item__property-option').forEach(function (el) {
+          var label = el.querySelector('.kaching-cart-item__property-label');
+          el.classList.toggle('engraving-cart-note', !!label && label.textContent.trim().indexOf(WARN) === 0);
+        });
+        document.querySelectorAll('line-item li, .line-item li').forEach(function (li) {
+          if (li.textContent.trim().indexOf(WARN) === 0) li.classList.add('engraving-cart-note');
+        });
+      }
+      var pending = false;
+      new MutationObserver(function () {
+        if (pending) return;
+        pending = true;
+        requestAnimationFrame(function () { pending = false; mark(); });
+      }).observe(document.documentElement, { childList: true, subtree: true, characterData: true });
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', mark); } else { mark(); }
+    })();
+  </script>
+{%- endif -%}
+
+{%- if request.page_type == 'product' and section.settings.enabled -%}
+  {%- liquid
+    assign lang = request.locale.iso_code | slice: 0, 2
+    case lang
+      when 'fr'
+        assign msg = section.settings.text_fr
+      when 'es'
+        assign msg = section.settings.text_es
+      when 'it'
+        assign msg = section.settings.text_it
+      when 'de'
+        assign msg = section.settings.text_de
+      else
+        assign msg = section.settings.text_en
+    endcase
+    if msg == blank
+      assign msg = section.settings.text_en
+    endif
+  -%}
+  <style>
+    .engraving-warning {
+      display: none;
+      margin-top: 8px;
+      padding: {{ section.settings.padding_v }}px {{ section.settings.padding_h }}px;
+      border: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
+      background: {{ section.settings.background_color }};
+      color: {{ section.settings.text_color }};
+      border-radius: {{ section.settings.radius }}px;
+      font-size: {{ section.settings.font_size }}px;
+      font-weight: {{ section.settings.font_weight }};
+      font-style: {% if section.settings.italic %}italic{% else %}normal{% endif %};
+      line-height: 1.35;
+    }
+    .engraving-warning.is-visible { display: block; }
+  </style>
+  <script>
+    (function () {
+      var MSG = {{ msg | json }};
+      var NOTE = MSG.replace(/^\s*\u26a0\ufe0f?\s*/, '');
+      var MODE = {{ section.settings.display_mode | json }};
+      var ADD_TO_CART_NOTE = {{ section.settings.cart_note | json }};
+      var SELECTOR = '.product-info__property input[type="text"][name^="properties["], .product-info__property textarea[name^="properties["]';
+
+      function isEmpty(fields) {
+        return fields.every(function (f) { return !f.value || !f.value.trim(); });
+      }
+
+      function setup(container) {
+        if (container.hasAttribute('data-engraving-warning')) return;
+        var fields = Array.prototype.slice.call(container.querySelectorAll(SELECTOR));
+        if (!fields.length) return;
+        container.setAttribute('data-engraving-warning', '');
+
+        var formId = fields[0].getAttribute('form');
+        var blocks = container.querySelectorAll('.product-info__property');
+        var box = document.createElement('p');
+        box.className = 'engraving-warning';
+        box.setAttribute('role', 'alert');
+        box.textContent = MSG;
+        blocks[blocks.length - 1].insertAdjacentElement('afterend', box);
+
+        var shown = MODE === 'always';
+        function refresh() { box.classList.toggle('is-visible', shown && isEmpty(fields)); }
+
+        /* La mention reste en permanence dans le formulaire tant qu'aucune gravure n'est saisie :
+           elle est ainsi transmise quel que soit le système d'ajout au panier (thème, Kaching...). */
+        function syncNote() {
+          if (!ADD_TO_CART_NOTE || !formId) return;
+          var form = document.getElementById(formId);
+          if (!form) return;
+          var flag = form.querySelector('input[data-engraving-flag]');
+          if (isEmpty(fields)) {
+            if (!flag) {
+              flag = document.createElement('input');
+              flag.type = 'hidden';
+              flag.name = 'properties[\u26a0\ufe0f]';
+              flag.setAttribute('data-engraving-flag', '');
+              form.appendChild(flag);
+            }
+            flag.value = NOTE;
+          } else if (flag) {
+            flag.remove();
+          }
+        }
+
+        function reveal() {
+          syncNote();
+          if (isEmpty(fields)) { shown = true; refresh(); }
+        }
+
+        fields.forEach(function (f) {
+          f.addEventListener('input', function () { refresh(); syncNote(); });
+        });
+
+        /* Clic sur un bouton d'ajout au panier lié à ce produit (capturé avant les applis) */
+        window.addEventListener('click', function (event) {
+          var btn = event.target && event.target.closest ? event.target.closest('button, input[type="submit"]') : null;
+          if (!btn) return;
+          var form = btn.form || (btn.getAttribute('form') ? document.getElementById(btn.getAttribute('form')) : null);
+          if (form && form.getAttribute('id') === formId) reveal();
+        }, true);
+        document.addEventListener('submit', function (event) {
+          if (event.target && event.target.getAttribute && event.target.getAttribute('id') === formId) reveal();
+        }, true);
+
+        /* Si le thème re-génère le formulaire (changement de variante), on remet la mention */
+        container.addEventListener('change', function () { setTimeout(syncNote, 300); }, true);
+        document.addEventListener('variant:change', function () { setTimeout(syncNote, 300); });
+
+        syncNote();
+        refresh();
+      }
+
+      function init() { document.querySelectorAll('.product-info').forEach(setup); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Avertissement gravure",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "S'affiche sur tous les produits personnalisables quand aucun champ de gravure n'est rempli."
+    },
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Activer l'avertissement",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "display_mode",
+      "label": "Quand afficher le message",
+      "options": [
+        {
+          "value": "submit",
+          "label": "Au clic sur « Ajouter au panier »"
+        },
+        {
+          "value": "always",
+          "label": "Dès l'arrivée sur la page (tant que c'est vide)"
+        }
+      ],
+      "default": "submit"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_note",
+      "label": "Ajouter la mention dans le panier et la commande",
+      "info": "La ligne « ⚠️ » apparaîtra sous le produit dans le panier, au paiement et dans la commande.",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_box",
+      "label": "Afficher la mention du panier dans un encadré",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Textes"
+    },
+    {
+      "type": "text",
+      "id": "text_en",
+      "label": "Anglais (langue principale)",
+      "default": "⚠️ No engraving entered: your jewelry will ship without personalization."
+    },
+    {
+      "type": "text",
+      "id": "text_es",
+      "label": "Espagnol",
+      "default": "⚠️ No has indicado ningún grabado: la joya se enviará sin personalizar."
+    },
+    {
+      "type": "text",
+      "id": "text_fr",
+      "label": "Français (si ajouté plus tard)",
+      "default": "⚠️ Aucune gravure saisie : le bijou sera envoyé sans personnalisation."
+    },
+    {
+      "type": "text",
+      "id": "text_it",
+      "label": "Italien (si ajouté plus tard)",
+      "default": "⚠️ Nessuna incisione inserita: il gioiello sarà spedito senza personalizzazione."
+    },
+    {
+      "type": "text",
+      "id": "text_de",
+      "label": "Allemand (si ajouté plus tard)",
+      "default": "⚠️ Keine Gravur angegeben: Der Schmuck wird ohne Personalisierung versendet."
+    },
+    {
+      "type": "header",
+      "content": "Style du texte"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Taille du texte (fiche produit)",
+      "min": 9,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "cart_font_size",
+      "label": "Taille du texte (panier)",
+      "min": 9,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Épaisseur du texte",
+      "options": [
+        {
+          "value": "300",
+          "label": "Fin"
+        },
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Moyen"
+        },
+        {
+          "value": "600",
+          "label": "Semi-gras"
+        },
+        {
+          "value": "700",
+          "label": "Gras"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "checkbox",
+      "id": "italic",
+      "label": "Texte en italique",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Encadré"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Couleur de fond",
+      "default": "#fbeef1"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Couleur de la bordure",
+      "default": "#800020"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Épaisseur de la bordure",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Arrondi des coins",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding_v",
+      "label": "Marge intérieure (haut / bas)",
+      "min": 2,
+      "max": 14,
+      "step": 1,
+      "unit": "px",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "padding_h",
+      "label": "Marge intérieure (gauche / droite)",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    }
+  ]
+}
+{% endschema %}
