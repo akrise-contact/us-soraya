@@ -119,7 +119,7 @@
         "category_EMVLM8": {
           "type": "category",
           "settings": {
-            "collection": "coffret-rose-eternelles",
+            "collection": "eternal-rose-gift-boxes",
             "custom_image": "shopify://shop_images/475739054_18035319740447336_5777024269477736812_n.jpg",
             "custom_title": "Gift Boxes",
             "custom_link": ""
@@ -146,7 +146,7 @@
         "category_9AbVGf": {
           "type": "category",
           "settings": {
-            "collection": "bracelet",
+            "collection": "bracelets",
             "custom_image": "shopify://shop_images/il_1588xN.5537821710_dvgl_1.webp",
             "custom_title": "Bracelets",
             "custom_link": ""
